@@ -30,9 +30,12 @@ export const authenticateTokenParams = (req: Request, res: Response, next: NextF
         
         if (decoded === undefined) return res.sendStatus(403)
 
-        //@ts-ignore
-        if (decoded.data.username !== req.params.username) return res.sendStatus(403);
-        next()
+        if (typeof decoded !== "string") {
+            if (decoded.data.username !== req.params.username) return res.sendStatus(403);
+            next()
+        } else {
+            return res.sendStatus(403)
+        }
     })
 }
 
@@ -45,8 +48,11 @@ export const authenticateTokenBody = (req: Request, res: Response, next: NextFun
         
         if (decoded === undefined) return res.sendStatus(403)
 
-        //@ts-ignore
-        if (decoded.data.username !== req.body.username) return res.sendStatus(403);
-        next()
+        if (typeof decoded !== "string") {
+            if (decoded.data.username !== req.body.username) return res.sendStatus(403);
+            next()
+        } else {
+            return res.sendStatus(403)
+        }
     })
 }
