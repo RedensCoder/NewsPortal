@@ -4,10 +4,10 @@ import { Request, Response, NextFunction } from "express";
 
 dotenv.config();
 
-export const generateAccessToken = (username: string): string => {
+export const generateAccessToken = (login: string): string => {
     return jwt.sign({
         data: {
-            username: username
+            login: login
         }
     }, process.env.SECRET_TOKEN || "Secret", {expiresIn: "7d"});
 }
