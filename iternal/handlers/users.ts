@@ -9,7 +9,7 @@ export const CreateUser = async (req: Request, res: Response, prisma: PrismaClie
         return;
     }
     
-    const user = await prisma.users.findFirst({ where: { AND: { login: md5(req.body.login), password: md5(req.body.password) } } });
+    const user = await prisma.users.findFirst({ where: { OR: [ {login: md5(req.body.login)}, {email: req.body.email} ] } });
 
     if (user !== null) {
         res.sendStatus(409);
