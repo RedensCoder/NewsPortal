@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import md5 from "md5";
-import { generateAccessToken } from "../services/security/jwt";
+import { generateAccessToken } from "../security/jwt";
 
 export const CreateUser = async (req: Request, res: Response, prisma: PrismaClient) => {
     if (!req.body.login || !req.body.password || !req.body.email) {

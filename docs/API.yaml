@@ -1,0 +1,239 @@
+openapi: 3.0.3
+info:
+  title: Новостной Портал API
+  description: |-
+    >## INITIALIZE:
+    > Сначала установи PostgreSQL
+    > https://www.postgresql.org/download/ \
+    > Потом создай базу с любым именем \
+    > Создай файл .env и напиши это \
+    > DATABASE_URL=postgres://postgres:YourPassword@localhost:5432/YourDatabaseName \
+    > Запусти эти команды в консоле:
+    >> npm install \
+    >> npx prisma migrate dev --name init \
+    >> npm start
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Пользователи
+    description: Работа с пользователями
+paths:
+  /createUser:
+    post:
+      tags:
+        - Пользователи
+      summary: Создаёт пользователя в БД
+      description: Создаёт пользователя в БД. Отдает токен. Сохрани его в localStorage
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegister'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRegister'
+        required: true
+      responses:
+        '200':
+          description: Вернёт JWT Токен
+        '204':
+          description: Вы ввели не все данные в body
+        '409':
+          description: Такой пользователь уже есть
+  /auth:
+    post:
+      tags:
+        - Пользователи
+      summary: Авторизация пользователя
+      description: Проверка пользователя в БД. Отдает токен. Сохрани его в localStorage
+      operationId: authUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthorization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserAuthorization'
+        required: true
+      responses:
+        '200':
+          description: Вернёт JWT Токен
+        '204':
+          description: Вы ввели не все данные в body
+        '401':
+          description: Пользователь не найден
+  /getUserById/{id}:
+    get:
+      tags:
+        - Пользователи
+      summary: Получить информацию о пользователе
+      description: Получить информацию о пользователе
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт пользователя
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '401':
+          description: Пользователь не найден
+  /getUserInfoById/{id}:
+    get:
+      tags:
+        - Пользователи
+      summary: Получить полную информацию о пользователе
+      description: Получить полную информацию о пользователе
+      operationId: getUserInfo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт информацию о пользователе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+        '401':
+          description: Пользователь не найден
+  /getUserSocialsById/{id}:
+    get:
+      tags:
+        - Пользователи
+      summary: Получить все социальные сети пользователя
+      description: Получить все социальные сети пользователя
+      operationId: getUserSoc
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт информацию о всех социальных сетях
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSocials"
+        '401':
+          description: Пользователь не найден
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        login:
+          type: string
+          format: string
+          example: test
+        password:
+          type: string
+          format: string
+          example: test123
+        email:
+          type: string
+          format: string
+          example: test@main.ru
+        role:
+          type: string
+          format: string
+          example: user
+      xml:
+        name: User
+    UserInfo:
+      type: object
+      properties:
+        user:
+          type: integer
+          format: int
+          example: 1
+        about:
+          type: string
+          format: string
+          example: Cool Man =)
+        avatar:
+          type: string
+          format: string
+          example: http://localhost:8080/files/Kirill/avatar.png
+        nickname:
+          type: string
+          format: string
+          example: Kirill228
+        link:
+          type: string
+          format: string
+          example: "@kirushka"
+      xml:
+        name: User
+    UserSocials:
+      type: array
+      items:
+        type: object
+        properties:
+          user:
+            type: integer
+            format: int
+            example: 1
+          soc_name:
+            type: string
+            format: string
+            example: Telegram
+          avatar:
+            type: string
+            format: string
+            example: https://t.me/@kirill228
+        xml:
+          name: User
+    UserRegister:
+      type: object
+      properties:
+        login:
+          type: string
+          format: string
+          example: test
+        password:
+          type: string
+          format: string
+          example: test123
+        email:
+          type: string
+          format: string
+          example: test@main.ru
+      xml:
+        name: User
+    UserAuthorization:
+      type: object
+      properties:
+        login:
+          type: string
+          format: string
+          example: test
+        password:
+          type: string
+          format: string
+          example: test123
+      xml:
+        name: User

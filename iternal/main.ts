@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { PrismaClient } from '@prisma/client'
 
-import { Auth, CreateUser, GetUserById, GetUserInfoById, GetUserSocialsById } from "./handlers/users";
+import { Auth, CreateUser, GetUserById, GetUserInfoById, GetUserSocialsById } from "./services/handlers/users";
 import { authenticateTokenBody, authenticateTokenParams } from "./services/security/jwt";
 
 const prisma = new PrismaClient();
