@@ -7,16 +7,17 @@
             </div>
             <div class="inputs">
                 <div class="form_eMail">
-                    <p class="text_p">E-mail</p>
-                    <input type="e-mail">
+                    <p class="text_p">Логин</p>
+                    <input type="text" v-model="login">
                 </div>
                 <div class="form_password">
                     <p class="text_p">Пароль</p>
-                    <input type="password">
+                    <input type="password" v-model="password">
                 </div>
                 <div class="form_send">
-                    <button v-if="btn_form_checkbox" class="btn_form1">Зарегистрироваться</button>
-                    <button v-else class="btn_form2">Зарегистрироваться</button>
+                    <button class="btn_form1" @click="auth">Войти</button>
+                    <!-- <button v-if="btn_form_checkbox" class="btn_form1">Войти</button>
+                    <button v-else class="btn_form2">Войти</button> -->
                     <a href="" class="text_account">Забыли пароль</a>
                 </div>
             </div>
@@ -26,7 +27,34 @@
 
 <script setup>
 import ("~/assets/css/second.css");
-let btn_form_checkbox = ref(false);
+import { useApiStore } from '#imports';
+
+// let btn_form_checkbox = ref(false);
+const api = useApiStore();
+let login = ref('');
+let password = ref('');
+let router = useRouter();
+
+async function auth(){
+    if (login.value !== "" && password.value !== ""){
+
+        const token = await api.auth(login.value , password.value);
+
+        if (token !== undefined){
+            // localStorage.getItem(token);
+            localStorage.setItem("token", token);
+            router.push({path: "/"});
+            
+        }
+        else{
+            console.log(token);
+            alert("Ошибка ввода данных, попробуйте еще раз")
+        }
+    }
+    else{
+        alert("Не все данные введены")
+    }
+}
 
 </script>
 

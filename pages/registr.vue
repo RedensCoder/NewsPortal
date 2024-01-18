@@ -61,18 +61,18 @@ async function registr(){
             }
         }
         else{
-            alert("пароли не совпали купите сметанку!!!")
+            alert("пароли не совпали")
         }
     }
     else{
-        alert("НЕ ВСЕ ВВЕЛИ СУЧКИ!!!")
+        alert("НЕ ВСЕ!")
     }
 }
-onMounted(() => {
-    if (localStorage.getItem(token) !== undefined){
-        router.push({path: "/"});
-    }
-})
+// onMounted(() => {
+//     if (localStorage.getItem(token) !== undefined){
+//         router.push({path: "/"});
+//     }
+// })
 </script>
 
 <style scoped>

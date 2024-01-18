@@ -25,5 +25,21 @@ export const useApiStore = defineStore('api', {
             }
         }
     },
+    async auth(login, password) {
+      try {
+          const token = await axios.post(`${this.url}/auth`, {
+            login: login,
+            password: password,
+          })
+          if (token.status === 200){
+            return token.data;
+        }
+      }
+      catch(err){
+          if(err.response.status === 409){
+              return undefined;
+          }
+      }
+    },
   },
 })

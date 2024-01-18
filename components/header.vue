@@ -54,8 +54,8 @@
 </template>
 
 <script setup>
-    let div_btn = ref(true);
-    let show = ref(false);
+let div_btn = ref(true);
+let show = ref(false);
 
 function scrollToTop(){
   let currentScroll = document.documentElement.scrollTop,
