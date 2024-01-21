@@ -101,3 +101,80 @@ export const GetUserSocialsById = async (req: Request, res: Response, prisma: Pr
 
     res.send(JSON.stringify({...user, id: user.forEach(el => el.id.toString()), userId: user.forEach(el => el.userId.toString())}))
 }
+
+export const UpdateUserInfo = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!req.body.id) {
+        res.sendStatus(204);
+        return;
+    }
+
+    if (req.body.nickname && req.body.nickname !== "") {
+        await prisma.user_infos.update({
+            where: { userId: req.body.id },
+            data: { nickname: req.body.nickname }
+        })
+    }
+
+    if (req.body.avatar && req.body.avatar !== "") {
+        await prisma.user_infos.update({
+            where: { userId: req.body.id },
+            data: { avatar: req.body.avatar }
+        })
+    }
+
+    if (req.body.about && req.body.about !== "") {
+        await prisma.user_infos.update({
+            where: { userId: req.body.id },
+            data: { about: req.body.about }
+        })
+    }
+
+    if (req.body.link && req.body.link !== "") {
+        await prisma.user_infos.update({
+            where: { userId: req.body.id },
+            data: { link: req.body.link }
+        })
+    }
+
+    res.sendStatus(200);
+}
+
+export const CreateSocial = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!req.body.id || !req.body.social || !req.body.url) {
+        res.sendStatus(204);
+        return;
+    }
+
+    await prisma.user_socials.create({
+        data: {
+            userId: req.body.id,
+            soc_name: req.body.social,
+            url: req.body.url
+        }
+    });
+
+    res.send(200);
+}
+
+export const UpdateSocial = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!req.body.id) {
+        res.sendStatus(204);
+        return;
+    }
+
+    if (req.body.social && req.body.social !== "") {
+        await prisma.user_socials.update({
+            where: { id: req.body.id },
+            data: { soc_name: req.body.social }
+        })
+    }
+
+    if (req.body.url && req.body.url !== "") {
+        await prisma.user_socials.update({
+            where: { id: req.body.id },
+            data: { url: req.body.url }
+        })
+    }
+
+    res.sendStatus(200);
+}

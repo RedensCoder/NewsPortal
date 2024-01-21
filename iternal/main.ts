@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { PrismaClient } from '@prisma/client'
 
-import { Auth, CreateUser, GetUserById, GetUserInfoById, GetUserSocialsById } from "./services/handlers/users";
+import { Auth, CreateUser, GetUserById, GetUserInfoById, GetUserSocialsById, UpdateUserInfo, CreateSocial, UpdateSocial } from "./services/handlers/users";
 import { authenticateTokenBody, authenticateTokenParams } from "./services/security/jwt";
 
 const prisma = new PrismaClient();
@@ -26,9 +26,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 //ROUTES
 app.post("/createUser", async (req: Request, res: Response) => await CreateUser(req, res, prisma));
 app.post("/auth", async (req: Request, res: Response) => await Auth(req, res, prisma));
+app.post("/createSocial", authenticateTokenBody, async (req: Request, res: Response) => await CreateSocial(req, res, prisma));
 app.get("/getUserById/:id", authenticateTokenParams, async (req: Request, res: Response) => await GetUserById(req, res, prisma));
 app.get("/getUserInfoById/:id", async (req: Request, res: Response) => await GetUserInfoById(req, res, prisma));
 app.get("/getUserSocialsById/:id", async (req: Request, res: Response) => await GetUserSocialsById(req, res, prisma));
+app.put("/updateUserInfo", authenticateTokenBody, async (req: Request, res: Response) => await UpdateUserInfo(req, res, prisma));
+app.put("/updateSocial", authenticateTokenBody, async (req: Request, res: Response) => await UpdateSocial(req, res, prisma));
 
 app.listen(8080, () => {
     console.log("[Server] Enabled!");
