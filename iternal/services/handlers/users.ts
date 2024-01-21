@@ -31,7 +31,7 @@ export const CreateUser = async (req: Request, res: Response, prisma: PrismaClie
             }
         });
 
-        const token = generateAccessToken(req.body.login);
+        const token = generateAccessToken(Number(createdUser.id), req.body.login);
 
         res.send(token);
     }
@@ -46,7 +46,7 @@ export const Auth = async (req: Request, res: Response, prisma: PrismaClient) =>
     const user = await prisma.users.findFirst({ where: { AND: { login: md5(req.body.login), password: md5(req.body.password) } } });
 
     if (user !== null) {
-        const token = generateAccessToken(req.body.login);
+        const token = generateAccessToken(Number(user.id), req.body.login);
 
         res.send(token);
     } else {
@@ -67,6 +67,13 @@ export const GetUserById = async (req: Request, res: Response, prisma: PrismaCli
 
 
 export const GetUserInfoById = async (req: Request, res: Response, prisma: PrismaClient) => {
+    try {
+        Number(req.params.id)
+    } catch(e) {
+        res.sendStatus(401);
+        return;
+    }
+
     const user = await prisma.user_infos.findFirst({ where: { userId: Number(req.params.id) } });
 
     if (user === null) {
@@ -78,6 +85,13 @@ export const GetUserInfoById = async (req: Request, res: Response, prisma: Prism
 }
 
 export const GetUserSocialsById = async (req: Request, res: Response, prisma: PrismaClient) => {
+    try {
+        Number(req.params.id)
+    } catch(e) {
+        res.sendStatus(401);
+        return;
+    }
+
     const user = await prisma.user_socials.findMany({ where: { userId: Number(req.params.id) } });
 
     if (user === null) {
