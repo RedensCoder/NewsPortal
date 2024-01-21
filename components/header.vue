@@ -5,11 +5,11 @@
                 <NuxtLink to="/" style="text-decoration: none;"><h1 class="text1">НОВОСТНОЙ<span style="color: #8657E9;">ПОРТАЛ</span></h1></NuxtLink>
             </div>
 
-            <div class="buttons" v-if="div_btn">
-				<button class="btn1" @click="div_btn = !div_btn">Войти</button>
-				<button class="btn2" >Зарегистрироваться</button>
+            <div class="buttons" v-if="dsa">
+				<button class="btn1" @click="routerPushAuthorization">Войти</button>
+				<button class="btn2" @click="routerPushRegistr">Зарегистрироваться</button>
 			</div>
-      
+
 			<div v-else class="profile">
 
                 <img  @click="show = !show" src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
@@ -20,7 +20,7 @@
             
                     <div class="flex">
                         <img   src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                        <p class="nickname">@nickname</p>
+                        <p class="nickname">@{{ nickname }}</p>
                     </div>
                             
                     <hr class="hr_profile">
@@ -41,9 +41,9 @@
                             <img src="../public/img/Settings.svg" alt="" class="img">
                             <nuxtlink class="settings" style="color: #818181;">Настройки профиля</nuxtlink>
                         </div>
-                        <div class="settings_flex">
+                        <div class="settings_flex" @click="usersExit">
                             <img src="../public/img/Cancel.svg" alt="" class="img">
-                            <nuxtlink class="exit" style="color: #EB3223;">Выйти</nuxtlink>
+                            <nuxtlink class="exit" style="color: #EB3223;" >Выйти</nuxtlink>
                         </div>
                     </div>
                 </div>
@@ -54,8 +54,39 @@
 </template>
 
 <script setup>
-let div_btn = ref(true);
+import { useApiStore } from '#imports';
+import { jwtDecode } from 'jwt-decode';
+// import { authorization } from '~/pages/authorization.vue';
+
+const api = useApiStore();
 let show = ref(false);
+let dsa = ref(true);
+let router = useRouter();
+let nickname = ref('');
+
+function routerPushAuthorization() {
+    router.push({path: "/authorization"});
+}
+
+function routerPushRegistr() {
+    router.push({path: "/registr"});
+}
+
+onMounted(async () => {
+    if (localStorage.getItem('token') == null) {
+        dsa.value = true;
+    }
+    else {
+        let id = jwtDecode(localStorage.getItem('token')).data.id;
+        console.log(id);
+
+        let res = await api.getUserInfoById(id);
+        
+        nickname.value = res.nickname;
+        dsa.value = false;
+    }
+   
+});
 
 function scrollToTop(){
   let currentScroll = document.documentElement.scrollTop,
@@ -178,7 +209,7 @@ button {
 
 .nickname{
     color: #0047FF99;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 19.36px;
     width: 300;
     font-family: 'Inter Variable', sans-serif; 

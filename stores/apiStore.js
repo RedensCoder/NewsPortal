@@ -41,5 +41,22 @@ export const useApiStore = defineStore('api', {
           }
       }
     },
+    async getUserInfoById(id){
+      try {
+        const token = await axios.get(`${this.url}/getUserInfoById/${id}`, {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`
+          }
+        })
+          if (token.status === 200){
+            return token.data;
+        }
+      }
+      catch(err){
+          if(err.response.status === 401){
+              return undefined;
+          }
+      }
+    },
   },
 })

@@ -16,9 +16,6 @@
                 </div>
                 <div class="form_send">
                     <button class="btn_form1" @click="auth">Войти</button>
-                    <!-- <button v-if="btn_form_checkbox" class="btn_form1">Войти</button>
-                    <button v-else class="btn_form2">Войти</button> -->
-                    <a href="" class="text_account">Забыли пароль</a>
                 </div>
             </div>
         </div>
@@ -29,16 +26,16 @@
 import ("~/assets/css/second.css");
 import { useApiStore } from '#imports';
 
-// let btn_form_checkbox = ref(false);
 const api = useApiStore();
 let login = ref('');
 let password = ref('');
 let router = useRouter();
 
 async function auth(){
+
     if (login.value !== "" && password.value !== ""){
 
-        const token = await api.auth(login.value , password.value);
+        const token = await api.auth(login.value, password.value);
 
         if (token !== undefined){
             // localStorage.getItem(token);
@@ -97,13 +94,13 @@ input:focus{
 }
 
 .text_reg{
-    margin-top: 23px;
+    margin-top: 30px;
     text-align: center;
 }
 
 .inputs{
     position: relative;
-    margin-top: 20px;
+    margin-top: 15px;
     left: 125px;
 }
 
@@ -123,7 +120,8 @@ input:focus{
 }
 
 .form_send{
-    padding-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -153,9 +151,4 @@ input:focus{
     height: 50px;
 }
 
-.text_account{
-    padding: 10px 180px;
-    text-decoration: none;
-    color: #0047FF;
-}
 </style>

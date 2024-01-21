@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="hh">
         <div class="header_articles">
             <NuxtLink to="/dsad" class="text_articles" exact>СТАТЬИ</NuxtLink>
             <hr>
@@ -12,6 +12,7 @@
 
 <script setup>
 import '@fontsource-variable/inter';
+
 </script>
 
 <style scoped>
@@ -20,13 +21,14 @@ hr{
     color: #8657E9;
     height: 25px;
 }
+
 .header_articles{
     height: 70px;
     display: flex;
     background-color: #FFFFFF;
     text-align: center;
     align-items: center;
-    margin: 0px auto;
+    /* margin: 0px auto; */
     padding-left: 37.5%;
 }
 
