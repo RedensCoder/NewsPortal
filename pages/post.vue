@@ -32,8 +32,8 @@
                     <p class="tegs_">telegram, whatsapp, viber</p>
                 </div>
                 <div class="buttons_post">
-                    <div class="div_like">
-                        <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" @click="quantity_like1">
+                    <div class="div_like" @click="quantity_like1">
+                        <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >{{ quantity }}</p>
                     </div>
                     <button>дизлайк <p>7</p></button>
@@ -204,10 +204,12 @@ button{
 .img_like{
     width: 20px;
     height: 50px;
+    cursor: pointer;
 }
 
 .quantity_like{
     padding-left: 5px;
     font-size: 15px;
+    cursor: pointer;
 }
 </style>
