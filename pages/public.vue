@@ -20,8 +20,8 @@ import '@fontsource-variable/inter';
 
     <div class="div1">
     <h3 class="text">Обложка паблика</h3>
-    <button class="btn">Загрузить</button>
-    <input type="file">
+    <i><img src="../public/img/add_picture.svg" alt=""></i><input class="add_image" type="file">
+    <button class="btn download">Загрузить</button>
     </div>
 
     <div class="div1">
@@ -70,4 +70,5 @@ import '@fontsource-variable/inter';
     width: 95%;
     height: 115px;
 }
+
 </style>
