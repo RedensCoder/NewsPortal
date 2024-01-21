@@ -85,8 +85,12 @@ onMounted(async () => {
         nickname.value = res.nickname;
         dsa.value = false;
     }
-   
 });
+
+function usersExit() {
+    localStorage.removeItem('token');
+    window.location.reload();
+}
 
 function scrollToTop(){
   let currentScroll = document.documentElement.scrollTop,
@@ -196,9 +200,12 @@ button {
     width: auto;
     height: auto;
     background-color: #ffffff;
-    border-radius: 4px;
     right: 45px;
     top: 80px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }
 
 .flex{
@@ -258,6 +265,7 @@ button {
 .settings_flex{
   display: flex;
   padding-top: 10px;
+  cursor: pointer;
 }
 
 .img{

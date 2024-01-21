@@ -66,18 +66,20 @@
           </div>
         </div>
 			</div>
-
-			
-
 		</div>
 	</div>
   <button @click="scrollToTop" class="scroll_btn"></button>
 </div>
+
 </template>
 
 <script setup>
 import '@fontsource-variable/inter';
 import ("~/assets/css/second.css");
+import { QuillEditor } from '@vueup/vue-quill'
+import { ref } from 'vue';
+
+const content = ref("")
 
 let div_btn = ref(true);
 // let show = ref(false);

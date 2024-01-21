@@ -28,8 +28,10 @@ hr{
     background-color: #FFFFFF;
     text-align: center;
     align-items: center;
-    /* margin: 0px auto; */
     padding-left: 37.5%;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
 .text_articles{
