@@ -30,6 +30,7 @@ import '@fontsource-variable/inter';
         <h3 class="text">Описание сайта</h3>
         <input type="text" class="input_1">
         <p>Вы можете прикрепить название сайта</p>
+        //da
     </div>
 
     <div class="div1">
