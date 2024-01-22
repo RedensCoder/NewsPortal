@@ -63,7 +63,7 @@ import '@fontsource-variable/inter';
 let quantity = ref(0);
 
 function quantity_like1() {
-    quantity.value++
+    quantity.value++;
 }
 
 </script>
