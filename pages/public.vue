@@ -10,31 +10,33 @@ import '@fontsource-variable/inter';
 
     <div class="div1">
     <h3 class="text">Название паблика</h3>
-    <input type="text" class="name">
+    <input type="text" class="input_1">
     </div>
 
     <div class="div1">
-    <h3>Описание паблика</h3>
+    <h3 class="text">Описание паблика</h3>
     <input type="text" class="description">
     </div>
 
-    <div class="div1">
+    <div class="div1 view_public">
     <h3 class="text">Обложка паблика</h3>
-    <i><img src="../public/img/add_picture.svg" alt=""></i><input class="add_image" type="file">
-    <button class="btn download">Загрузить</button>
+    <div class="add_image">
+    <input class="" type="image" src="" alt="">
+</div>
+    <button class="btn_download">Загрузить</button>
     </div>
 
     <div class="div1">
         <h3 class="text">Описание сайта</h3>
-        <input type="text">
+        <input type="text" class="input_1">
         <p>Вы можете прикрепить название сайта</p>
     </div>
 
     <div class="div1">
         <h3 class="text">Комментарий администрации</h3>
-        <input type="text">
+        <input type="text" class="input_1">
     </div>
-    <button class="add_public">Создать паблик</button>
+    <button class="btn_public">Создать паблик</button>
 </div>
 </div>
 </template>
@@ -52,16 +54,13 @@ import '@fontsource-variable/inter';
 }
 .text{
     font-weight: 500px;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 29.05px;
     font-family: 'Inter';
 }
-.name{
-    height: 25px;
-    width: 35%;
-}
+
 .new_public{
-    height: 100%;
+    height: 100vh;
 }
 .new_public2{
     margin-left: 3%;
@@ -70,5 +69,45 @@ import '@fontsource-variable/inter';
     width: 95%;
     height: 115px;
 }
-
+.div1{
+    margin-top: 2.5%;
+}
+.btn_download{
+    width: 86px;
+    height: 30px;
+    border: 1px solid #818181;
+    border-radius: 4px;
+    background-color: #EEEEEE;
+    margin-left: 2%;
+    margin-top: 5%;
+}
+.btn_public{
+    border: 1px solid #8657E9;
+    width: 133px;
+    height: 34px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    margin-top: 5%;
+}
+.add_image{
+    background: url(../public/img/add_picture.png) no-repeat 39px 36px;
+    border: 1px solid #818181;
+    width: 59px;
+    height: 56px;
+    justify-content: center;
+    border-radius: 30px;
+    background-position: center;
+    display: inline-block;
+}
+.view_public{
+    display: inline-block;
+    width: 100%;
+}
+.input_1{
+    width: 325px;
+    height: 38px;
+    border: 1px solid #81818180;
+    border-radius: 4px;
+    margin-top: 20px;
+}
 </style>
