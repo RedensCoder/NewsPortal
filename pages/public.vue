@@ -15,22 +15,19 @@ import '@fontsource-variable/inter';
 
     <div class="div1">
     <h3 class="text">Описание паблика</h3>
-    <input type="text" class="description">
+    <textarea type="text" class="description" style="resize: none;"></textarea>
     </div>
 
     <div class="div1 view_public">
     <h3 class="text">Обложка паблика</h3>
-    <div class="add_image">
-    <input class="" type="image" src="" alt="">
-</div>
-    <button class="btn_download">Загрузить</button>
+    <div class="add_image"></div>
+    <input type="file" class="btn_download">
     </div>
 
     <div class="div1">
         <h3 class="text">Описание сайта</h3>
         <input type="text" class="input_1">
         <p>Вы можете прикрепить название сайта</p>
-        //da
     </div>
 
     <div class="div1">
@@ -43,7 +40,8 @@ import '@fontsource-variable/inter';
 </template>
 
 <style scoped>
-    .block{
+
+.block{
      margin: 0 auto;
     margin-top: 2.5%;
      width: 776px;
