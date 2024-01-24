@@ -9,17 +9,17 @@
     <div class="block new_public"><div class="new_public2">
 
         <div class="div1">
-            <h3 class="text">Название паблика</h3>
+            <h3 class="text bottom">Название паблика</h3>
             <input type="text" class="input_1">
         </div>
 
         <div class="div1">
-            <h3 class="text">Описание паблика</h3>
+            <h3 class="text bottom">Описание паблика</h3>
             <textarea type="text" class="description" style="resize: none;"></textarea>
         </div>
 
         <div class="div1 view_public">
-            <h3 class="text">Обложка паблика</h3>
+            <h3 class="text bottom">Обложка паблика</h3>
             <div class="flex">
                 <div class="add_image"></div>
                 <label for="file_img">
@@ -29,13 +29,13 @@
         </div>
 
         <div class="div1">
-            <h3 class="text">Описание сайта</h3>
+            <h3 class="text bottom">Описание сайта</h3>
             <input type="text" class="input_1">
             <p>Вы можете прикрепить название сайта</p>
         </div>
 
         <div class="div1">
-            <h3 class="text">Комментарий администрации</h3>
+            <h3 class="text bottom">Комментарий администрации</h3>
             <input type="text" class="input_1">
         </div>
 
@@ -82,7 +82,8 @@ p{
     height: 115px;
 }
 .div1{
-    margin-top: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 label{
@@ -128,6 +129,8 @@ label{
     height: 38px;
     border: 1px solid #81818180;
     border-radius: 4px;
-    margin-top: 20px;
+}
+.bottom{
+    margin-bottom: 2%;
 }
 </style>
