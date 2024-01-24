@@ -163,7 +163,6 @@ button{
 }
 
 .text_post{
-    font-family: 'Inter Variable', sans-serif;
     font-size: 16px;
     line-height: 19px;
     color: #000000;

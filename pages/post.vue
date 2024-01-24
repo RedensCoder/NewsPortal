@@ -4,7 +4,7 @@
         <div class="articles">
             <div class="author">
                 <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <p class="nickname">{{nickname}}</p>
+                <p class="nickname">{{ nickname }}</p>
                 <p class="time_post">5 минут назад</p>
             </div>
             <p class="news_text">Новости</p>
