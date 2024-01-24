@@ -20,8 +20,12 @@
 
         <div class="div1 view_public">
             <h3 class="text">Обложка паблика</h3>
-            <div class="add_image"></div>
-            <input type="file" class="btn_download">
+            <div class="flex">
+                <div class="add_image"></div>
+                <label for="file_img">
+                    <input type="file" class="btn_download" accept="image/*" name="file_img" id="file_img">
+                </label>
+            </div>
         </div>
 
         <div class="div1">
@@ -34,13 +38,21 @@
             <h3 class="text">Комментарий администрации</h3>
             <input type="text" class="input_1">
         </div>
-        
+
         <button class="btn_public">Создать паблик</button>
     </div>
 </div>
 </template>
 
 <style scoped>
+button{
+    cursor: pointer;
+}
+
+p{
+    margin-top: 7px;
+    color: #818181;
+}
 
 .block{
      margin: 0 auto;
@@ -49,7 +61,7 @@
      background-color: #FFFFFF;   
     }
 .header{
-    height: 67px;;
+    height: 67px;
     vertical-align: middle;
 }
 .text{
@@ -72,9 +84,17 @@
 .div1{
     margin-top: 2.5%;
 }
-.btn_download{
-    width: 86px;
-    height: 30px;
+
+label{
+    padding-top: 5px;
+}
+
+.flex{ 
+    display: flex;
+}
+
+.btn_download{  
+    cursor: pointer;
     border: 1px solid #818181;
     border-radius: 4px;
     background-color: #EEEEEE;
@@ -101,7 +121,7 @@
 }
 .view_public{
     display: inline-block;
-    width: 100%;
+    width: auto;
 }
 .input_1{
     width: 325px;
