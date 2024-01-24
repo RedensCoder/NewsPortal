@@ -26,9 +26,8 @@ hr{
     height: 70px;
     display: flex;
     background-color: #FFFFFF;
-    text-align: center;
+    padding: 0px 0px 0px 37.5%;
     align-items: center;
-    padding-left: 37.5%;
     -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
