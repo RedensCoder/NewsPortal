@@ -4,7 +4,7 @@
         <div class="articles">
             <div class="author">
                 <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <p class="nickname">nickname</p>
+                <p class="nickname">{{ nickname }}</p>
                 <p class="time_post">5 минут назад</p>
             </div>
             <p class="news_text">Новости</p>
@@ -34,22 +34,44 @@
                 <div class="buttons_post">
                     <div class="div_like" @click="quantity_like1">
                         <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >{{ quantity }}</p>
+                        <p class="quantity_like" >{{ 1 }}</p>
                     </div>
-                    <button>дизлайк <p>7</p></button>
-                    <button>поделиться</button>
-                    <button>комменты <p>7</p></button>
-                    <button>просмотры <p>7</p></button>
+                    <div class="div_dizlike" >
+                        <img src="../public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                        <p class="quantity_like" >2</p>
+                    </div>
+                    <div class="div_share" >
+                        <img src="../public/img/Share.svg" alt="NO" class="img_like" >
+                        <p class="quantity_like" >3</p>
+                    </div>
+                    <div class="div_commnets" >
+                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                        <p class="quantity_like" >4</p>
+                    </div>
+                    <div class="div_viewing" >
+                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                        <p class="quantity_like" >5</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="articles_popular">
-            <p class="post_watching">Сейчас смотрят</p>
+            <p class="post_watching">Популярные статьи</p>
             <hr>
             <div class="news_post">
                 <h3 class="heading_post">Реконструкция белого дома</h3>
-                <button>комменты <p>7</p></button>
-                <button>просмотры <p>7</p></button>
+
+                <div class="div_interaction">
+                    <div class="div_commnets" >
+                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                        <p class="quantity_like" >4</p>
+                    </div>
+                    <div class="div_viewing" >
+                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                        <p class="quantity_like" >5</p>
+                    </div>
+                </div>
+
             </div>
             <hr>
         </div>
@@ -59,8 +81,28 @@
 <script setup>
 import ("~/assets/css/second.css");
 import '@fontsource-variable/inter';
+import { useApiStore } from '#imports';
+import { jwtDecode } from 'jwt-decode';
 
 let quantity = ref(0);
+const api = useApiStore();
+let dsa = ref(true);
+let nickname = ref('');
+
+onMounted(async () => {
+    if (localStorage.getItem('token') == null) {
+        dsa.value = true;
+    }
+    else {
+        let id = jwtDecode(localStorage.getItem('token')).data.id;
+        console.log(id);
+
+        let res = await api.getUserInfoById(id);
+        
+        nickname.value = res.nickname;
+        dsa.value = false;
+    }
+});
 
 function quantity_like1() {
     quantity.value++;
@@ -109,14 +151,15 @@ button{
 }
 
 .ava{
-    width: 30px;
-    height: 30px;    
+    width: 33px;
+    height: 33px;    
     border-radius: 50px;
 }
 
 .nickname{
-    font-size: 14px;
+    font-size: 16px;
     line-height: 16px;
+    font-weight: 500;
 }
 
 .time_post{
@@ -125,8 +168,9 @@ button{
     line-height: 16px;
 }
 .news_text{
+    padding-top: 5px;
     padding-left: 20px;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 16px;
     color: #818181;
 }
@@ -157,8 +201,8 @@ button{
 
 .buttons_post{
     display: flex;
-    padding-top: 15px;
-    gap: 10px;
+    padding-top: 10px;
+    gap: 10px;    
 }
 
 .articles_popular{
@@ -171,34 +215,38 @@ button{
 }
 
 .news_post{
-    padding: 10px 0px 5px;
+    padding: 24px 0px 5px;
 }
 
 .post_watching{
-    font-family: 'Inter Variable', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 16px;
     color: #818181;
 }
 
 .heading_post{
     line-height: 19.36px;
-    font-family: 'Inter Variable', sans-serif;
     color: #000000;
+    font-size: 18px;
+}
+
+.div_interaction{
+    display: flex;
+    gap: 10px;
 }
 
 .tegs_{
     padding-left: 10px;
 }
 
-.div_like{
+.div_like, .div_dizlike, .div_share, .div_viewing, .div_commnets{
     display: flex;
     text-align: center;
     align-items: center;
 }
 
 .img_like{
-    width: 20px;
+    width: 25px;
     height: 50px;
     cursor: pointer;
 }
