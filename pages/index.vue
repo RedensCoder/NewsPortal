@@ -186,20 +186,19 @@ button{
 }
 
 .news_post{
-    padding: 10px 0px 5px;
+    padding: 24px 0px 5px;
 }
 
 .post_watching{
-    font-family: 'Inter Variable', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 16px;
     color: #818181;
 }
 
 .heading_post{
     line-height: 19.36px;
-    font-family: 'Inter Variable', sans-serif;
     color: #000000;
+    font-size: 18px;
 }
 
 .div_interaction{

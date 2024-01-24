@@ -215,7 +215,7 @@ button{
 }
 
 .news_post{
-    padding: 10px 0px 5px;
+    padding: 24px 0px 5px;
 }
 
 .post_watching{
@@ -225,7 +225,6 @@ button{
 }
 
 .heading_post{
-    margin-top: 16px;
     line-height: 19.36px;
     color: #000000;
     font-size: 18px;
