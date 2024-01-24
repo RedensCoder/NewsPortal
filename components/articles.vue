@@ -1,9 +1,10 @@
 <template>
+    <!-- СТРАНИЦА С ПЕРЕХОДОМ НА СТРАНИЦЫ -->
     <div class="hh">
         <div class="header_articles">
-            <NuxtLink to="/dsad" class="text_articles" exact>СТАТЬИ</NuxtLink>
+            <NuxtLink to="/articles" class="text_articles" exact>СТАТЬИ</NuxtLink>
             <hr>
-            <NuxtLink to="/post" class="text_articles" >ПОСТЫ</NuxtLink>
+            <NuxtLink to="/post" class="text_articles">ПОСТЫ</NuxtLink>
             <hr>
             <NuxtLink to="/" class="text_articles" exact>НОВОСТИ</NuxtLink>
         </div>
