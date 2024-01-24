@@ -1,41 +1,42 @@
-<script>
-import ("~/assets/css/second.css");
-import '@fontsource-variable/inter';
+<script setup>
+    import ("~/assets/css/second.css");
+    import '@fontsource-variable/inter';
 </script>
 <template>
 
 <Articles />
 <div class="block header"><h1 class="text">Создание новостного паблика</h1></div>
-<div class="block new_public"><div class="new_public2">
+    <div class="block new_public"><div class="new_public2">
 
-    <div class="div1">
-    <h3 class="text">Название паблика</h3>
-    <input type="text" class="input_1">
-    </div>
+        <div class="div1">
+            <h3 class="text">Название паблика</h3>
+            <input type="text" class="input_1">
+        </div>
 
-    <div class="div1">
-    <h3 class="text">Описание паблика</h3>
-    <textarea type="text" class="description" style="resize: none;"></textarea>
-    </div>
+        <div class="div1">
+            <h3 class="text">Описание паблика</h3>
+            <textarea type="text" class="description" style="resize: none;"></textarea>
+        </div>
 
-    <div class="div1 view_public">
-    <h3 class="text">Обложка паблика</h3>
-    <div class="add_image"></div>
-    <input type="file" class="btn_download">
-    </div>
+        <div class="div1 view_public">
+            <h3 class="text">Обложка паблика</h3>
+            <div class="add_image"></div>
+            <input type="file" class="btn_download">
+        </div>
 
-    <div class="div1">
-        <h3 class="text">Описание сайта</h3>
-        <input type="text" class="input_1">
-        <p>Вы можете прикрепить название сайта</p>
-    </div>
+        <div class="div1">
+            <h3 class="text">Описание сайта</h3>
+            <input type="text" class="input_1">
+            <p>Вы можете прикрепить название сайта</p>
+        </div>
 
-    <div class="div1">
-        <h3 class="text">Комментарий администрации</h3>
-        <input type="text" class="input_1">
+        <div class="div1">
+            <h3 class="text">Комментарий администрации</h3>
+            <input type="text" class="input_1">
+        </div>
+        
+        <button class="btn_public">Создать паблик</button>
     </div>
-    <button class="btn_public">Создать паблик</button>
-</div>
 </div>
 </template>
 

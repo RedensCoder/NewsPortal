@@ -115,20 +115,17 @@ button{
 }
 
 .nickname{
-    font-family: 'Inter Variable', sans-serif;
     font-size: 14px;
     line-height: 16px;
 }
 
 .time_post{
     color: #818181;
-    font-family: 'Inter Variable', sans-serif;
     font-size: 14px;
     line-height: 16px;
 }
 .news_text{
     padding-left: 20px;
-    font-family: 'Inter Variable', sans-serif;
     font-size: 14px;
     line-height: 16px;
     color: #818181;
@@ -147,7 +144,6 @@ button{
 
 .text_post{
     margin-top: 10px;
-    font-family: 'Inter Variable', sans-serif;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
