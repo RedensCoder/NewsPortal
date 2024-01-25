@@ -14,6 +14,26 @@ import '@fontsource-variable/inter';
     </div>
     <div class="publics">
         <div class="public">
+            <div class="info">
+            <img class="logo" src="public/img/example_logo.png" alt="">
+            <div class="info_public">
+            <h1 class="name_public">Новости мира</h1>
+            <p class="followers">0 подписчиков</p>
+                 </div>
+                </div>
+            </div>
+            <hr>
+            <div class="public">
+            <div class="info">
+            <img class="logo" src="public/img/example_logo.png" alt="">
+            <div class="info_public">
+            <h1 class="name_public">Новости мира</h1>
+            <p class="followers">0 подписчиков</p>
+                 </div>
+                </div>
+            </div>
+            <hr>
+            <div class="public">
             <img class="logo" src="public/img/example_logo.png" alt="">
             <div class="info_public">
             <h1 class="name_public">Новости мира</h1>
@@ -59,19 +79,31 @@ import '@fontsource-variable/inter';
 }
 .public{
     display: inline-block;
+    margin-top: 2%;
+    justify-content: center;
 }
 .followers{
-    display: inline-block;
+    display: block;
 }
 .name_public{
-    display: inline-block;
+    display: block;
+    font-size: 20px;
 }
 .info_public{
-    display:block;
+    display:inline-block;
     
 }
 .logo{
     display: inline-block;
-    width: 10%;
+    width: 35%;
+    height: 35%;
+    border-radius: 49px;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+.info{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
 }
 </style>
