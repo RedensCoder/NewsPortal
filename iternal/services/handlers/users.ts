@@ -55,51 +55,55 @@ export const Auth = async (req: Request, res: Response, prisma: PrismaClient) =>
 }
 
 export const GetUserById = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400)
+    }
+
     const user = await prisma.users.findFirst({ where: { id: Number(req.params.id) } });
 
     if (user === null) {
-        res.sendStatus(401);
+        res.sendStatus(400);
         return;
     }
 
-    res.send(JSON.stringify({...user, id: user.id.toString()}))
+    res.send(JSON.stringify(
+        user, (key, value) => (typeof value === 'bigint' ? value.toString() : value)
+    ));
 }
 
 
 export const GetUserInfoById = async (req: Request, res: Response, prisma: PrismaClient) => {
-    try {
-        Number(req.params.id)
-    } catch(e) {
-        res.sendStatus(401);
-        return;
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400)
     }
 
     const user = await prisma.user_infos.findFirst({ where: { userId: Number(req.params.id) } });
 
     if (user === null) {
-        res.sendStatus(401);
+        res.sendStatus(400);
         return;
     }
 
-    res.send(JSON.stringify({...user, id: user.id.toString(), userId: user.userId.toString()}))
+    res.send(JSON.stringify(
+        user, (key, value) => (typeof value === 'bigint' ? value.toString() : value)
+    ));
 }
 
 export const GetUserSocialsById = async (req: Request, res: Response, prisma: PrismaClient) => {
-    try {
-        Number(req.params.id)
-    } catch(e) {
-        res.sendStatus(401);
-        return;
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400)
     }
 
     const user = await prisma.user_socials.findMany({ where: { userId: Number(req.params.id) } });
 
     if (user === null) {
-        res.sendStatus(401);
+        res.sendStatus(400);
         return;
     }
 
-    res.send(JSON.stringify({...user, id: user.forEach(el => el.id.toString()), userId: user.forEach(el => el.userId.toString())}))
+    res.send(JSON.stringify(
+        user, (key, value) => (typeof value === 'bigint' ? value.toString() : value)
+    ));
 }
 
 export const UpdateUserInfo = async (req: Request, res: Response, prisma: PrismaClient) => {

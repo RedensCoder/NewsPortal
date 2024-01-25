@@ -72,6 +72,13 @@ paths:
       summary: Добавляет социальную сеть пользователя
       description: Добавляет социальную сеть пользователя
       operationId: addUser
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -105,7 +112,7 @@ paths:
           required: true
           description: JWT Токен пользователя
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Вернёт пользователя
@@ -113,7 +120,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-        '401':
+        '400':
           description: Пользователь не найден
   /getUserInfoById/{id}:
     get:
@@ -136,7 +143,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserInfo"
-        '401':
+        '400':
           description: Пользователь не найден
   /getUserSocialsById/{id}:
     get:
@@ -159,7 +166,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserSocials"
-        '401':
+        '400':
           description: Пользователь не найден
   /updateUserInfo:
     put:
@@ -168,6 +175,13 @@ paths:
       summary: Обновить инфу о пользователе
       description: Обновить инфу о пользователе
       operationId: UserInfoUpdate
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
       responses:
         '200':
           description: Успех!
@@ -184,15 +198,176 @@ paths:
       summary: Обновить социальные сети пользовотеля
       description: Обновить социальные сети пользовотеля
       operationId: UserSocialUpdate
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserSocialUpdate"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UserSocialUpdate"
+        required: true
       responses:
         '200':
           description: Успех!
+        '204':
+          description: Вы ввели не все данные
+
+# POSTS
+  /createPost:
+    post:
+      tags:
+        - Посты
+      summary: Добавляет пост
+      description: Добавляет пост
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPostsAdd'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserPostsAdd'
+        required: true
+      responses:
+        '200':
+          description: Пост создан!
+        '204':
+          description: Вы ввели не все данные в body
+  /getAllPosts/{limit}:
+    get:
+      tags:
+        - Посты
+      summary: Получить посты
+      description: Получить посты
+      parameters:
+        - name: limit
+          in: path
+          required: true
+          description: Сколько хотите получить постов
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт посты
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSocialUpdate"
+                $ref: "#/components/schemas/UserPostsArray"
+        '400':
+          description: Ошибка ебейшая
+  /getUserPosts/{id}:
+    get:
+      tags:
+        - Посты
+      summary: Получить посты пользователя
+      description: Получить посты пользователя
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт посты
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPostsArray"
+        '400':
+          description: Посты не найдены
+  /getPostById/{id}:
+    get:
+      tags:
+        - Посты
+      summary: Получить пост
+      description: Получить пост
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт пост
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPosts"
+        '400':
+          description: Пост не найдены
+  /updatePost:
+    put:
+      tags:
+        - Посты
+      summary: Обновить пост
+      description: Обновить пост
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserPostsAdd"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UserPostsAdd"
+        required: true
+      responses:
+        '200':
+          description: Успех!
         '204':
           description: Вы ввели не все данные
+  /deletePost/{id}:
+    delete:
+      tags:
+        - Посты
+      summary: Удалить пост
+      description: Удалить пост
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успех!
+        '400':
+          description: Ты даун!
+
+# SCHEMAS
+
 components:
   schemas:
     User:
@@ -324,3 +499,59 @@ components:
             type: string
             format: string
             example: https://t.me/@kirill228
+    # POSTS
+    UserPosts:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int
+          example: 1
+        userId:
+          type: integer
+          format: int
+          example: 1
+        content:
+          type: string
+          format: string
+          example: Hello, Kirill =)
+        tags:
+          type: array
+          format: string
+          example: twitch, youtube
+    UserPostsArray:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int
+            example: 1
+          userId:
+            type: integer
+            format: int
+            example: 1
+          content:
+            type: string
+            format: string
+            example: Hello, Kirill =)
+          tags:
+            type: array
+            format: string
+            example: twitch, youtube
+    UserPostsAdd:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int
+          example: 1
+        content:
+          type: string
+          format: string
+          example: Hello, Kirill =)
+        tags:
+          type: array
+          format: string
+          example: twitch, youtube

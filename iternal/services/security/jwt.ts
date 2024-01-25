@@ -50,8 +50,9 @@ export const authenticateTokenBody = (req: Request, res: Response, next: NextFun
         if (decoded === undefined) return res.sendStatus(403)
 
         if (typeof decoded !== "string") {
-            if (decoded.data.username !== req.body.username) return res.sendStatus(403);
-            next()
+            if (decoded.data.id === req.body.id || decoded.data.id === req.body.userId) { next() } else {
+                return res.sendStatus(403);
+            }
         } else {
             return res.sendStatus(403)
         }

@@ -13,8 +13,13 @@ model Users {
   password  String
   email     String
   role      String
-  usersInfo User_infos?
-  userSoc   User_socials?
+
+  usersInfo    User_infos?
+  userSoc      User_socials[]
+  UserPosts    User_posts[]
+  PostLike     Post_likes[]
+  PostDislikes Post_dislikes[]
+  PostComments Post_comments[]
 }
 
 model User_infos {
@@ -29,47 +34,53 @@ model User_infos {
 
 model User_socials {
   id       BigInt   @id @default(autoincrement())
-  userId   BigInt   @unique
+  userId   BigInt
   user     Users    @relation(fields: [userId], references: [id])
   soc_name String
   url      String
 }
 
 model User_posts {
-    id       BigInt   @id @default(autoincrement())
-    userId   BigInt   @unique
-    user     Users    @relation(fields: [userId], references: [id])
-    content  String
+    id        BigInt   @id @default(autoincrement())
+    userId    BigInt
+    user      Users    @relation(fields: [userId], references: [id])
+    content   String
+    tags      String[]
+
+    PostViews    Post_views?
+    PostLike     Post_likes[]
+    PostDislikes Post_dislikes[]
+    PostComments Post_comments[]
 }
 
 model Post_views {
-    id       BigInt   @id @default(autoincrement())
-    postId   BigInt   @unique
-    post     Users    @relation(fields: [postId], references: [id])
+    id       BigInt         @id @default(autoincrement())
+    postId   BigInt         @unique
+    post     User_posts    @relation(fields: [postId], references: [id])
     views    Int
 }
 
 model Post_likes {
-    id       BigInt   @id @default(autoincrement())
-    userId   BigInt   @unique
-    user     Users    @relation(fields: [userId], references: [id])
-    postId   BigInt   @unique
-    post     Users    @relation(fields: [postId], references: [id])
+    id       BigInt        @id @default(autoincrement())
+    userId   BigInt
+    user     Users         @relation(fields: [userId], references: [id])
+    postId   BigInt
+    post     User_posts    @relation(fields: [postId], references: [id])
 }
 
 model Post_dislikes {
-    id       BigInt   @id @default(autoincrement())
-    userId   BigInt   @unique
-    user     Users    @relation(fields: [userId], references: [id])
-    postId   BigInt   @unique
-    post     Users    @relation(fields: [postId], references: [id])
+    id       BigInt        @id @default(autoincrement())
+    userId   BigInt
+    user     Users         @relation(fields: [userId], references: [id])
+    postId   BigInt
+    post     User_posts    @relation(fields: [postId], references: [id])
 }
 
 model Post_comments {
-    id       BigInt   @id @default(autoincrement())
-    userId   BigInt   @unique
-    user     Users    @relation(fields: [userId], references: [id])
-    postId   BigInt   @unique
-    post     Users    @relation(fields: [postId], references: [id])
+    id       BigInt        @id @default(autoincrement())
+    userId   BigInt
+    user     Users         @relation(fields: [userId], references: [id])
+    postId   BigInt
+    post     User_posts    @relation(fields: [postId], references: [id])
     comment  String
 }
