@@ -26,8 +26,10 @@
                     <hr class="hr_profile">
 
                     <div class="public_profile">
-                        <nuxtlink class="text_my_public">Мои публикации</nuxtlink>
-                        <nuxtlink class="text_add_public">Создать публикацию</nuxtlink>
+                        <NuxtLink class="text_my_public">Мои публикации</NuxtLink>
+                        <NuxtLink class="text_add_public">Создать публикацию</NuxtLink>
+                        <NuxtLink class="text_add_public">Сменить тему</NuxtLink>
+                        <NuxtLink class="text_add_public" to="/public">Паблики</NuxtLink>
                     </div>
                 
                     <hr class="hr_profile">
@@ -35,15 +37,15 @@
                     <div class="settings_profile">
                         <div class="settings_flex">
                             <img src="../public/img/Help.svg" alt="" class="img">
-                            <nuxtlink class="help" style="color: #818181;">Поддержка</nuxtlink>
+                            <p class="help" style="color: #818181;">Поддержка</p>
                         </div>
                         <div class="settings_flex">
                             <img src="../public/img/Settings.svg" alt="" class="img">
-                            <nuxtlink class="settings" style="color: #818181;">Настройки профиля</nuxtlink>
+                            <p class="settings" style="color: #818181;">Настройки профиля</p>
                         </div>
                         <div class="settings_flex" @click="usersExit">
                             <img src="../public/img/Cancel.svg" alt="" class="img">
-                            <nuxtlink class="exit" style="color: #EB3223;" >Выйти</nuxtlink>
+                            <p class="exit" style="color: #EB3223;" >Выйти</p>
                         </div>
                     </div>
                 </div>
@@ -109,6 +111,14 @@ function scrollToTop(){
 </script>
 
 <style scoped>
+a{
+    text-decoration: none;
+}
+
+p{
+    padding-left: 5px;
+}
+
 button {
     cursor: pointer;
 }
@@ -237,35 +247,30 @@ button {
   margin-bottom: 80px;
 }
 
-.public_profile nuxtlink{
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 19px;
-  padding-left: 10px;
-}
-
-.text_add_public{
-  padding-top: 20px;
-}
-
-.settings_profile{
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.settings_profile nuxtlink{
+.public_profile a{
   font-size: 20px;
   font-weight: 300;
   line-height: 19px;
   padding-left: 5px;
-  padding-top: 2.5px;
+}
+
+.text_add_public{
+    padding-top: 20px;
+    color: #202124;;
+}
+
+.settings_profile{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
 }
 
 .settings_flex{
   display: flex;
   padding-top: 10px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .img{

@@ -5,6 +5,7 @@
 </script>
 
 <template>
+    <!-- СТРАНИЦА СО СТАТЬЯМИ -->
 <Articles />
 <div class="news">
     <div class="info">
@@ -21,17 +22,17 @@
  Одним из основных принципов работы интернета является использование пакетной передачи данных. Когда мы отправляем сообщение или запрашиваем информацию через интернет, она разбивается на маленькие пакеты данных, которые передаются по сети независимо друг от друга. Затем эти пакеты собираются в исходную информацию на компьютере получателя. Этот процесс позволяет обеспечить более эффективную передачу данных и устранить проблемы, связанные с возможной потерей и повреждением информации.</p>
 <button class="read_button">Читать далее</button>
 
-<div class="funtcion">
-    <button class="button like" style="opacity: 0.5;"><img class="icon" src="public/img/Facebook Like.svg" alt=""></button>
-    <p class="number like">0</p>
-    <button class="button dislike"><img class="icon" src="public/img/Facebook dislike.png" alt=""></button>
-    <p class="number dislike">0</p>
-    <button class="button share"><img class="icon" src="public/img/Share.png" alt=""></button>
-    <button class="button comments"><img class="icon" src="public/img/Chat Message.png" alt=""></button>
-    <p class="number comments">0</p>
-    <button class="button views"><img class="icon" src="public/img/Eye.png" alt=""></button>
-    <p class="number view">0</p>
-</div>
+    <div class="funtcion">
+        <button class="button like" style="opacity: 0.5;"><img class="icon" src="public/img/Facebook Like.svg" alt=""></button>
+        <p class="number like">0</p>
+        <button class="button dislike"><img class="icon" src="public/img/Facebook dislike.png" alt=""></button>
+        <p class="number dislike">0</p>
+        <button class="button share"><img class="icon" src="public/img/Share.png" alt=""></button>
+        <button class="button comments"><img class="icon" src="public/img/Chat Message.png" alt=""></button>
+        <p class="number comments">0</p>
+        <button class="button views"><img class="icon" src="public/img/Eye.png" alt=""></button>
+        <p class="number view">0</p>
+    </div>
 </div>
 </template>
 
@@ -50,16 +51,16 @@
     margin-left: 2.5%;
 }
 .user_name{
-font-family: 'Inter';
-font-weight: 500;
-font-size: 14px;
-line-height: 16.94px;
-display: inline-block;
-margin-left: 1.5%;
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.94px;
+    display: inline-block;
+    margin-left: 1.5%;
 }
 .post_data{
-display: inline-block;
-margin-left: 3.5%;
+    display: inline-block;
+    margin-left: 3.5%;
 }
 .info{
     display: inline-block;
