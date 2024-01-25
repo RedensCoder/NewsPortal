@@ -34,6 +34,8 @@ app.get("/getUserInfoById/:id", async (req: Request, res: Response) => await Use
 app.get("/getUserSocialsById/:id", async (req: Request, res: Response) => await User.GetUserSocialsById(req, res, prisma));
 app.put("/updateUserInfo", authenticateTokenBody, async (req: Request, res: Response) => await User.UpdateUserInfo(req, res, prisma));
 app.put("/updateSocial", authenticateTokenBody, async (req: Request, res: Response) => await User.UpdateSocial(req, res, prisma));
+app.delete("/deleteSocial/:id", authenticateToken, async (req: Request, res: Response) => await User.DeleteSocial(req, res, prisma));
+
 //POSTS
 app.post("/createPost", authenticateTokenBody, async (req: Request, res: Response) => await Post.CreatePost(req, res, prisma));
 app.get("/getAllPosts/:take", async (req: Request, res: Response) => await Post.GetAllPosts(req, res, prisma));

@@ -182,3 +182,13 @@ export const UpdateSocial = async (req: Request, res: Response, prisma: PrismaCl
 
     res.sendStatus(200);
 }
+
+export const DeleteSocial = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400)
+    }
+
+    await prisma.user_socials.delete({ where: { id: Number(req.params.id) } });
+
+    res.sendStatus(200);
+}

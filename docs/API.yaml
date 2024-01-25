@@ -219,6 +219,30 @@ paths:
           description: Успех!
         '204':
           description: Вы ввели не все данные
+  /deleteSocial/{id}:
+    delete:
+      tags:
+        - Пользователи
+      summary: Удалить соц.сеть
+      description: Удалить соц.сеть
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успех!
+        '400':
+          description: Где-то ты проебался!
 
 # POSTS
   /createPost:

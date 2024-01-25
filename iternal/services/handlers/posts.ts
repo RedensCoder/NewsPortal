@@ -83,11 +83,8 @@ export const UpdatePost = async (req: Request, res: Response, prisma: PrismaClie
 }
 
 export const DeletePost = async (req: Request, res: Response, prisma: PrismaClient) => {
-    try {
-        Number(req.params.id)
-    } catch(e) {
-        res.sendStatus(400);
-        return;
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400)
     }
 
     await prisma.user_posts.delete({ where: { id: Number(req.params.id) } });
