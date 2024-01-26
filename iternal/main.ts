@@ -38,11 +38,22 @@ app.delete("/deleteSocial/:id", authenticateToken, async (req: Request, res: Res
 
 //POSTS
 app.post("/createPost", authenticateTokenBody, async (req: Request, res: Response) => await Post.CreatePost(req, res, prisma));
+app.post("/postLike", authenticateTokenBody, async (req: Request, res: Response) => await Post.Like(req, res, prisma));
+app.post("/postDislike", authenticateTokenBody, async (req: Request, res: Response) => await Post.Dislike(req, res, prisma));
+app.post("/getUserPostLike", authenticateTokenBody, async (req: Request, res: Response) => await Post.GetUserLike(req, res, prisma));
+app.post("/getUserPostDislike", authenticateTokenBody, async (req: Request, res: Response) => await Post.GetUserDislike(req, res, prisma));
+app.post("/createPostComment", authenticateTokenBody, async (req: Request, res: Response) => await Post.CreateComment(req, res, prisma));
 app.get("/getAllPosts/:take", async (req: Request, res: Response) => await Post.GetAllPosts(req, res, prisma));
 app.get("/getUserPosts/:id", async (req: Request, res: Response) => await Post.GetUserPosts(req, res, prisma));
 app.get("/getPostById/:id", async (req: Request, res: Response) => await Post.GetPostById(req, res, prisma));
+app.get("/getPostLikes/:id", async (req: Request, res: Response) => await Post.GetLikeByPostId(req, res, prisma));
+app.get("/getPostDislikes/:id", async (req: Request, res: Response) => await Post.GetDislikeByPostId(req, res, prisma));
+app.get("/getPostViews/:id", async (req: Request, res: Response) => await Post.GetViews(req, res, prisma));
+app.get("/getPostComments/:id", async (req: Request, res: Response) => await Post.GetPostComments(req, res, prisma));
 app.put("/updatePost", authenticateTokenBody, async (req: Request, res: Response) => await Post.UpdatePost(req, res, prisma));
+app.put("/addView/:id", authenticateToken, async (req: Request, res: Response) => await Post.AddView(req, res, prisma));
 app.delete("/deletePost/:id", authenticateToken, async (req: Request, res: Response) => await Post.DeletePost(req, res, prisma));
+app.delete("/deletePostComment/:id", authenticateToken, async (req: Request, res: Response) => await Post.DeleteComment(req, res, prisma));
 
 app.listen(8080, () => {
     console.log("[Server] Enabled!");
