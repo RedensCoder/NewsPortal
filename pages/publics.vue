@@ -1,6 +1,10 @@
 <script>
 import ("~/assets/css/second.css");
 import '@fontsource-variable/inter';
+function my_public(){
+    
+}
+
 </script>
 
 <template>
@@ -11,7 +15,7 @@ import '@fontsource-variable/inter';
         <div class="public1">
         <h3 class="text text1 t1">Все паблики</h3>
         <h3 class="text text1 t2">/</h3>
-        <h3 class="text text1 t3">Мои паблики</h3>
+        <h3 class="text text1 t3" @click="">Мои паблики</h3>
         <div class="div_search">
         <input type="search" class="search" name="" id="" placeholder="Поиск паблика">
         <button class="icon btn_search"></button>
@@ -48,7 +52,21 @@ import '@fontsource-variable/inter';
             <hr class="hr">
         </div>
     </div>
-   
+    
+    <div class="my_public">
+        <div class="publics">
+        <div class="public">
+            <div class="info">
+            <img class="logo" src="public/img/example_logo.png" alt="">
+            <div class="info_public">
+            <h1 class="name_public">Новости мира</h1>
+            <p class="followers">0 подписчиков</p>
+                 </div>
+                </div>
+            </div>
+    </div>
+    <hr class="hr">
+    </div>
     </div>
 </template>
 
@@ -57,9 +75,10 @@ import '@fontsource-variable/inter';
     display: flex;
 }
 .all_publics{
-    width: 50%;
-    margin-left: 45%;
-    margin-right: 10%;
+    width: 55%;
+    flex-shrink: 0;
+    margin-left: 42.5%;
+
     margin-top: 2%;
     height: 100vh;
     background-color: white;
@@ -76,10 +95,15 @@ import '@fontsource-variable/inter';
 }
 .t1{
     color: #8657E9;
+    cursor: pointer;
+}
+.t3{
+    cursor: pointer;
 }
 .public1{
     display: inline-block;
 }
+
 .search{
     width: 91%;
     height: 3.5vh;
@@ -102,6 +126,8 @@ import '@fontsource-variable/inter';
     margin-top: 2%;
     text-align: center;
     clear: left;
+    margin-left: 2.5%;
+    flex-shrink: 0;
 }
 .followers{
     display: block;
@@ -143,18 +169,21 @@ import '@fontsource-variable/inter';
     height: 3.5vh;
     display: inline-block;
     border-style: none;
+    cursor: pointer;
 
 }
 .icon{
 background-image: url("public/img/Search.png");
 background-repeat: no-repeat;
 display: inline-block;
-
 }
 .div_search{
     width: 100%;
     display: inline-block;
     height: 100%;
-    
+    margin-bottom: -5%;
+}
+.my_public{
+    visibility: hidden;
 }
 </style>
