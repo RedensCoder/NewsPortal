@@ -21,10 +21,6 @@
                         <img src="../public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >2</p>
                     </div>
-                    <div class="div_share" >
-                        <img src="../public/img/Share.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >3</p>
-                    </div>
                     <div class="div_commnets" >
                         <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >4</p>
@@ -32,6 +28,9 @@
                     <div class="div_viewing" >
                         <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >5</p>
+                    </div>
+                    <div class="div_share" >
+                        <img src="../public/img/Share.svg" alt="NO" class="img_like" >
                     </div>
                 </div>
             </div>
