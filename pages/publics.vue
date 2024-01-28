@@ -1,8 +1,9 @@
 <script>
 import ("~/assets/css/second.css");
 import '@fontsource-variable/inter';
+import { Style } from 'nuxt/dist/head/runtime/components';
 function my_public(){
-    
+    console.log("Все работает!")
 }
 
 </script>
@@ -15,7 +16,7 @@ function my_public(){
         <div class="public1">
         <h3 class="text text1 t1">Все паблики</h3>
         <h3 class="text text1 t2">/</h3>
-        <h3 class="text text1 t3" @click="">Мои паблики</h3>
+        <h3 class="text text1 t3" @click="my_public">Мои паблики</h3>
         <div class="div_search">
         <input type="search" class="search" name="" id="" placeholder="Поиск паблика">
         <button class="icon btn_search"></button>
