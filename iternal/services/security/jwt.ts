@@ -4,11 +4,12 @@ import { Request, Response, NextFunction } from "express";
 
 dotenv.config();
 
-export const generateAccessToken = (id: number, login: string): string => {
+export const generateAccessToken = (id: number, login: string, role: string): string => {
     return jwt.sign({
         data: {
             id: id,
-            login: login
+            login: login,
+            role: role
         }
     }, process.env.SECRET_TOKEN || "Secret", {expiresIn: "7d"});
 }
@@ -32,8 +33,9 @@ export const authenticateTokenParams = (req: Request, res: Response, next: NextF
         if (decoded === undefined) return res.sendStatus(403)
 
         if (typeof decoded !== "string") {
-            if (decoded.data.username !== req.params.username) return res.sendStatus(403);
-            next()
+            if (decoded.data.id === req.params.id || decoded.data.role === "admin") { next() } else {
+                return res.sendStatus(403);
+            }
         } else {
             return res.sendStatus(403)
         }
@@ -50,7 +52,7 @@ export const authenticateTokenBody = (req: Request, res: Response, next: NextFun
         if (decoded === undefined) return res.sendStatus(403)
 
         if (typeof decoded !== "string") {
-            if (decoded.data.id === req.body.id || decoded.data.id === req.body.userId) { next() } else {
+            if (decoded.data.id === req.body.id || decoded.data.id === req.body.userId || decoded.data.role === "admin" || decoded.data.role === "moderator") { next() } else {
                 return res.sendStatus(403);
             }
         } else {

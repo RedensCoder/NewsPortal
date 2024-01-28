@@ -31,7 +31,7 @@ export const CreateUser = async (req: Request, res: Response, prisma: PrismaClie
             }
         });
 
-        const token = generateAccessToken(Number(createdUser.id), req.body.login);
+        const token = generateAccessToken(Number(createdUser.id), req.body.login, createdUser.role);
 
         res.send(token);
     }
@@ -46,7 +46,7 @@ export const Auth = async (req: Request, res: Response, prisma: PrismaClient) =>
     const user = await prisma.users.findFirst({ where: { AND: { login: md5(req.body.login), password: md5(req.body.password) } } });
 
     if (user !== null) {
-        const token = generateAccessToken(Number(user.id), req.body.login);
+        const token = generateAccessToken(Number(user.id), req.body.login, user.role);
 
         res.send(token);
     } else {

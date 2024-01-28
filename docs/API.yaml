@@ -272,6 +272,87 @@ paths:
           description: Пост создан!
         '204':
           description: Вы ввели не все данные в body
+  /createPostComment:
+    post:
+      tags:
+        - Посты
+      summary: Добавляет комментарий к посту
+      description: Добавляет комментарий к посту
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postCommentBody'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/postCommentBody'
+        required: true
+      responses:
+        '200':
+          description: Комментарий создан!
+        '204':
+          description: Вы ввели не все данные в body
+  /postLike:
+    post:
+      tags:
+        - Посты
+      summary: Ставит лайк или убирает его, если есть
+      description: Ставит лайк или убирает его, если есть
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikeDislikeBody'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LikeDislikeBody'
+        required: true
+      responses:
+        '200':
+          description: Успех!
+        '204':
+          description: Вы ввели не все данные в body
+  /postDislike:
+    post:
+      tags:
+        - Посты
+      summary: Ставит дизлайк или убирает его, если есть
+      description: Ставит дизлайк или убирает его, если есть
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikeDislikeBody'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LikeDislikeBody'
+        required: true
+      responses:
+        '200':
+          description: Успех!
+        '204':
+          description: Вы ввели не все данные в body
   /getAllPosts/{limit}:
     get:
       tags:
@@ -338,6 +419,82 @@ paths:
                 $ref: "#/components/schemas/UserPosts"
         '400':
           description: Пост не найдены
+  /getPostLikes/{id}:
+    get:
+      tags:
+        - Посты
+      summary: Получить кол-во лайков пост
+      description: Получить кол-во лайков пост
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт кол-во лайков
+        '400':
+          description: Пост не найдены
+  /getPostDislikes/{id}:
+    get:
+      tags:
+        - Посты
+      summary: Получить кол-во дизлайков пост
+      description: Получить кол-во дизлайков пост
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт кол-во дизлайков
+        '400':
+          description: Пост не найдены
+  /getPostViews/{id}:
+    get:
+      tags:
+        - Посты
+      summary: Получить кол-во просмотров под постом
+      description: Получить кол-во просмотров под постом
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт кол-во просмотров
+        '400':
+          description: Пост не найдены
+  /getPostComments/{id}:
+    get:
+      tags:
+        - Посты
+      summary: Получить все комментарии под постом
+      description: Получить все комментарии под постом
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернет комменты
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comments"
+        '400':
+          description: Пост не найдены
   /updatePost:
     put:
       tags:
@@ -365,12 +522,60 @@ paths:
           description: Успех!
         '204':
           description: Вы ввели не все данные
+  /addView/{id}:
+    put:
+      tags:
+        - Посты
+      summary: Обновить пост
+      description: Обновить пост
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ID Поста
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успех!
+        '400':
+          description: Ошибка в введенных данных
   /deletePost/{id}:
     delete:
       tags:
         - Посты
       summary: Удалить пост
       description: Удалить пост
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поста
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успех!
+        '400':
+          description: Ты даун!
+  /deletePostComment/{id}:
+    delete:
+      tags:
+        - Посты
+      summary: Удалить комментарий к посту
+      description: Удалить комментарий к посту
       parameters:
         - name: id
           in: path
@@ -535,6 +740,9 @@ components:
           type: integer
           format: int
           example: 1
+        title:
+          format: string
+          example: Крутая новость
         content:
           type: string
           format: string
@@ -543,6 +751,9 @@ components:
           type: array
           format: string
           example: twitch, youtube
+        status:
+          type: boolean
+          example: false
     UserPostsArray:
       type: array
       items:
@@ -556,6 +767,9 @@ components:
             type: integer
             format: int
             example: 1
+          title:
+            format: string
+            example: Крутая новость
           content:
             type: string
             format: string
@@ -564,6 +778,9 @@ components:
             type: array
             format: string
             example: twitch, youtube
+          status:
+            type: boolean
+            example: false
     UserPostsAdd:
       type: object
       properties:
@@ -571,6 +788,9 @@ components:
           type: integer
           format: int
           example: 1
+        title:
+          format: string
+          example: Крутая новость
         content:
           type: string
           format: string
@@ -579,3 +799,55 @@ components:
           type: array
           format: string
           example: twitch, youtube
+        status:
+          type: boolean
+          format: boolean
+          example: false
+    postCommentBody:
+      type: object
+      properties:
+        id:
+          description: user id
+          type: integer
+          format: int
+          example: 1
+        post:
+          type: integer
+          format: int
+          example: 1
+        comment:
+          type: string
+          format: string
+          example: Пост говна, Кирилл переделывай
+    LikeDislikeBody:
+      type: object
+      properties:
+        id:
+          description: user id
+          type: integer
+          format: int
+          example: 1
+        post:
+          type: integer
+          format: int
+          example: 1
+    Comments:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              description: user id
+              type: integer
+              format: int
+              example: 1
+            userId:
+              type: integer
+              format: int
+              example: 1
+            postId:
+              type: integer
+              example: 1
+            comment:
+              type: string
+              example: Кирилл, я заебался писец :(
