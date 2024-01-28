@@ -1,171 +1,124 @@
-<template>
-    <Articles />
-    <div class="main">
-        <div class="articles">
-            <div class="author">
-                <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <p class="nickname">{{nickname}}</p>
-                <p class="time_post">5 минут назад</p>
-            </div>
-            <p class="news_text">Новости</p>
-            <div class="news">
-                <h2 class="heading_post">Погода на неделю в Москве</h2>
-                <img src="http://vsegda-pomnim.com/uploads/posts/2022-04/1648935906_99-vsegda-pomnim-com-p-bittsevskii-les-foto-106.jpg" alt="" class="img_post">
-                <p class="text_post">Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в МосквеПогода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве</p>
-                <div class="buttons_post">
-                    <div class="div_like" @click="quantity_like1">
-                        <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >{{ 1 }}</p>
-                    </div>
-                    <div class="div_dizlike" >
-                        <img src="../public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >2</p>
-                    </div>
-                    <div class="div_commnets" >
-                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >4</p>
-                    </div>
-                    <div class="div_viewing" >
-                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >5</p>
-                    </div>
-                    <div class="div_share" >
-                        <img src="../public/img/Share.svg" alt="NO" class="img_like" >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="articles_popular">
-            <p class="post_watching">Популярные статьи</p>
-            <hr>
-            <div class="news_post">
-                <h3 class="heading_post">Реконструкция белого дома</h3>
-
-                <div class="div_interaction">
-                    <div class="div_commnets" >
-                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >4</p>
-                    </div>
-                    <div class="div_viewing" >
-                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >5</p>
-                    </div>
-                </div>
-
-            </div>
-            <hr>
-        </div>
-    </div>
-</template>
-
-<script setup>
-import ("~/assets/css/second.css");
-import '@fontsource-variable/inter';
-import { useApiStore } from '#imports';
-import { jwtDecode } from 'jwt-decode';
-
-let quantity = ref(0);
-const api = useApiStore();
-let dsa = ref(true);
-let nickname = ref('');
-
-onMounted(async () => {
-    if (localStorage.getItem('token') == null) {
-        dsa.value = true;
-    }
-    else {
-        let id = jwtDecode(localStorage.getItem('token')).data.id;
-        console.log(id);
-
-        let res = await api.getUserInfoById(id);
-        
-        nickname.value = res.nickname;
-        dsa.value = false;
-    }
-});
+<script>
+    import ("~/assets/css/second.css");
+    import ("~/assets/css/first.css");
+    import '@fontsource-variable/inter';
 </script>
 
+<template>
+    <!-- СТРАНИЦА СО СТАТЬЯМИ -->
+<Articles />
+<div class="news">
+    <div class="info">
+        <img class="user_icon" src="public/img/user.png" alt="">
+        <p class="user_name text">user1</p>
+        <p class="post_data">5 минут назад</p>
+    </div>
+
+        <p class="categories">Статья</p>
+        <h1 class="name_articles">Основы интернета</h1>
+        <img class="articles_picture" src="public/img/acrticles_example.png" alt="">
+        <p class="text_articles">Интернет, безусловно, стал одной из самых важных частей нашей современной жизни. Однако, несмотря на его всеобъемлющее присутствие, мало кто задумывается над его основами и принципами работы. <br>
+    В основе интернета лежит потрясающая сетевая инфраструктура, которая обеспечивает связь между компьютерами по всему миру. 
+    Эта инфраструктура включает в себя огромное количество сетевых провайдеров, серверов, роутеров и протоколов, которые работают вместе, чтобы обеспечить надежное и эффективное функционирование интернета.</p>
+        <button class="read_button">Читать далее</button>
+
+    <div class="buttons_post">
+        <div class="div_like" @click="quantity_like1">
+            <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
+            <p class="quantity_like" >{{ 1 }}</p>
+        </div>
+        <div class="div_dizlike" >
+            <img src="../public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+            <p class="quantity_like" >2</p>
+        </div>
+        <div class="div_commnets" >
+            <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+            <p class="quantity_like" >4</p>
+        </div>
+        <div class="div_viewing" >
+            <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+            <p class="quantity_like" >5</p>
+        </div>
+        <div class="div_share" >
+            <img src="../public/img/Share.svg" alt="NO" class="img_like" >
+        </div>
+    </div>
+</div>
+</template>
+
 <style scoped>
-.main{
-    display: flex;
-}
-
-hr{
-    margin-top: 20px;
-}
-
-h2{
-    font-size: 24px;
-}
-
-h3{
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-button{
-    width: 100px;
-    height: 40px;
-}
-.articles{
-    background-color: #FFFFFF;
-    width: 770px;
-    height: auto;
-    overflow: auto;
-    margin: 30px 0 30px auto;
-    align-items: center;
-}
-
-.author{
-    display: flex;
-    margin: 10px auto;
-    padding: 0px 20px;
-    gap: 10px;
-    text-align: center;
-    align-items: center;
-}
-
-.ava{
-    width: 33px;
-    height: 33px;    
-    border-radius: 50px;
-}
-
-.nickname{
-    font-size: 16px;
-    line-height: 16px;
-    font-weight: 500;
-}
-
-.time_post{
-    color: #818181;
-    font-size: 14px;
-    line-height: 16px;
-}
-.news_text{
-    padding-top: 5px;
-    padding-left: 20px;
-    font-size: 20px;
-    line-height: 16px;
-    color: #818181;
-}
 .news{
-    padding: 20px;
-    padding-top: 20px;
-    width: auto;
+    width: 50%;
+    height: auto;
+    background-color: #FFFFFF;
+    margin-left: 30%;
+    margin-top: 2.5%;
 }
-
-.img_post{
-    width: 730px;
-    height: 400px;
-    padding: 20px 0px 10px;
+.user_icon{
+    width: 5%;
+    display: inline;
+    border-radius: 49px;
+    margin-left: 2.5%;
 }
-
-.text_post{
+.user_name{
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.94px;
+    display: inline-block;
+    margin-left: 1.5%;
+}
+.post_data{
+    display: inline-block;
+    margin-left: 3.5%;
+}
+.info{
+    display: inline-block;
+}
+.categories{
+    font-family: 'Inter';
+    font-weight: 500;
+    size: 14px;
+    line-height: 16.94px;
+    color: #818181;
+    margin-top: 1.5%;
+    margin-left: 2.5%;
+}
+.name_articles{
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29.05px;
+    margin-top: 1.5%;
+    margin-left: 2.5%
+}
+.articles_picture{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 3%;
+}
+.text_articles{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    font-family: 'Inter';
+    font-weight: 400px;
     font-size: 16px;
-    line-height: 19px;
-    color: #000000;
-    width: auto;
+    line-height: 19.36px;
+    margin-top: 2%;
+}
+.read_button{
+    width: 13.5%;
+   padding: 1.5%;
+    border: 1px solid #8657E9;
+    background-color: #FFFFFF;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5%;
+    border-radius: 4px;
+    margin-left: 3%;
 }
 
 .buttons_post{
