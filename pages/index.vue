@@ -1,7 +1,29 @@
-<script>
-    import ("~/assets/css/second.css");
-    import ("~/assets/css/first.css");
-    import '@fontsource-variable/inter';
+<script setup>
+import ("~/assets/css/second.css");
+import ("~/assets/css/first.css");
+import '@fontsource-variable/inter';
+import { useApiStore } from '#imports';
+import { jwtDecode } from 'jwt-decode';
+
+let quantity = ref(0);
+const api = useApiStore();
+let dsa = ref(true);
+let nickname = ref('');
+
+onMounted(async () => {
+    if (localStorage.getItem('token') == null) {
+        dsa.value = true;
+    }
+    else {
+        let id = jwtDecode(localStorage.getItem('token')).data.id;
+        console.log(id);
+
+        let res = await api.getUserInfoById(id);
+        
+        nickname.value = res.nickname;
+        dsa.value = false;
+    }
+});
 </script>
 
 <template>
@@ -10,7 +32,7 @@
 <div class="news">
     <div class="info">
         <img class="user_icon" src="public/img/user.png" alt="">
-        <p class="user_name text">user1</p>
+        <p class="user_name text">{{nickname}}</p>
         <p class="post_data">5 минут назад</p>
     </div>
 
@@ -124,6 +146,7 @@
 .buttons_post{
     display: flex;
     padding-top: 15px;
+    margin-left: 2.5%;
     gap: 10px;
 }
 

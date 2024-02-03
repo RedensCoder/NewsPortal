@@ -88,6 +88,24 @@ onMounted(async () => {
 <style scoped>
 .main{
     display: flex;
+    justify-content: center;
+    max-width: 1920px;
+}
+
+@media (max-width: 1400px){
+    .main{
+        max-width: 1400px;
+    }
+}
+@media (max-width: 992px){
+    .main{
+        max-width: 992px;
+    }
+}
+@media (max-width: 767px){
+    .main{
+        max-width: none;
+    }
 }
 
 hr{
@@ -112,7 +130,7 @@ button{
     width: 770px;
     height: auto;
     overflow: auto;
-    margin: 30px 0 30px auto;
+    margin: 30px 0 0 auto;
     align-items: center;
 }
 

@@ -1,59 +1,46 @@
 <template>
+    <!-- СТРАНИЦА С ПОСТАМИ -->
     <Articles />
     <div class="main">
-        <div class="articles">
-            <div class="author">
-                <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <p class="nickname">{{ nickname }}</p>
-                <p class="time_post">5 минут назад</p>
-            </div>
-            <p class="news_text">Новости</p>
-            <div class="news">
-                <h2 class="heading_post">Пост</h2>
-                <p class="text_post">Мессенджер — это программа для мгновенного обмена текстовыми сообщениями, файлами и медиа между зарегистрированными пользователями через интернет.<br>
-С помощью мессенджеров можно:
-общаться с другими пользователями один на один или в групповых беседах; <br>
-отправлять текстовые или голосовые сообщения, а также стикеры, фото, видео и другие файлы; <br>
-звонить и разговаривать по видеосвязи (один на один или в режиме конференции); <br>
-создавать публичные каналы и подписываться на них; <br>
-пользоваться чат-ботами. <br>
-Обычно мессенджеры не отключаются, а продолжают работать в фоновом режиме и доставляют сообщения мгновенно, если устройство адресата подключено к интернету.
-Наиболее распространёнными в России являются WhatsApp, Telegram и Viber.
-С помощью мессенджеров можно:
-общаться с другими пользователями один на один или в групповых беседах;
-отправлять текстовые или голосовые сообщения, а также стикеры, фото, видео и другие файлы;
-звонить и разговаривать по видеосвязи (один на один или в режиме конференции);
-создавать публичные каналы и подписываться на них;
-пользоваться чат-ботами.
-Обычно мессенджеры не отключаются, а продолжают работать в фоновом режиме и доставляют сообщения мгновенно, если устройство адресата подключено к интернету.
-Наиболее распространёнными в России являются WhatsApp, Telegram и Viber.</p>
-                <div class="tegs">
-                    <h3>Теги:</h3>
-                    <p class="tegs_">telegram, whatsapp, viber</p>
+        <div class="flex_column">
+            <div class="articles" v-for="post in data">
+                <div class="author">
+                    <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
+                    <p class="nickname">{{ post.user.nickname }}</p>
+                    <p class="time_post">5 минут назад</p>
                 </div>
-                <div class="buttons_post">
-                    <div class="div_like" @click="quantity_like1">
-                        <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >{{ 1 }}</p>
+                <p class="news_text">{{ post.post.title }}</p>
+                <div class="news">
+                    <p class="text_post">{{ post.post.content }}</p>
+                    <div class="tegs">
+                        <h3>Теги:</h3>
+                        <p class="tegs_" v-for="tag in post.post.tags">{{ tag }}</p>
                     </div>
-                    <div class="div_dizlike" >
-                        <img src="../public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >2</p>
-                    </div>
-                    <div class="div_commnets" >
-                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >4</p>
-                    </div>
-                    <div class="div_viewing" >
-                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >5</p>
-                    </div>
-                    <div class="div_share" >
-                        <img src="../public/img/Share.svg" alt="NO" class="img_like" >
+                    <div class="buttons_post">
+                        <div class="div_like" @click="quantity_like1">
+                            <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like" >
+                            <p class="quantity_like" >{{ 1 }}</p>
+                        </div>
+                        <div class="div_dizlike" >
+                            <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                            <p class="quantity_like" >2</p>
+                        </div>
+                        <div class="div_commnets" >
+                            <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                            <p class="quantity_like" >4</p>
+                        </div>
+                        <div class="div_viewing" >
+                            <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
+                            <p class="quantity_like" >5</p>
+                        </div>
+                        <div class="div_share" >
+                            <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="articles_popular">
             <p class="post_watching">Популярные статьи</p>
             <hr>
@@ -62,11 +49,11 @@
 
                 <div class="div_interaction">
                     <div class="div_commnets" >
-                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >4</p>
                     </div>
                     <div class="div_viewing" >
-                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >5</p>
                     </div>
                 </div>
@@ -80,38 +67,29 @@
 <script setup>
 import ("~/assets/css/second.css");
 import '@fontsource-variable/inter';
-import { useApiStore } from '#imports';
+import { useApiStore } from '~/stores/apiStore';
 import { jwtDecode } from 'jwt-decode';
 
 let quantity = ref(0);
 const api = useApiStore();
-let dsa = ref(true);
-let nickname = ref('');
 
-onMounted(async () => {
-    if (localStorage.getItem('token') == null) {
-        dsa.value = true;
-    }
-    else {
-        let id = jwtDecode(localStorage.getItem('token')).data.id;
-        console.log(id);
+const { data } = await useAsyncData (() => api.getAllPosts(10));
+console.log(data.value);
 
-        let res = await api.getUserInfoById(id);
-        
-        nickname.value = res.nickname;
-        dsa.value = false;
-    }
-});
+// let posts = reactive([]);
 
-function quantity_like1() {
-    quantity.value++;
-}
+// onMounted(async () => {
+//     posts.push(...await api.getAllPosts(100))
+
+//     // console.log(posts);
+// })
 
 </script>
 
 <style scoped>
 .main{
     display: flex;
+    justify-content: center;
 }
 
 hr{
@@ -131,12 +109,17 @@ button{
     width: 100px;
     height: 40px;
 }
+
+.flex_column{
+    display: flex;
+    flex-direction: column;
+}
 .articles{
     background-color: #FFFFFF;
     width: 770px;
     height: auto;
     overflow: auto;
-    margin: 30px 0 30px auto;
+    margin: 30px 0 0px auto;
     align-items: center;
 }
 
