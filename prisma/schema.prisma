@@ -20,6 +20,8 @@ model Users {
   PostLike     Post_likes[]
   PostDislikes Post_dislikes[]
   PostComments Post_comments[]
+  PublicAdmins         Public_admins[]
+  PublicSubscribers    Public_subscribers[]
 }
 
 model User_infos {
@@ -47,7 +49,6 @@ model User_posts {
     title     String
     content   String
     tags      String[]
-    status    Boolean
 
     PostViews    Post_views?
     PostLike     Post_likes[]
@@ -85,4 +86,33 @@ model Post_comments {
     postId   BigInt
     post     User_posts    @relation(fields: [postId], references: [id])
     comment  String
+}
+
+model Publics {
+    id              BigInt   @id @default(autoincrement())
+    name            String
+    description     String
+    avatar          String
+    site            String
+    comment         String
+    status          String
+
+    PublicAdmins         Public_admins?
+    PublicSubscribers    Public_subscribers?
+}
+
+model Public_admins {
+    id          BigInt          @id @default(autoincrement())
+    publicId    BigInt          @unique
+    public      Publics         @relation(fields: [publicId], references: [id])
+    userId      BigInt
+    user        Users           @relation(fields: [userId], references: [id])
+}
+
+model Public_subscribers {
+    id          BigInt          @id @default(autoincrement())
+    publicId    BigInt          @unique
+    public      Publics         @relation(fields: [publicId], references: [id])
+    userId      BigInt
+    user        Users           @relation(fields: [userId], references: [id])
 }

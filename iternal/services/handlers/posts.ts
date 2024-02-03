@@ -12,8 +12,7 @@ export const CreatePost = async (req: Request, res: Response, prisma: PrismaClie
             userId: req.body.id,
             title: req.body.title,
             content: req.body.content,
-            tags: req.body.tags,
-            status: false
+            tags: req.body.tags
         }
     });
 
