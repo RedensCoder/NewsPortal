@@ -22,6 +22,51 @@ import '@fontsource-variable/inter';
         </div>
 
     </div>
+    <div class="news_post">
+        <h3 class="heading_post">Реконструкция белого дома</h3>
+
+        <div class="div_interaction">
+            <div class="div_commnets" >
+                <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                <p class="quantity_like" >4</p>
+            </div>
+            <div class="div_viewing" >
+                <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                <p class="quantity_like" >5</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="news_post">
+        <h3 class="heading_post">Реконструкция белого дома</h3>
+
+        <div class="div_interaction">
+            <div class="div_commnets" >
+                <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                <p class="quantity_like" >4</p>
+            </div>
+            <div class="div_viewing" >
+                <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                <p class="quantity_like" >5</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="news_post">
+        <h3 class="heading_post">Реконструкция белого дома</h3>
+
+        <div class="div_interaction">
+            <div class="div_commnets" >
+                <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                <p class="quantity_like" >4</p>
+            </div>
+            <div class="div_viewing" >
+                <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                <p class="quantity_like" >5</p>
+            </div>
+        </div>
+
+    </div>
     <hr>
 </div>
 </template>
