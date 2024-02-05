@@ -4,33 +4,14 @@
         <div class="articles">
             <div class="author">
                 <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <p class="nickname">{{ nickname }}</p>
+                <p class="nickname">{{nickname}}</p>
                 <p class="time_post">5 минут назад</p>
             </div>
             <p class="news_text">Новости</p>
             <div class="news">
-                <h2 class="heading_post">Пост</h2>
-                <p class="text_post">Мессенджер — это программа для мгновенного обмена текстовыми сообщениями, файлами и медиа между зарегистрированными пользователями через интернет.<br>
-С помощью мессенджеров можно:
-общаться с другими пользователями один на один или в групповых беседах; <br>
-отправлять текстовые или голосовые сообщения, а также стикеры, фото, видео и другие файлы; <br>
-звонить и разговаривать по видеосвязи (один на один или в режиме конференции); <br>
-создавать публичные каналы и подписываться на них; <br>
-пользоваться чат-ботами. <br>
-Обычно мессенджеры не отключаются, а продолжают работать в фоновом режиме и доставляют сообщения мгновенно, если устройство адресата подключено к интернету.
-Наиболее распространёнными в России являются WhatsApp, Telegram и Viber.
-С помощью мессенджеров можно:
-общаться с другими пользователями один на один или в групповых беседах;
-отправлять текстовые или голосовые сообщения, а также стикеры, фото, видео и другие файлы;
-звонить и разговаривать по видеосвязи (один на один или в режиме конференции);
-создавать публичные каналы и подписываться на них;
-пользоваться чат-ботами.
-Обычно мессенджеры не отключаются, а продолжают работать в фоновом режиме и доставляют сообщения мгновенно, если устройство адресата подключено к интернету.
-Наиболее распространёнными в России являются WhatsApp, Telegram и Viber.</p>
-                <div class="tegs">
-                    <h3>Теги:</h3>
-                    <p class="tegs_">telegram, whatsapp, viber</p>
-                </div>
+                <h2 class="heading_post">Погода на неделю в Москве</h2>
+                <img src="http://vsegda-pomnim.com/uploads/posts/2022-04/1648935906_99-vsegda-pomnim-com-p-bittsevskii-les-foto-106.jpg" alt="" class="img_post">
+                <p class="text_post">Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в МосквеПогода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве</p>
                 <div class="buttons_post">
                     <div class="div_like" @click="quantity_like1">
                         <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
@@ -102,16 +83,29 @@ onMounted(async () => {
         dsa.value = false;
     }
 });
-
-function quantity_like1() {
-    quantity.value++;
-}
-
 </script>
 
 <style scoped>
 .main{
     display: flex;
+    justify-content: center;
+    max-width: 1920px;
+}
+
+@media (max-width: 1400px){
+    .main{
+        max-width: 1400px;
+    }
+}
+@media (max-width: 992px){
+    .main{
+        max-width: 992px;
+    }
+}
+@media (max-width: 767px){
+    .main{
+        max-width: none;
+    }
 }
 
 hr{
@@ -136,7 +130,7 @@ button{
     width: 770px;
     height: auto;
     overflow: auto;
-    margin: 30px 0 30px auto;
+    margin: 30px 0 0 auto;
     align-items: center;
 }
 
@@ -175,7 +169,7 @@ button{
 }
 .news{
     padding: 20px;
-    padding-top: 10px;
+    padding-top: 20px;
     width: auto;
 }
 
@@ -186,22 +180,16 @@ button{
 }
 
 .text_post{
-    margin-top: 10px;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
     width: auto;
 }
 
-.tegs{
-    margin: 100px auto 0;
-    display: flex;
-}
-
 .buttons_post{
     display: flex;
-    padding-top: 10px;
-    gap: 10px;    
+    padding-top: 15px;
+    gap: 10px;
 }
 
 .articles_popular{
@@ -232,10 +220,6 @@ button{
 .div_interaction{
     display: flex;
     gap: 10px;
-}
-
-.tegs_{
-    padding-left: 10px;
 }
 
 .div_like, .div_dizlike, .div_share, .div_viewing, .div_commnets{

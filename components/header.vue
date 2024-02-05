@@ -27,7 +27,7 @@
 
                     <div class="public_profile">
                         <NuxtLink class="text_my_public">Мои публикации</NuxtLink>
-                        <NuxtLink class="text_add_public">Создать публикацию</NuxtLink>
+                        <NuxtLink class="text_add_public" to="/articles/editor">Создать публикацию</NuxtLink>
                         <NuxtLink class="text_add_public">Сменить тему</NuxtLink>
                         <NuxtLink class="text_add_public" to="/public">Паблики</NuxtLink>
                     </div>
@@ -80,7 +80,7 @@ onMounted(async () => {
     }
     else {
         let id = jwtDecode(localStorage.getItem('token')).data.id;
-        console.log(id);
+        // console.log(id);
 
         let res = await api.getUserInfoById(id);
         
@@ -136,6 +136,23 @@ button {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    max-width: 1920px;
+}
+
+@media (max-width: 1400px){
+    .header_content{
+        max-width: 1400px;
+    }
+}
+@media (max-width: 992px){
+    .header_content{
+        max-width: 992px;
+    }
+}
+@media (max-width: 767px){
+    .header_content{
+        max-width: none;
+    }
 }
 
 .text_portal{

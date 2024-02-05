@@ -22,6 +22,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@vueup/vue-quill": "^1.2.0",
     "jwt-decode": "^4.0.0",
-    "pinia": "^2.1.7"
+    "pinia": "^2.1.7",
+    "vue-quill-editor": "^3.0.6"
   }
 }
