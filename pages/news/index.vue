@@ -10,7 +10,7 @@
             <p class="news_text">Новости</p>
             <div class="news">
                 <h2 class="heading_post">Погода на неделю в Москве</h2>
-                <img src="http://vsegda-pomnim.com/uploads/posts/2022-04/1648935906_99-vsegda-pomnim-com-p-bittsevskii-les-foto-106.jpg" alt="" class="img_post">
+                <img class="img_post" src="http://vsegda-pomnim.com/uploads/posts/2022-04/1648935906_99-vsegda-pomnim-com-p-bittsevskii-les-foto-106.jpg" alt="">
                 <p class="text_post">Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в МосквеПогода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве</p>
                 <div class="buttons_post">
                     <div class="div_like" @click="quantity_like1">
@@ -92,22 +92,6 @@ onMounted(async () => {
     max-width: 1920px;
 }
 
-@media (max-width: 1400px){
-    .main{
-        max-width: 1400px;
-    }
-}
-@media (max-width: 992px){
-    .main{
-        max-width: 992px;
-    }
-}
-@media (max-width: 767px){
-    .main{
-        max-width: none;
-    }
-}
-
 hr{
     margin-top: 20px;
 }
@@ -177,6 +161,7 @@ button{
     width: 730px;
     height: 400px;
     padding: 20px 0px 10px;
+    object-fit: cover;
 }
 
 .text_post{

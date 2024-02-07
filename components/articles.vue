@@ -1,6 +1,6 @@
 <template>
     <!-- СТРАНИЦА С ПЕРЕХОДОМ НА СТРАНИЦЫ -->
-    <div class="hh">
+    <div class="container">
         <div class="header_articles">
             <NuxtLink to="/" class="text_articles" exact>СТАТЬИ</NuxtLink>
             <hr>
@@ -34,6 +34,29 @@ hr{
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
+.container{
+    width: 100%;
+    max-width: 100%;
+}
+
+/* адаптив начало */
+@media (max-width: 1400px){
+    .container{
+        max-width: 1400px;
+    }
+}
+@media (max-width: 992px){
+    .container{
+        max-width: 992px;
+    }
+}
+@media (max-width: 767px){
+    .container{
+        max-width: none;
+    }
+}
+/* адаптив конец */
+
 .text_articles{
     font-size: 24px;
     line-height: 30px;
@@ -44,9 +67,6 @@ hr{
 }
 
 .text_articles:hover{
-    color: #8657E9;
-}
-.router-link-exact-active{
     color: #8657E9;
 }
 

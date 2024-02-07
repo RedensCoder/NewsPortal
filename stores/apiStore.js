@@ -62,9 +62,12 @@ export const useApiStore = defineStore('api', {
     },
 
     async createPost(title, content, tags, userId){
-      
-        await axios.post(`${this.url}/createPost`, {
-          userId: userId,
+      console.log(title);
+      console.log(content);
+      console.log(tags);
+      console.log(userId);
+        const postiki = await axios.post(`${this.url}/createPost`, {
+          id: userId,
           title: title,
           content: content,
           tags: tags,
@@ -72,7 +75,7 @@ export const useApiStore = defineStore('api', {
             Authorization: `${localStorage.getItem("token")}`
           }
         })   
-      
+      console.log(postiki);
     },
 
     async getPostById(id){

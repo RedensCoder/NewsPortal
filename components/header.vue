@@ -125,20 +125,18 @@ button {
 
 .header{
     background-color: #202124;
-    height: 150px;
-    display: flex;
-    justify-content: space-between;
     position: sticky;
-    top: 0px;
 }
 
 .header_content{
     display: flex;
+    height: 150px;
     justify-content: space-between;
     width: 100%;
-    max-width: 1920px;
+    max-width: 100%;
 }
 
+/* адаптив начало */
 @media (max-width: 1400px){
     .header_content{
         max-width: 1400px;
@@ -147,6 +145,7 @@ button {
 @media (max-width: 992px){
     .header_content{
         max-width: 992px;
+        justify-content: space-around;
     }
 }
 @media (max-width: 767px){
@@ -154,10 +153,12 @@ button {
         max-width: none;
     }
 }
+/* адаптив конец */
 
 .text_portal{
-    padding-top: 60px;
-    padding-left: 120px;
+    /* width: 50px; */
+    padding-top: 56px;
+    padding-left: 7.5%;
 }
 
 .text1{
@@ -169,7 +170,7 @@ button {
 
 .buttons{
     display: flex;
-    padding-right: 50px;
+    padding-right: 5%;
 }
 
 .btn1{
@@ -196,7 +197,7 @@ button {
 .profile{
     width: auto;
     margin-top: 50px;
-    margin-right: 150px;
+    margin-right: 7.5%;
     display: flex;
 }
 
@@ -204,10 +205,11 @@ button {
     border-radius: 4px;
     background-color: #8657E9;
     border: none;
-    padding: 15px 15px;
+    padding: 0px 15px;
     font-size: 16px;
     line-height: 19px;
     color: #ffffff;
+    text-align: center;
     height: 50px;
 }
 

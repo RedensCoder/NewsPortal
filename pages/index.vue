@@ -38,7 +38,7 @@ onMounted(async () => {
 
         <p class="categories">Статья</p>
         <h1 class="name_articles">Основы интернета</h1>
-        <img class="articles_picture" src="public/img/acrticles_example.png" alt="">
+        <img class="articles_picture" src="public/img/acrticles_example.png" alt="123">
         <p class="text_articles">Интернет, безусловно, стал одной из самых важных частей нашей современной жизни. Однако, несмотря на его всеобъемлющее присутствие, мало кто задумывается над его основами и принципами работы. <br>
     В основе интернета лежит потрясающая сетевая инфраструктура, которая обеспечивает связь между компьютерами по всему миру. 
     Эта инфраструктура включает в себя огромное количество сетевых провайдеров, серверов, роутеров и протоколов, которые работают вместе, чтобы обеспечить надежное и эффективное функционирование интернета.</p>
@@ -116,14 +116,13 @@ onMounted(async () => {
 }
 .articles_picture{
     width: 95%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+    max-height: 400px;
+    padding: 0px 2.5%;
     margin-top: 3%;
+    object-fit: cover;
 }
 .text_articles{
-    width: 95%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+    padding: 0px 2.5%;
     font-family: 'Inter';
     font-weight: 400px;
     font-size: 16px;
@@ -131,8 +130,8 @@ onMounted(async () => {
     margin-top: 2%;
 }
 .read_button{
-    width: 13.5%;
-   padding: 1.5%;
+    width: auto;
+    padding: 1.5%;
     border: 1px solid #8657E9;
     background-color: #FFFFFF;
     font-family: 'Inter';
