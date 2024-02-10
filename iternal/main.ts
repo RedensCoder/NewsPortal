@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client'
 
 import * as User from "./services/handlers/users";
 import * as Post from "./services/handlers/posts";
+import * as Public from "./services/handlers/publics";
 import {authenticateToken, authenticateTokenBody, authenticateTokenParams} from "./services/security/jwt";
 
 const prisma = new PrismaClient();
@@ -54,6 +55,18 @@ app.put("/updatePost", authenticateTokenBody, async (req: Request, res: Response
 app.put("/addView/:id", authenticateToken, async (req: Request, res: Response) => await Post.AddView(req, res, prisma));
 app.delete("/deletePost/:id", authenticateToken, async (req: Request, res: Response) => await Post.DeletePost(req, res, prisma));
 app.delete("/deletePostComment/:id", authenticateToken, async (req: Request, res: Response) => await Post.DeleteComment(req, res, prisma));
+
+//PUBLICS
+app.post("/createPublic", authenticateTokenBody, async (req: Request, res: Response) => await Public.CreatePublic(req, res, prisma));
+app.post("/addAdmin", authenticateTokenBody, async (req: Request, res: Response) => await Public.AddAdmin(req, res, prisma));
+app.post("/subscribe", authenticateTokenBody, async (req: Request, res: Response) => await Public.Subscribe(req, res, prisma));
+app.get("/getAllPublics/:take", async (req: Request, res: Response) => await Public.GetAllPublics(req, res, prisma));
+app.get("/getUserPublics/:id", authenticateToken, async (req: Request, res: Response) => await Public.GetUserPublics(req, res, prisma));
+app.get("/getPublicById/:id", async (req: Request, res: Response) => await Public.GetPublicById(req, res, prisma));
+app.get("/getPublicAdmins/:id", authenticateToken, async (req: Request, res: Response) => await Public.GetPublicAdmins(req, res, prisma));
+app.get("/getPublicSubs/:id", async (req: Request, res: Response) => await Public.GetPublicSubscribers(req, res, prisma));
+app.put("/updatePublic", authenticateTokenBody, async (req: Request, res: Response) => await Public.UpdatePublic(req, res, prisma));
+app.delete("/deletePublic/:id", authenticateToken, async (req: Request, res: Response) => await Public.DeletePublic(req, res, prisma));
 
 app.listen(8080, () => {
     console.log("[Server] Enabled!");

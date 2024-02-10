@@ -595,7 +595,261 @@ paths:
         '400':
           description: Ты даун!
 
-# SCHEMAS
+# PUBLICS ======================================================
+
+  /createPublic:
+    post:
+      tags:
+        - Паблики
+      summary: Создать Паблик
+      description: Создать Паблик
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicAdd'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublicAdd'
+        required: true
+      responses:
+        '200':
+          description: Паблик создан!
+        '204':
+          description: Вы ввели не все данные в body
+  /addAdmin:
+    post:
+      tags:
+        - Паблики
+      summary: Добавить Админа
+      description: Добавить Админа
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAdminSub'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddAdminSub'
+        required: true
+      responses:
+        '200':
+          description: Админ добавлен!
+        '204':
+          description: Вы ввели не все данные в body
+  /subscribe:
+    post:
+      tags:
+        - Паблики
+      summary: Подписаться
+      description: Подписаться
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAdminSub'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddAdminSub'
+        required: true
+      responses:
+        '200':
+          description: Вы подписаны!
+        '204':
+          description: Вы ввели не все данные в body
+  /getAllPublics/{limit}:
+    get:
+      tags:
+        - Паблики
+      summary: Получить паблики
+      description: Получить паблики
+      parameters:
+        - name: limit
+          in: path
+          required: true
+          description: Сколько хотите получить пабликов
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт паблики
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllPublics"
+        '400':
+          description: Ошибка ебейшая
+  /getUserPublics/{id}:
+    get:
+      tags:
+        - Паблики
+      summary: Получить паблики пользователя
+      description: Получить паблики пользователя
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт паблики
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllPublics"
+        '400':
+          description: Паблики не найдены
+  /getPublicById/{id}:
+    get:
+      tags:
+        - Паблики
+      summary: Получить паблик
+      description: Получить паблик
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID Паблика
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт паблики
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Public"
+        '400':
+          description: Паблик не найден
+  /getPublicAdmins/{id}:
+    get:
+      tags:
+        - Паблики
+      summary: Получить админов паблика
+      description: Получить админов паблика
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID Паблика
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт админов паблика
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicUsers"
+        '400':
+          description: Паблик не найден
+  /getPublicSubs/{id}:
+    get:
+      tags:
+        - Паблики
+      summary: Получить админов паблика
+      description: Получить админов паблика
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID Паблика
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Вернёт админов паблика
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicUsers"
+        '400':
+          description: Паблик не найден
+  /updatePublic:
+    put:
+      tags:
+        - Паблики
+      summary: Обновить паблик
+      description: Обновить паблик
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ID Паблика
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicEdit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublicEdit'
+        required: true
+      responses:
+        '200':
+          description: Успех!
+        '204':
+          description: Введены не все данные
+        '400':
+          description: Ошибка в введенных данных
+  /deletePublic/{id}:
+    delete:
+      tags:
+        - Паблики
+      summary: Удалить паблик
+      description: Удалить паблик
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID Паблика
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          required: true
+          description: JWT Токен пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успех!
+        '400':
+          description: Ты даун!
+
+
+# SCHEMAS =============================================================
 
 components:
   schemas:
@@ -740,20 +994,13 @@ components:
           type: integer
           format: int
           example: 1
-        title:
-          format: string
-          example: Крутая новость
         content:
           type: string
           format: string
           example: Hello, Kirill =)
-        tags:
-          type: array
-          format: string
-          example: twitch, youtube
-        status:
-          type: boolean
-          example: false
+        Date:
+          type: string
+          example: "2024:пошелнахуй"
     UserPostsArray:
       type: array
       items:
@@ -767,20 +1014,13 @@ components:
             type: integer
             format: int
             example: 1
-          title:
-            format: string
-            example: Крутая новость
           content:
             type: string
             format: string
             example: Hello, Kirill =)
-          tags:
-            type: array
-            format: string
-            example: twitch, youtube
-          status:
-            type: boolean
-            example: false
+          Date:
+            type: string
+            example: "2024:пошелнахуй"
     UserPostsAdd:
       type: object
       properties:
@@ -788,21 +1028,10 @@ components:
           type: integer
           format: int
           example: 1
-        title:
-          format: string
-          example: Крутая новость
         content:
           type: string
           format: string
           example: Hello, Kirill =)
-        tags:
-          type: array
-          format: string
-          example: twitch, youtube
-        status:
-          type: boolean
-          format: boolean
-          example: false
     postCommentBody:
       type: object
       properties:
@@ -819,6 +1048,9 @@ components:
           type: string
           format: string
           example: Пост говна, Кирилл переделывай
+        Date:
+          type: string
+          example: "2024:пошелнахуй"
     LikeDislikeBody:
       type: object
       properties:
@@ -851,3 +1083,142 @@ components:
             comment:
               type: string
               example: Кирилл, я заебался писец :(
+    PublicAdd:
+      type: object
+      properties:
+        userId:
+          description: user id
+          type: integer
+          example: 1
+        name:
+          description: Название
+          type: string
+          example: Новости Говна
+        description:
+          description: Описание
+          type: string
+          example: Тут крутые новости! не веришь? тогда пошел нахуй!!!
+        avatar:
+          description: Аватарка
+          type: string
+          example: https://localhost:8080/files/publics/1.png
+        site:
+          description: Сайт
+          type: string
+          example: https://phermentland.ru
+        comment:
+          description: Комментарий
+          type: string
+          example: Ну добавьте пж паблик :(
+    PublicEdit:
+      type: object
+      properties:
+        userId:
+          description: user id
+          type: integer
+          example: 1
+        public:
+          description: public Id
+          type: integer
+          example: 1
+        name:
+          description: Название
+          type: string
+          example: Новости Говна
+        description:
+          description: Описание
+          type: string
+          example: Тут крутые новости! не веришь? тогда пошел нахуй!!!
+        avatar:
+          description: Аватарка
+          type: string
+          example: https://localhost:8080/files/publics/1.png
+        site:
+          description: Сайт
+          type: string
+          example: https://phermentland.ru
+        comment:
+          description: Комментарий
+          type: string
+          example: Ну добавьте пж паблик :(
+    AddAdminSub:
+      type: object
+      properties:
+        userId:
+          description: user id
+          type: integer
+          example: 1
+        public:
+          description: public id
+          type: integer
+          example: 1
+    AllPublics:
+      type: array
+      items:
+        type: object
+        properties:
+          userId:
+            description: user id
+            type: integer
+            example: 1
+          name:
+            description: Название
+            type: string
+            example: Новости Говна
+          description:
+            description: Описание
+            type: string
+            example: Тут крутые новости! не веришь? тогда пошел нахуй!!!
+          avatar:
+            description: Аватарка
+            type: string
+            example: https://localhost:8080/files/publics/1.png
+          site:
+            description: Сайт
+            type: string
+            example: https://phermentland.ru
+          comment:
+            description: Комментарий
+            type: string
+            example: Ну добавьте пж паблик :(
+    Public:
+      type: object
+      properties:
+        userId:
+          description: user id
+          type: integer
+          example: 1
+        name:
+          description: Название
+          type: string
+          example: Новости Говна
+        description:
+          description: Описание
+          type: string
+          example: Тут крутые новости! не веришь? тогда пошел нахуй!!!
+        avatar:
+          description: Аватарка
+          type: string
+          example: https://localhost:8080/files/publics/1.png
+        site:
+          description: Сайт
+          type: string
+          example: https://phermentland.ru
+        comment:
+          description: Комментарий
+          type: string
+          example: Ну добавьте пж паблик :(
+    PublicUsers:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          publicId:
+            type: integer
+            example: 1
+          userId:
+            type: integer
+            example: 1

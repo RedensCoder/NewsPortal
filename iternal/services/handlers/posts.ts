@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 
 export const CreatePost = async (req: Request, res: Response, prisma: PrismaClient) => {
-    if (!req.body.id || !req.body.title || !req.body.content || !req.body.tags) {
+    if (!req.body.id || !req.body.content) {
         res.sendStatus(204);
         return;
     }
@@ -10,9 +10,7 @@ export const CreatePost = async (req: Request, res: Response, prisma: PrismaClie
     const post = await prisma.user_posts.create({
         data: {
             userId: req.body.id,
-            title: req.body.title,
-            content: req.body.content,
-            tags: req.body.tags
+            content: req.body.content
         }
     });
 
@@ -73,31 +71,10 @@ export const UpdatePost = async (req: Request, res: Response, prisma: PrismaClie
         return;
     }
 
-    if (req.body.title && req.body.title !== "") {
-        await prisma.user_posts.update({
-            where: { id: req.body.postId },
-            data: { content: req.body.title }
-        })
-    }
-
     if (req.body.content && req.body.content !== "") {
         await prisma.user_posts.update({
             where: { id: req.body.postId },
             data: { content: req.body.content }
-        })
-    }
-
-    if (req.body.tags) {
-        await prisma.user_posts.update({
-            where: { id: req.body.postId },
-            data: { tags: req.body.tags }
-        })
-    }
-
-    if (req.body.status && req.body.status !== "") {
-        await prisma.user_posts.update({
-            where: { id: req.body.postId },
-            data: { content: req.body.status }
         })
     }
 
