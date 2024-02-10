@@ -29,7 +29,7 @@
                         <NuxtLink class="text_my_public">Мои публикации</NuxtLink>
                         <NuxtLink class="text_add_public" to="/articles/editor">Создать публикацию</NuxtLink>
                         <NuxtLink class="text_add_public">Сменить тему</NuxtLink>
-                        <NuxtLink class="text_add_public" to="/public">Паблики</NuxtLink>
+                        <NuxtLink class="text_add_public" to="/publics">Паблики</NuxtLink>
                     </div>
                 
                     <hr class="hr_profile">
@@ -56,6 +56,8 @@
 </template>
 
 <script setup>
+import ("~/assets/css/second.css");
+import ("~/assets/css/first.css");
 import { useApiStore } from '#imports';
 import { jwtDecode } from 'jwt-decode';
 // import { authorization } from '~/pages/authorization.vue';
@@ -137,6 +139,7 @@ button {
 }
 
 /* адаптив начало */
+
 @media (max-width: 1400px){
     .header_content{
         max-width: 1400px;
@@ -145,7 +148,6 @@ button {
 @media (max-width: 992px){
     .header_content{
         max-width: 992px;
-        justify-content: space-around;
     }
 }
 @media (max-width: 767px){
@@ -156,7 +158,6 @@ button {
 /* адаптив конец */
 
 .text_portal{
-    /* width: 50px; */
     padding-top: 56px;
     padding-left: 7.5%;
 }

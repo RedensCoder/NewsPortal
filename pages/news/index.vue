@@ -14,23 +14,23 @@
                 <p class="text_post">Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в МосквеПогода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве</p>
                 <div class="buttons_post">
                     <div class="div_like" @click="quantity_like1">
-                        <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >{{ 1 }}</p>
                     </div>
                     <div class="div_dizlike" >
-                        <img src="../public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >2</p>
                     </div>
                     <div class="div_commnets" >
-                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >4</p>
                     </div>
                     <div class="div_viewing" >
-                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >5</p>
                     </div>
                     <div class="div_share" >
-                        <img src="../public/img/Share.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
                     </div>
                 </div>
             </div>
@@ -43,11 +43,11 @@
 
                 <div class="div_interaction">
                     <div class="div_commnets" >
-                        <img src="../public/img/Chat Message.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >4</p>
                     </div>
                     <div class="div_viewing" >
-                        <img src="../public/img/Eye.svg" alt="NO" class="img_like" >
+                        <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
                         <p class="quantity_like" >5</p>
                     </div>
                 </div>
@@ -60,6 +60,7 @@
 
 <script setup>
 import ("~/assets/css/second.css");
+import ("~/assets/css/first.css");
 import '@fontsource-variable/inter';
 import { useApiStore } from '#imports';
 import { jwtDecode } from 'jwt-decode';
@@ -89,7 +90,7 @@ onMounted(async () => {
 .main{
     display: flex;
     justify-content: center;
-    max-width: 1920px;
+    max-width: 100%;
 }
 
 hr{

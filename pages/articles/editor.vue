@@ -9,7 +9,7 @@
 
         <div class="editor">
             <input type="text" placeholder="Заголовок публикации" class="input_text" v-model="title">
-
+            <!-- ЭТО БУДУТ СТАТЬИ И НОВОСТИ -->
             <div class="editer">
                 <ClientOnly> <editerr @text="contentText"/> </ClientOnly>
             </div>
@@ -39,6 +39,7 @@ function contentText(text) {
     content.value = text;
 }
 
+// функция по созданию статей и новостей
 async function createPost() {
     let tag = [];
     tags.value.split(",").forEach(element => {

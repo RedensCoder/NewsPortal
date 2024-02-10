@@ -9,17 +9,13 @@
                     <p class="nickname">{{ post.user.nickname }}</p>
                     <p class="time_post">5 минут назад</p>
                 </div>
-                <p class="news_text">{{ post.post.title }}</p>
                 <div class="news">
-                    <p class="text_post">{{ post.post.content }}</p>
-                    <div class="tegs">
-                        <h3>Теги:</h3>
-                        <p class="tegs_" v-for="tag in post.post.tags">{{ tag }}</p>
-                    </div>
+                    <p class="text_post" v-html="post.post.content"></p>
+
                     <div class="buttons_post">
-                        <div class="div_like" @click="quantity_like1">
-                            <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like" >
-                            <p class="quantity_like" >{{ 1 }}</p>
+                        <div class="div_like" @click="like">
+                            <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                            <p class="quantity_like" >{{ quantity }}</p>
                         </div>
                         <div class="div_dizlike" >
                             <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
@@ -40,6 +36,8 @@
                 </div>
             </div>
         </div>
+        <!-- ДОБАВИТЬ СТИЛИ КНОПКИ -->
+        <button @click="addLimit" class="post_next">ДАЛЕЕ</button>
         
         <div class="articles_popular">
             <p class="post_watching">Популярные статьи</p>
@@ -70,26 +68,53 @@ import '@fontsource-variable/inter';
 import { useApiStore } from '~/stores/apiStore';
 import { jwtDecode } from 'jwt-decode';
 
-let quantity = ref(0);
+let quantity = ref(1);
+let limit = ref(10);
+let data = reactive([]);
 const api = useApiStore();
 
-const { data } = await useAsyncData (() => api.getAllPosts(10));
-console.log(data.value);
+watch (limit, async () => {
+    data.splice(0, data.length)
+    const posts = await api.getAllPosts(limit.value);
+    data.push(...posts)
+}) 
 
-// let posts = reactive([]);
+function addLimit(){
+    limit.value = limit.value + 10
+    // alert(limit.value)
+}
 
-// onMounted(async () => {
-//     posts.push(...await api.getAllPosts(100))
+onMounted(async () => {
+    const posts = await api.getAllPosts(limit.value);
+    data.push(...posts)
+})
 
-//     // console.log(posts);
-// })
+async function like() {
+    if (localStorage.getItem('token') == null) {
+        quantity.value = quantity.value + 1;
+    }
+    else {
+        const id = jwtDecode(localStorage.getItem('token')).data.id;
+
+        const posts = await api.postLike(id.value);
+        quantity.value = posts.id
+        quantity.value = quantity.value - 1
+    }
+}
 
 </script>
 
 <style scoped>
+.post_next{
+
+}
+
+
 .main{
     display: flex;
     justify-content: center;
+    margin-left: 28%;
+    max-width: 100%;
 }
 
 hr{
@@ -117,8 +142,6 @@ button{
 .articles{
     background-color: #FFFFFF;
     width: 770px;
-    height: auto;
-    overflow: auto;
     margin: 30px 0 0px auto;
     align-items: center;
 }
@@ -149,16 +172,9 @@ button{
     font-size: 14px;
     line-height: 16px;
 }
-.news_text{
-    padding-top: 5px;
-    padding-left: 20px;
-    font-size: 20px;
-    line-height: 16px;
-    color: #818181;
-}
 .news{
     padding: 20px;
-    padding-top: 10px;
+    padding-top: 20px;
     width: auto;
 }
 
@@ -174,11 +190,6 @@ button{
     line-height: 19px;
     color: #000000;
     width: auto;
-}
-
-.tegs{
-    margin: 100px auto 0;
-    display: flex;
 }
 
 .buttons_post{

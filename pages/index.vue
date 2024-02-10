@@ -46,7 +46,7 @@ onMounted(async () => {
 
     <div class="buttons_post">
         <div class="div_like" @click="quantity_like1">
-            <img src="../public/img/Facebook Like.svg" alt="NO" class="img_like" >
+            <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like" >
             <p class="quantity_like" >{{ 1 }}</p>
         </div>
         <div class="div_dizlike" >
@@ -83,7 +83,7 @@ onMounted(async () => {
     margin-left: 2.5%;
 }
 .user_name{
-    font-family: 'Inter';
+     
     font-weight: 500;
     font-size: 14px;
     line-height: 16.94px;
@@ -98,7 +98,7 @@ onMounted(async () => {
     display: inline-block;
 }
 .categories{
-    font-family: 'Inter';
+    
     font-weight: 500;
     size: 14px;
     line-height: 16.94px;
@@ -106,8 +106,7 @@ onMounted(async () => {
     margin-top: 1.5%;
     margin-left: 2.5%;
 }
-.name_articles{
-    font-family: 'Inter';
+.name_articles{ 
     font-weight: 400;
     font-size: 24px;
     line-height: 29.05px;
@@ -123,7 +122,6 @@ onMounted(async () => {
 }
 .text_articles{
     padding: 0px 2.5%;
-    font-family: 'Inter';
     font-weight: 400px;
     font-size: 16px;
     line-height: 19.36px;
@@ -134,7 +132,7 @@ onMounted(async () => {
     padding: 1.5%;
     border: 1px solid #8657E9;
     background-color: #FFFFFF;
-    font-family: 'Inter';
+     
     font-size: 14px;
     font-weight: 400;
     margin-top: 5%;

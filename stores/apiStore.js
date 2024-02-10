@@ -60,17 +60,26 @@ export const useApiStore = defineStore('api', {
           }
       }
     },
+    // ИЗМЕНИТЬ ПОТОМ НА СТАТЬЮ И НОВОСТИ
+    // async createArticles(title, content, tags, userId){
 
-    async createPost(title, content, tags, userId){
-      console.log(title);
-      console.log(content);
-      console.log(tags);
-      console.log(userId);
+    //     const articles = await axios.post(`${this.url}/createAcrticles`, {
+    //       id: userId,
+    //       title: title,
+    //       content: content,
+    //       tags: tags,
+    //     }, {headers: {
+    //         Authorization: `${localStorage.getItem("token")}`
+    //       }
+    //     })   
+    //   console.log(articles);
+    // },
+
+    async createPost(content, userId){
+
         const postiki = await axios.post(`${this.url}/createPost`, {
           id: userId,
-          title: title,
           content: content,
-          tags: tags,
         }, {headers: {
             Authorization: `${localStorage.getItem("token")}`
           }
@@ -106,11 +115,19 @@ export const useApiStore = defineStore('api', {
         const user = await axios.get(`http://localhost:8080/getUserInfoById/${req.data[i].userId}`);
         posts.push({post: req.data[i], user: user.data});
       }
-
       return posts
         
     },
 
+    async postLike(userId, postId){
+      let like = await axios.post(`${this.url}/postLike`, {
+        userId: userId,
+        postId: postId
+      }, {headers: {
+            Authorization: `${localStorage.getItem("token")}`
+          }
+        })
+    },
 
   },
 })

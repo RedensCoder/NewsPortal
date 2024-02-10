@@ -1,7 +1,6 @@
-<script>
+<script setup>
 import ("~/assets/css/second.css");
-import '@fontsource-variable/inter';
-import { Style } from 'nuxt/dist/head/runtime/components';
+
 function my_public(){
     console.log("Все работает!")
 }
@@ -11,64 +10,77 @@ function my_public(){
 <template>
     <Articles />
     <Populars />
-    <div class="main">
-    <div class="all_publics">
-        <div class="public1">
-        <h3 class="text text1 t1">Все паблики</h3>
-        <h3 class="text text1 t2">/</h3>
-        <h3 class="text text1 t3" @click="my_public">Мои паблики</h3>
-        <div class="div_search">
-        <input type="search" class="search" name="" id="" placeholder="Поиск паблика">
-        <button class="icon btn_search"></button>
-    </div>
-    </div>
-    <div class="publics">
-        <div class="public">
-            <div class="info">
-            <img class="logo" src="public/img/example_logo.png" alt="">
-            <div class="info_public">
-            <h1 class="name_public">Новости мира</h1>
-            <p class="followers">0 подписчиков</p>
-                 </div>
+
+        <div class="main">
+            <div class="all_publics">
+                <div class="public1">
+                <h3 class="text text1 t1">Все паблики</h3>
+                <h3 class="text text1 t2">/</h3>
+                <h3 class="text text1 t3" @click="my_public">Мои паблики</h3>
+
+                <div class="div_search">
+                    <input type="search" class="search" name="" id="" placeholder="Поиск паблика">
+                    <button class="icon btn_search"></button>
                 </div>
             </div>
-             <hr class="hr">
-            <div class="public">
-            <div class="info">
-            <img class="logo" src="public/img/example_logo.png" alt="">
-            <div class="info_public">
-            <h1 class="name_public">Новости мира</h1>
-            <p class="followers">0 подписчиков</p>
-                 </div>
+
+            <div class="publics">
+                <div class="public">
+                    <div class="info">
+                        <img class="logo" src="public/img/example_logo.png" alt="">
+                        <div class="info_public">
+                            <h1 class="name_public">Новости мира</h1>
+                            <p class="followers">0 подписчиков</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="hr">
+            
+                <div class="public">
+                    <div class="info">
+                        <img class="logo" src="public/img/example_logo.png" alt="">
+
+                        <div class="info_public">
+                            <h1 class="name_public">Новости мира</h1>
+                            <p class="followers">0 подписчиков</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="hr">
+
+                <div class="public">
+                    <img class="logo" src="public/img/example_logo.png" alt="">
+                        <div class="info_public">
+                            <h1 class="name_public">Новости мира</h1>
+                            <p class="followers">0 подписчиков</p>
+                        </div>
+                </div>
+
+                <hr class="hr">
+
                 </div>
             </div>
-            <hr class="hr">
-            <div class="public">
-            <img class="logo" src="public/img/example_logo.png" alt="">
-            <div class="info_public">
-            <h1 class="name_public">Новости мира</h1>
-            <p class="followers">0 подписчиков</p>
-                 </div>
-            </div>
-            <hr class="hr">
-        </div>
-    </div>
     
-    <div class="my_public">
-        <div class="publics">
-        <div class="public">
-            <div class="info">
-            <img class="logo" src="public/img/example_logo.png" alt="">
-            <div class="info_public">
-            <h1 class="name_public">Новости мира</h1>
-            <p class="followers">0 подписчиков</p>
-                 </div>
+        <div class="my_public">
+            <div class="publics">
+                <div class="public">
+
+                    <div class="info">
+                    <img class="logo" src="public/img/example_logo.png" alt="">
+
+                    <div class="info_public">
+                        <h1 class="name_public">Новости мира</h1>
+                        <p class="followers">0 подписчиков</p>
+                    </div>
                 </div>
             </div>
-    </div>
-    <hr class="hr">
-    </div>
-    </div>
+        </div>
+
+            <hr class="hr">
+            </div>
+        </div>
 </template>
 
 <style scoped>
@@ -112,7 +124,6 @@ function my_public(){
     margin-left: 2.5%;
     margin-top: 2.5%;
     border: 1px solid #81818180;
-    font-family: 'Inter';
     font-size: 16px;
     font-weight: 500;
     line-height: 19px;

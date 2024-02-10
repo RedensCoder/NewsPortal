@@ -12,7 +12,8 @@
 </template>
 
 <script setup>
-import '@fontsource-variable/inter';
+import ("~/assets/css/second.css");
+import ("~/assets/css/first.css");
 
 </script>
 
@@ -66,7 +67,7 @@ hr{
     padding: 0px 38px;
 }
 
-.text_articles:hover{
+.text_articles:hover,.text_articles:focus,.text_articles:active{
     color: #8657E9;
 }
 
