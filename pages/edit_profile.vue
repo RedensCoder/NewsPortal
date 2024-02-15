@@ -1,4 +1,5 @@
-<script></script>
+<script setup>import ("~/assets/css/second.css");</script>
+
 <template>
     <Articles />
     <Populars />
@@ -7,6 +8,7 @@
         <div class="info">
         <p class="nickname text info2">og buda</p>
         <p class="status text info2">краш всех крашей</p>
+        <button class="btn_edit_info text info2">Редактировать профиль</button>
     </div>
     <div class="site">
         <p class="text">Мои соц.сети:</p>
@@ -16,9 +18,18 @@
     </div>
     </div>
     <div class="profile_posts">
+        <h1 class="text header">Опубликовать пост:</h1>
+        <div class="div_add_post">
+        <input class="new_post add_post" type="text">
+        <img class="icon_profile" src="/img/buda.jpg" alt="">
+    </div>
     <hr class="granica">
-
-    <h1 class="text header">Посты пользователя:</h1>
+    <div class="add_post2">
+        <button class="btn_add_post">Опубликовать</button>
+        <br>
+        <br>
+    </div>
+    <h1 class="text header">Мои посты:</h1>
 
     <div class="posts">
         <img class="icon_profile2" src="/img/buda.jpg" alt="">
@@ -36,25 +47,16 @@
     </div>  
 </div>
 <br>
-<div class="posts">
-    <img class="icon_profile2" src="/img/buda.jpg" alt="">
-    <div class="post_info">
-    <p class="text text_info">og buda</p>
-    <p class="text text_info">5 минут назад</p>
+
 </div>
 
-<p class="text_post">Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве</p>
-<div class="info_post">
-<div class="btn_comments post_icon"><img src="/img/Chat Message.png" alt="">
-<p class="col_comments text">0</p></div>
-<img class="views post_icon" src="/img/Eye.png" alt=""> 
-<p class="text col_views">0</p>     
-</div>  
-</div>
-</div>
+        
+
 
 </template>
+
 <style scoped>
+
 .info_profile{
     background-color: #8657E9;
     width: 50%;
