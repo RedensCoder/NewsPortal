@@ -13,25 +13,38 @@
                     <p class="text_post" v-html="post.post.content"></p>
 
                     <div class="buttons_post">
-                        <div class="div_like" @click="like">
+                        <div class="div_like" @click="like(post.post.id)" v-if="!post.likeState">
                             <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
-                            <p class="quantity_like">{{ quantity }}</p>
+                            <p class="quantity_like">{{ post.likes }}</p>
                         </div>
-                        <div class="div_dizlike" >
+                        <div class="div_like" @click="like(post.post.id)" v-else>
+                            <img src="~/public/img/Facebook Like fiol.svg" alt="NO" class="img_like">
+                            <p class="quantity_like">{{ post.likes }}</p>
+                        </div>
+
+                        <div class="div_dizlike" @click="dislike(post.post.id)" v-if="!post.disLikeState">
                             <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
-                            <p class="quantity_like" >2</p>
+                            <p class="quantity_like" >{{ post.dislikes }}</p>
                         </div>
+                        <div class="div_dizlike" @click="dislike(post.post.id)" v-else>
+                            <img src="~/public/img/Facebook DisLike red.svg" alt="NO" class="img_like" >
+                            <p class="quantity_like" >{{ post.dislikes }}</p>
+                        </div>
+
                         <div class="div_commnets" >
                             <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
                             <p class="quantity_like" >4</p>
                         </div>
+
                         <div class="div_viewing" >
-                            <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
-                            <p class="quantity_like" >5</p>
+                            <img src="~/public/img/Eye.svg" alt="NO" class="img_view">
+                            <p class="quantity_view">{{ 123 }}</p>
                         </div>
+
                         <div class="div_share" >
                             <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -39,9 +52,6 @@
                     <button @click="addLimit" class="post_next">Следующие Посты</button>
                 </div>
         </div>
-
-     
-
         
         <div class="articles_popular">
             <p class="post_watching">Популярные статьи</p>
@@ -72,7 +82,6 @@ import '@fontsource-variable/inter';
 import { useApiStore } from '~/stores/apiStore';
 import { jwtDecode } from 'jwt-decode';
 
-let quantity = ref(0);
 let limit = ref(10);
 let data = reactive([]);
 const api = useApiStore();
@@ -87,17 +96,63 @@ function addLimit(){
     limit.value = limit.value + 10
     // alert(limit.value)
 }
-
+// p = post
 onMounted(async () => {
     const posts = await api.getAllPosts(limit.value);
     data.push(...posts)
+
+    const userId = jwtDecode(localStorage.getItem('token')).data.id;
+    data.forEach(async p => {
+        let like = await api.getUserPostLike(userId, p.post.id)
+            
+        if (like === null) {
+            p.likeState = false
+        }
+        else {
+            p.likeState = true
+        }
+    })
+
+    data.forEach(async p => {
+        let disLike = await api.getUserPostDislike(userId, p.post.id)
+            
+        if (disLike === null) {
+            p.disLikeState = false
+        }
+        else {
+            p.disLikeState = true
+        }
+    })
 })
 
-async function like() {
-    const postLike = await api.postLike();
+async function like(id) {
     const userId = jwtDecode(localStorage.getItem('token')).data.id;
 
+    let like = await api.getUserPostLike(userId, id)
 
+    if (like === null) {
+        data.filter(p => p.post.id == id).map(p => {p.likes += 1; p.likeState = true});
+    }
+    else {
+        data.filter(p => p.post.id == id).map(p => {p.likes -= 1; p.likeState = false});
+    }
+
+    await api.postLike(userId, id);
+}
+
+async function dislike(id) {
+    const userId = jwtDecode(localStorage.getItem('token')).data.id;
+
+    let dislike = await api.getUserPostDislike(userId, id)
+
+    if (dislike === null) {
+        data.filter(p => p.post.id == id).map(p => {p.dislikes += 1; p.disLikeState = true});
+    }
+    else {
+        data.filter(p => p.post.id == id).map(p => {p.dislikes -= 1; p.disLikeState = false});
+    }
+
+    await api.postDislike(userId, id);
 }
 
 </script>
@@ -253,6 +308,11 @@ button{
     width: 25px;
     height: 50px;
     cursor: pointer;
+}
+
+.img_view{
+    width: 25px;
+    height: 50px;
 }
 
 .quantity_like{

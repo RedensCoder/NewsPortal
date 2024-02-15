@@ -113,7 +113,11 @@ export const useApiStore = defineStore('api', {
 
       for (let i = 0; i < req.data.length; i++) {
         const user = await axios.get(`http://localhost:8080/getUserInfoById/${req.data[i].userId}`);
-        posts.push({post: req.data[i], user: user.data});
+        posts.push({post: req.data[i], likes: await this.getPostLikes(req.data[i].id), 
+          dislikes: await this.getPostDislikes(req.data[i].id), 
+          view: await this.getPostViews(req.data[i].id), 
+          user: user.data
+        });
       }
       return posts
         
@@ -127,7 +131,66 @@ export const useApiStore = defineStore('api', {
           Authorization: `${localStorage.getItem("token")}`
         }
       })   
-      console.log(like);
+      // console.log(like);
+    },
+
+    async postDislike(id, post){
+      let dislike = await axios.post(`${this.url}/postDislike`, {
+        id: id,
+        post: post,
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })   
+      // console.log(like);
+    },
+
+    async getPostLikes(id) {
+      let getLike = await axios.get(`${this.url}/getPostLikes/${id}`);
+      return getLike.data;
+    },
+
+    async getPostDislikes(id) {
+      let getDislike = await axios.get(`${this.url}/getPostDislikes/${id}`);
+      return getDislike.data;
+    },
+
+    async getUserPostLike(id, post){
+      let like = await axios.post(`${this.url}/getUserPostLike`, {
+        id: id,
+        post: post,
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })   
+      return like.data;
+    },
+
+    async getUserPostDislike(id, post){
+      let like = await axios.post(`${this.url}/getUserPostDislike`, {
+        id: id,
+        post: post,
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })   
+      return like.data;
+    },
+
+    async addView(id){
+
+      await axios.put(`${this.url}/addView`, {
+        id: id
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })   
+      
+    },
+
+    async getPostViews(id) {
+      let getView = await axios.get(`${this.url}/getPostViews/${id}`);
+      return getView.data;
     },
 
   },
