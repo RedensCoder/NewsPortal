@@ -119,14 +119,15 @@ export const useApiStore = defineStore('api', {
         
     },
 
-    async postLike(userId, postId){
+    async postLike(id, post){
       let like = await axios.post(`${this.url}/postLike`, {
-        userId: userId,
-        postId: postId
+        id: id,
+        post: post,
       }, {headers: {
-            Authorization: `${localStorage.getItem("token")}`
-          }
-        })
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })   
+      console.log(like);
     },
 
   },

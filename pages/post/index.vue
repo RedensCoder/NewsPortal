@@ -15,7 +15,7 @@
                     <div class="buttons_post">
                         <div class="div_like" @click="like">
                             <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
-                            <p class="quantity_like" >{{ quantity }}</p>
+                            <p class="quantity_like">{{ quantity }}</p>
                         </div>
                         <div class="div_dizlike" >
                             <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
@@ -35,9 +35,13 @@
                     </div>
                 </div>
             </div>
+                <div class="next_post_btn">
+                    <button @click="addLimit" class="post_next">Следующие Посты</button>
+                </div>
         </div>
-        <!-- ДОБАВИТЬ СТИЛИ КНОПКИ -->
-        <button @click="addLimit" class="post_next">ДАЛЕЕ</button>
+
+     
+
         
         <div class="articles_popular">
             <p class="post_watching">Популярные статьи</p>
@@ -68,7 +72,7 @@ import '@fontsource-variable/inter';
 import { useApiStore } from '~/stores/apiStore';
 import { jwtDecode } from 'jwt-decode';
 
-let quantity = ref(1);
+let quantity = ref(0);
 let limit = ref(10);
 let data = reactive([]);
 const api = useApiStore();
@@ -90,23 +94,30 @@ onMounted(async () => {
 })
 
 async function like() {
-    if (localStorage.getItem('token') == null) {
-        quantity.value = quantity.value + 1;
-    }
-    else {
-        const id = jwtDecode(localStorage.getItem('token')).data.id;
+    const postLike = await api.postLike();
+    const userId = jwtDecode(localStorage.getItem('token')).data.id;
 
-        const posts = await api.postLike(id.value);
-        quantity.value = posts.id
-        quantity.value = quantity.value - 1
-    }
+
 }
 
 </script>
 
 <style scoped>
+.next_post_btn{
+    margin-top: 30px;
+    margin-left: 37%;
+    margin-bottom: 30px;
+}
 .post_next{
-
+    width: auto;
+    border-radius: 4px;
+    background-color: #8657E9;
+    border: black 1.9px solid;
+    padding: 15px 15px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    height: 50px;
 }
 
 
