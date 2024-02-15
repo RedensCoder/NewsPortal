@@ -104,16 +104,27 @@ export const Like = async (req: Request, res: Response, prisma: PrismaClient) =>
     }
 
     const like = await prisma.post_likes.findFirst({ where: { AND: { userId: req.body.id, postId: req.body.post } } })
+    const dislike = await prisma.post_dislikes.findFirst({ where: { AND: { userId: req.body.id, postId: req.body.post } } })
 
     if (like !== null) {
         await prisma.post_likes.delete({ where: { id: like.id } });
     } else {
-        await prisma.post_likes.create({
-            data: {
-                userId: req.body.id,
-                postId: req.body.post
-            }
-        });
+        if (dislike === null) {
+            await prisma.post_likes.create({
+                data: {
+                    userId: req.body.id,
+                    postId: req.body.post
+                }
+            });
+        } else {
+            await prisma.post_dislikes.delete({ where: { id: dislike.id } });
+            await prisma.post_likes.create({
+                data: {
+                    userId: req.body.id,
+                    postId: req.body.post
+                }
+            });
+        }
     }
 
     res.sendStatus(200);
@@ -149,16 +160,27 @@ export const Dislike = async (req: Request, res: Response, prisma: PrismaClient)
     }
 
     const dislike = await prisma.post_dislikes.findFirst({ where: { AND: { userId: req.body.id, postId: req.body.post } } })
+    const like = await prisma.post_likes.findFirst({ where: { AND: { userId: req.body.id, postId: req.body.post } } })
 
     if (dislike !== null) {
         await prisma.post_dislikes.delete({ where: { id: dislike.id } });
     } else {
-        await prisma.post_dislikes.create({
-            data: {
-                userId: req.body.id,
-                postId: req.body.post
-            }
-        });
+        if (like === null) {
+            await prisma.post_dislikes.create({
+                data: {
+                    userId: req.body.id,
+                    postId: req.body.post
+                }
+            });
+        } else {
+            await prisma.post_likes.delete({ where: { id: like.id } });
+            await prisma.post_dislikes.create({
+                data: {
+                    userId: req.body.id,
+                    postId: req.body.post
+                }
+            });
+        }
     }
 
     res.sendStatus(200);
@@ -206,11 +228,9 @@ export const GetViews = async (req: Request, res: Response, prisma: PrismaClient
         return res.sendStatus(400)
     }
 
-    const views = await prisma.post_views.findFirst({ where: { postId: Number(req.params.id) } })
+    const views = await prisma.post_views.count({ where: { postId: Number(req.params.id) } })
 
-    res.send(JSON.stringify(
-        views, (key, value) => (typeof value === 'bigint' ? value.toString() : value)
-    ));
+    res.send(views.toString());
 }
 
 // COMMENTS
