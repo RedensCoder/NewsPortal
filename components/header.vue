@@ -13,7 +13,7 @@
 			<div v-else class="profile">
 
                 <img  @click="show = !show" src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <button class="btn3">Мой профиль</button>
+                <NuxtLink class="btn3" to="/profile">Мой профиль</NuxtLink>
 
 
                 <div class="profile_list" v-if="show">

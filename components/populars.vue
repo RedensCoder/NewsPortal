@@ -3,6 +3,7 @@
 import '@fontsource-variable/inter';
 
 </script>
+
 <template>
 <div class="articles_popular">
     <p class="post_watching">Популярные статьи</p>
