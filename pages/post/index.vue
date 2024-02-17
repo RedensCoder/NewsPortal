@@ -7,7 +7,7 @@
                 <div class="author">
                     <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
                     <p class="nickname">{{ post.user.nickname }}</p>
-                    <p class="time_post">5 минут назад</p>
+                    <p class="time_post" >{{ datePost(post.post.Date) }}</p>
                 </div>
                 <div class="news">
                     <p class="text_post" v-html="post.post.content"></p>
@@ -38,7 +38,7 @@
 
                         <div class="div_viewing" >
                             <img src="~/public/img/Eye.svg" alt="NO" class="img_view">
-                            <p class="quantity_view">{{ 123 }}</p>
+                            <p class="quantity_view">{{ post.view }}</p>
                         </div>
 
                         <div class="div_share" >
@@ -53,7 +53,7 @@
                 </div>
         </div>
         
-        <div class="articles_popular">
+        <!-- <div class="articles_popular">
             <p class="post_watching">Популярные статьи</p>
             <hr>
             <div class="news_post">
@@ -72,7 +72,7 @@
 
             </div>
             <hr>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -129,12 +129,20 @@ async function like(id) {
     const userId = jwtDecode(localStorage.getItem('token')).data.id;
 
     let like = await api.getUserPostLike(userId, id)
+    let dislike = await api.getUserPostDislike(userId, id)
 
-    if (like === null) {
-        data.filter(p => p.post.id == id).map(p => {p.likes += 1; p.likeState = true});
+    if (like !== null) {
+        data.filter(p => p.post.id == id).map(p => {p.likes -= 1; p.likeState = false});
     }
     else {
-        data.filter(p => p.post.id == id).map(p => {p.likes -= 1; p.likeState = false});
+        if (dislike === null){
+            data.filter(p => p.post.id == id).map(p => {p.likeState = true; p.likes += 1})
+        }
+        else{
+            data.filter(p => p.post.id == id).map(p => {p.likeState = true ; p.likes += 1})
+            data.filter(p => p.post.id == id).map(p => {p.disLikeState = false; p.dislikes -= 1})
+        }
+      
     }
 
     await api.postLike(userId, id);
@@ -144,15 +152,97 @@ async function dislike(id) {
     const userId = jwtDecode(localStorage.getItem('token')).data.id;
 
     let dislike = await api.getUserPostDislike(userId, id)
+    let like = await api.getUserPostLike(userId, id)
+    
 
-    if (dislike === null) {
-        data.filter(p => p.post.id == id).map(p => {p.dislikes += 1; p.disLikeState = true});
+    if (dislike !== null) {
+        data.filter(p => p.post.id == id).map(p => {p.dislikes -= 1; p.disLikeState = false});
     }
     else {
-        data.filter(p => p.post.id == id).map(p => {p.dislikes -= 1; p.disLikeState = false});
+        if (like === null){
+            data.filter(p => p.post.id == id).map(p => {p.disLikeState = true; p.dislikes += 1})
+        }
+        else{
+            data.filter(p => p.post.id == id).map(p => {p.disLikeState = true ; p.dislikes += 1})
+            data.filter(p => p.post.id == id).map(p => {p.likeState = false; p.likes -= 1})
+        }
+      
     }
 
     await api.postDislike(userId, id);
+}
+
+function datePost(date) {
+    let datePublished = new Date(date);
+    let currentDate = new Date();
+
+    let timeDifference = currentDate - datePublished;
+
+    let seconds = Math.floor(timeDifference / 1000);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+    let days = Math.floor(hours / 24);
+
+    function parseMonth(month){
+        switch (month) {
+            case 1:
+                return "Янв";
+                break;
+            case 2:
+                return "Фев";
+                break;
+            case 3:
+                return "Марта";
+                break;
+            case 4:
+                return "Апр";
+                break;
+            case 5:
+                return "Мая";
+                break;
+            case 6:
+                return "Июня";
+                break;
+            case 7:
+                return "Июля";
+                break;
+            case 8:
+                return "Авг";
+                break;
+            case 9:
+                return "Сен";
+                break;
+            case 10:
+                return "Окт";
+                break;
+            case 11:
+                return "Ноя";
+                break;
+            case 12:
+                return "Дек";
+                break;
+            default: return "err"
+        }
+    }
+
+    let timeAgo;
+    if (days > 6) {
+        timeAgo = datePublished.getDate() + " " + (parseMonth(datePublished.getMonth() + 1)) + " " + datePublished.getFullYear();
+    }
+    else if (days > 0 ) {
+        timeAgo = days + " дней назад";
+    } 
+    else if (hours > 0) {
+        timeAgo = hours + " часов назад";
+    } 
+    else if (minutes > 0) {
+        timeAgo = minutes + " минут назад";
+    } 
+    else {
+        timeAgo = "только что";
+    }
+
+    return timeAgo
 }
 
 </script>
@@ -179,7 +269,7 @@ async function dislike(id) {
 .main{
     display: flex;
     justify-content: center;
-    margin-left: 28%;
+    /* margin-left: 28%; */
     max-width: 100%;
 }
 

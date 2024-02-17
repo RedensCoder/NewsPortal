@@ -2,7 +2,6 @@
 
 <template>
     <Articles />
-    <Populars />
     <div class="info_profile">
         <img class="img_profile" src="/img/buda.jpg" alt="">
         <div class="info">

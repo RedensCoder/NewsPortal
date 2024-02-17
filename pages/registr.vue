@@ -54,7 +54,9 @@ async function registr(){
             const token = await api.createUser(login.value , password.value , eMail.value);
             if (token !== undefined){
                 localStorage.setItem('token', token);
-                router.push({path: "/"});
+                router.push(`/`).then(() => {
+                    window.location.reload()
+                })
             }
             else{
                 alert("такой пользователь есть")

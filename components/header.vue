@@ -13,7 +13,7 @@
 			<div v-else class="profile">
 
                 <img  @click="show = !show" src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
-                <NuxtLink class="btn3" to="/profile">Мой профиль</NuxtLink>
+                <NuxtLink to="/profile"><button class="btn3">Мой профиль</button></NuxtLink>
 
 
                 <div class="profile_list" v-if="show">
@@ -41,7 +41,7 @@
                         </div>
                         <div class="settings_flex">
                             <img src="../public/img/Settings.svg" alt="" class="img">
-                            <p class="settings" style="color: #818181;">Настройки профиля</p>
+                            <NuxtLink to="/profile/settings"><p class="settings" style="color: #818181;">Настройки профиля</p></NuxtLink>
                         </div>
                         <div class="settings_flex" @click="usersExit">
                             <img src="../public/img/Cancel.svg" alt="" class="img">
@@ -206,7 +206,7 @@ button {
     border-radius: 4px;
     background-color: #8657E9;
     border: none;
-    padding: 0px 15px;
+    padding: 15px;
     font-size: 16px;
     line-height: 19px;
     color: #ffffff;

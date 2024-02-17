@@ -113,7 +113,8 @@ export const useApiStore = defineStore('api', {
 
       for (let i = 0; i < req.data.length; i++) {
         const user = await axios.get(`http://localhost:8080/getUserInfoById/${req.data[i].userId}`);
-        posts.push({post: req.data[i], likes: await this.getPostLikes(req.data[i].id), 
+        posts.push({post: req.data[i], 
+          likes: await this.getPostLikes(req.data[i].id), 
           dislikes: await this.getPostDislikes(req.data[i].id), 
           view: await this.getPostViews(req.data[i].id), 
           user: user.data
@@ -124,18 +125,18 @@ export const useApiStore = defineStore('api', {
     },
 
     async postLike(id, post){
-      let like = await axios.post(`${this.url}/postLike`, {
+      await axios.post(`${this.url}/postLike`, {
         id: id,
         post: post,
       }, {headers: {
           Authorization: `${localStorage.getItem("token")}`
         }
       })   
-      // console.log(like);
+
     },
 
     async postDislike(id, post){
-      let dislike = await axios.post(`${this.url}/postDislike`, {
+      await axios.post(`${this.url}/postDislike`, {
         id: id,
         post: post,
       }, {headers: {
@@ -191,6 +192,20 @@ export const useApiStore = defineStore('api', {
     async getPostViews(id) {
       let getView = await axios.get(`${this.url}/getPostViews/${id}`);
       return getView.data;
+    },
+
+    async updateUserInfo(id, about, avatar, nickname, link) {
+      await axios.put(`${this.url}/updateUserInfo`, {
+        id: id,
+        about: about,
+        avatar: avatar,
+        nickname: nickname,
+        link: link
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })  
+
     },
 
   },

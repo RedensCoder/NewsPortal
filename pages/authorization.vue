@@ -40,8 +40,9 @@ async function auth(){
         if (token !== undefined){
             // localStorage.getItem(token);
             localStorage.setItem("token", token);
-            router.push({path: "/"});
-            
+            router.push(`/`).then(() => {
+                window.location.reload()
+            })
         }
         else{
             console.log(token);
