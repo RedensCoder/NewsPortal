@@ -12,14 +12,14 @@
 
 			<div v-else class="profile">
 
-                <img  @click="show = !show" src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
+                <img  @click="show = !show" :src="avatar" alt="аватарка не загрузилась" class="ava">
                 <NuxtLink to="/profile"><button class="btn3">Мой профиль</button></NuxtLink>
 
 
                 <div class="profile_list" v-if="show">
             
                     <div class="flex">
-                        <img   src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
+                        <img :src="avatar" alt="аватарка не загрузилась" class="ava">
                         <p class="nickname">@{{ nickname }}</p>
                     </div>
                             
@@ -66,7 +66,9 @@ const api = useApiStore();
 let show = ref(false);
 let dsa = ref(true);
 let router = useRouter();
+
 let nickname = ref('');
+let avatar = ref("");
 
 function routerPushAuthorization() {
     router.push({path: "/authorization"});
@@ -77,23 +79,23 @@ function routerPushRegistr() {
 }
 
 onMounted(async () => {
-    if (localStorage.getItem('token') == null) {
+    if (localStorage.getItem('token') == null || sessionStorage.getItem("user") == null) {
         dsa.value = true;
     }
     else {
-        let id = jwtDecode(localStorage.getItem('token')).data.id;
-        // console.log(id);
+        const user = JSON.parse(sessionStorage.getItem("user"));
 
-        let res = await api.getUserInfoById(id);
-        
-        nickname.value = res.nickname;
+        nickname.value = user.link;
+        avatar.value = user.avatar;
+
         dsa.value = false;
     }
 });
 
 function usersExit() {
     localStorage.removeItem('token');
-    window.location.reload();
+    sessionStorage.removeItem("user");
+    router.push("/").then(() => window.location.reload());
 }
 
 function scrollToTop(){

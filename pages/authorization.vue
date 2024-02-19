@@ -54,6 +54,15 @@ async function auth(){
     }
 }
 
+onMounted(() => {
+  if(sessionStorage.getItem("user") !== null) {
+    router.push("/");
+  }
+})
+
+useHead({
+  title: "Новостной Портал - Авторизация"
+})
 </script>
 
 <style scoped>

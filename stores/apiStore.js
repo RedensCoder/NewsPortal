@@ -1,21 +1,27 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
+import {jwtDecode} from "jwt-decode";
+
+const URL = "http://localhost:8080";
 
 export const useApiStore = defineStore('api', {
   state: () => {
-    return { url: "http://localhost:8080" }
+    return { }
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
   actions: {
     async createUser(login, password, email) { 
         try {        
-            const token = await axios.post(`${this.url}/createUser`, {
+            const token = await axios.post(`${URL}/createUser`, {
                 login: login,
                 password: password,
                 email: email,
             })
             if (token.status === 200){
+                const id = jwtDecode(token.data).data.id;
+                const req = await this.getUserInfoById(id);
+
+                sessionStorage.setItem("user", JSON.stringify(req));
+
                 return token.data;
             }
         }
@@ -28,12 +34,17 @@ export const useApiStore = defineStore('api', {
 
     async auth(login, password) {
       try {
-          const token = await axios.post(`${this.url}/auth`, {
+          const token = await axios.post(`${URL}/auth`, {
             login: login,
             password: password,
           })
           if (token.status === 200){
-            return token.data;
+              const id = jwtDecode(token.data).data.id;
+              const req = await this.getUserInfoById(id);
+
+              sessionStorage.setItem("user", JSON.stringify(req));
+
+              return token.data;
         }
       }
       catch(err){
@@ -45,7 +56,7 @@ export const useApiStore = defineStore('api', {
 
     async getUserInfoById(id){
       try {
-        const token = await axios.get(`${this.url}/getUserInfoById/${id}`, {
+        const token = await axios.get(`${URL}/getUserInfoById/${id}`, {
           headers: {
             Authorization: `${localStorage.getItem("token")}`
           }
@@ -77,7 +88,7 @@ export const useApiStore = defineStore('api', {
 
     async createPost(content, userId){
 
-        const postiki = await axios.post(`${this.url}/createPost`, {
+        const postiki = await axios.post(`${URL}/createPost`, {
           id: userId,
           content: content,
         }, {headers: {
@@ -89,7 +100,7 @@ export const useApiStore = defineStore('api', {
 
     async getPostById(id){
       try {
-        const token = await axios.get(`${this.url}/getPostById/${id}`)
+        const token = await axios.get(`${URL}/getPostById/${id}`)
           if (token.status === 200){
             return token.data;
         }
@@ -104,7 +115,7 @@ export const useApiStore = defineStore('api', {
     async getAllPosts(limit){
       
       let posts = [];
-      const req = await axios.get(`${this.url}/getAllPosts/${limit}`)
+      const req = await axios.get(`${URL}/getAllPosts/${limit}`)
 
       // await token.data.forEach(async el => {
       //   const user = await axios.get(`http://localhost:8080/getUserInfoById/${el.userId}`);
@@ -112,7 +123,7 @@ export const useApiStore = defineStore('api', {
       // });
 
       for (let i = 0; i < req.data.length; i++) {
-        const user = await axios.get(`http://localhost:8080/getUserInfoById/${req.data[i].userId}`);
+        const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
         posts.push({post: req.data[i], 
           likes: await this.getPostLikes(req.data[i].id), 
           dislikes: await this.getPostDislikes(req.data[i].id), 
@@ -125,7 +136,7 @@ export const useApiStore = defineStore('api', {
     },
 
     async postLike(id, post){
-      await axios.post(`${this.url}/postLike`, {
+      await axios.post(`${URL}/postLike`, {
         id: id,
         post: post,
       }, {headers: {
@@ -136,7 +147,7 @@ export const useApiStore = defineStore('api', {
     },
 
     async postDislike(id, post){
-      await axios.post(`${this.url}/postDislike`, {
+      await axios.post(`${URL}/postDislike`, {
         id: id,
         post: post,
       }, {headers: {
@@ -147,17 +158,17 @@ export const useApiStore = defineStore('api', {
     },
 
     async getPostLikes(id) {
-      let getLike = await axios.get(`${this.url}/getPostLikes/${id}`);
+      let getLike = await axios.get(`${URL}/getPostLikes/${id}`);
       return getLike.data;
     },
 
     async getPostDislikes(id) {
-      let getDislike = await axios.get(`${this.url}/getPostDislikes/${id}`);
+      let getDislike = await axios.get(`${URL}/getPostDislikes/${id}`);
       return getDislike.data;
     },
 
     async getUserPostLike(id, post){
-      let like = await axios.post(`${this.url}/getUserPostLike`, {
+      let like = await axios.post(`${URL}/getUserPostLike`, {
         id: id,
         post: post,
       }, {headers: {
@@ -168,7 +179,7 @@ export const useApiStore = defineStore('api', {
     },
 
     async getUserPostDislike(id, post){
-      let like = await axios.post(`${this.url}/getUserPostDislike`, {
+      let like = await axios.post(`${URL}/getUserPostDislike`, {
         id: id,
         post: post,
       }, {headers: {
@@ -180,7 +191,7 @@ export const useApiStore = defineStore('api', {
 
     async addView(id){
 
-      await axios.put(`${this.url}/addView`, {
+      await axios.put(`${URL}/addView`, {
         id: id
       }, {headers: {
           Authorization: `${localStorage.getItem("token")}`
@@ -190,21 +201,38 @@ export const useApiStore = defineStore('api', {
     },
 
     async getPostViews(id) {
-      let getView = await axios.get(`${this.url}/getPostViews/${id}`);
+      let getView = await axios.get(`${URL}/getPostViews/${id}`);
       return getView.data;
     },
 
-    async updateUserInfo(id, about, avatar, nickname, link) {
-      await axios.put(`${this.url}/updateUserInfo`, {
+      async uploadUserAvatar(id, img) {
+          const file = new FormData();
+          file.append("avatar", img)
+
+          await axios.put(`${URL}/uploadUserAvatar/${id}`, file, {
+              headers: {
+                  "Authorization": localStorage.getItem("token"),
+                  "Content-Type": "multipart/form-data"
+              }
+          });
+
+          const req = await this.getUserInfoById(id);
+          sessionStorage.setItem("user", JSON.stringify(req));
+      },
+
+    async updateUserInfo(id, about, nickname, link) {
+      await axios.put(`${URL}/updateUserInfo`, {
         id: id,
         about: about,
-        avatar: avatar,
         nickname: nickname,
         link: link
       }, {headers: {
           Authorization: `${localStorage.getItem("token")}`
         }
-      })  
+      })
+
+        const req = await this.getUserInfoById(id);
+        sessionStorage.setItem("user", JSON.stringify(req));
 
     },
 

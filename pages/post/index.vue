@@ -5,7 +5,7 @@
         <div class="flex_column">
             <div class="articles" v-for="post in data">
                 <div class="author">
-                    <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
+                    <img :src="post.user.avatar" alt="аватарка не загрузилась" class="ava">
                     <p class="nickname">{{ post.user.nickname }}</p>
                     <p class="time_post" >{{ datePost(post.post.Date) }}</p>
                 </div>
@@ -99,7 +99,7 @@ function addLimit(){
 // p = post
 onMounted(async () => {
     const posts = await api.getAllPosts(limit.value);
-    data.push(...posts)
+    data.push(...posts.reverse())
 
     const userId = jwtDecode(localStorage.getItem('token')).data.id;
     data.forEach(async p => {

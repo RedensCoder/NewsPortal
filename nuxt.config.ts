@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@pinia/nuxt'],
+  // @ts-ignore
   css: [
     'quill/dist/quill.snow.css',
     'quill/dist/quill.bubble.css',

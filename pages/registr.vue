@@ -70,11 +70,16 @@ async function registr(){
         alert("НЕ ВСЕ!")
     }
 }
-// onMounted(() => {
-//     if (localStorage.getItem(token) !== undefined){
-//         router.push({path: "/"});
-//     }
-// })
+
+onMounted(() => {
+  if(sessionStorage.getItem("user") !== null) {
+    router.push("/");
+  }
+})
+
+useHead({
+  title: "Новостной Портал - Регистрация"
+})
 </script>
 
 <style scoped>
