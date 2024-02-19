@@ -212,4 +212,7 @@ color: #FFFFFF;
 .div_add_post{
   width: 90.5%;  
 }
+.btn_comments{
+    cursor: pointer;
+}
 </style>
