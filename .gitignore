@@ -3,3 +3,4 @@ node_modules
 files
 prisma/migrations
 .idea
+files/users

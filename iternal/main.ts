@@ -1,7 +1,10 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
+
+// @ts-ignore
+import file from "./services/file/file.cjs";
 
 import * as User from "./services/handlers/users";
 import * as Post from "./services/handlers/posts";
@@ -26,6 +29,27 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 //ROUTES
+//UPLOAD
+app.put("/uploadUserAvatar/:id", authenticateToken, file.single("avatar"), async (req: Request, res: Response) => {
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400)
+    }
+    //@ts-ignore
+    if (req.file) {
+        await prisma.user_infos.update({
+            where: { userId: Number(req.params.id)},
+            data: {
+                //@ts-ignore
+                avatar: `${req.protocol}://${req.get('host')}/${req.file.path}`
+            }
+        })
+
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(422);
+    }
+});
+
 //USERS
 app.post("/createUser", async (req: Request, res: Response) => await User.CreateUser(req, res, prisma));
 app.post("/auth", async (req: Request, res: Response) => await User.Auth(req, res, prisma));

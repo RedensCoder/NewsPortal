@@ -27,6 +27,7 @@ export const CreateUser = async (req: Request, res: Response, prisma: PrismaClie
             data: {
                 userId: createdUser.id,
                 nickname: req.body.login,
+                avatar: `${req.protocol}://${req.get('host')}/files/avatar_null.png`,
                 link: req.body.login
             }
         });
