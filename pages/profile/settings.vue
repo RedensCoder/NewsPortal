@@ -48,7 +48,6 @@ const api = useApiStore();
 let nickname = ref('');
 let about = ref('')
 let link = ref('')
-let data = reactive([]);
 
 const img = ref("");
 const imgAva = ref("");

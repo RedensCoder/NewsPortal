@@ -265,7 +265,6 @@ function datePost(date) {
     height: 50px;
 }
 
-
 .main{
     display: flex;
     justify-content: center;

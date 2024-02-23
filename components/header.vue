@@ -29,7 +29,7 @@
                         <NuxtLink class="text_my_public">Мои публикации</NuxtLink>
                         <NuxtLink class="text_add_public" to="/articles/editor">Создать публикацию</NuxtLink>
                         <NuxtLink class="text_add_public">Сменить тему</NuxtLink>
-                        <NuxtLink class="text_add_public" to="/publics">Паблики</NuxtLink>
+                        <NuxtLink class="text_add_public" to="/publics/">Паблики</NuxtLink>
                     </div>
                 
                     <hr class="hr_profile">

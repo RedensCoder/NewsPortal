@@ -1,5 +1,7 @@
-<script>import ("~/assets/css/second.css");
+<script setup>
+import ("~/assets/css/second.css");
 </script>
+
 <template>
     <Articles />
     <div class="edit_public">
@@ -28,6 +30,7 @@
     </div>
 </div>
 </template>
+
 <style scoped>
 .text{
     font-family: 'Inter';

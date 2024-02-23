@@ -135,6 +135,23 @@ export const useApiStore = defineStore('api', {
         
     },
 
+    async getUserPosts(){
+      
+      let posts = [];
+      const req = await axios.get(`${URL}/getUserPosts/${id}`)
+
+      for (let i = 0; i < req.data.length; i++) {
+        const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
+        posts.push({post: req.data[i],  
+          view: await this.getPostViews(req.data[i].id), 
+          user: user.data
+        });
+        console.log(posts);
+      }
+      return posts
+        
+    },
+
     async postLike(id, post){
       await axios.post(`${URL}/postLike`, {
         id: id,
