@@ -112,15 +112,28 @@ export const useApiStore = defineStore('api', {
       }
     },
 
+      async getAllUserPosts(id){
+
+          let posts = [];
+          const req = await axios.get(`${URL}/getUserPosts/${id}`)
+
+          for (let i = 0; i < req.data.length; i++) {
+              const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
+              posts.push({post: req.data[i],
+                  likes: await this.getPostLikes(req.data[i].id),
+                  dislikes: await this.getPostDislikes(req.data[i].id),
+                  view: await this.getPostViews(req.data[i].id),
+                  user: user.data
+              });
+          }
+          return posts
+
+      },
+
     async getAllPosts(limit){
       
       let posts = [];
       const req = await axios.get(`${URL}/getAllPosts/${limit}`)
-
-      // await token.data.forEach(async el => {
-      //   const user = await axios.get(`http://localhost:8080/getUserInfoById/${el.userId}`);
-      //   posts.push({post: el, user: await user.data})
-      // });
 
       for (let i = 0; i < req.data.length; i++) {
         const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
@@ -153,8 +166,7 @@ export const useApiStore = defineStore('api', {
       }, {headers: {
           Authorization: `${localStorage.getItem("token")}`
         }
-      })   
-      // console.log(like);
+      })
     },
 
     async getPostLikes(id) {
@@ -265,19 +277,44 @@ export const useApiStore = defineStore('api', {
     },
 
     async getAllPublics(limit){
-      
-      let publics = [];
-      const req = await axios.get(`${URL}/getAllPublics/${limit}`)
+        let publics = [];
+        const req = await axios.get(`${URL}/getAllPublics/${limit}`)
 
-      for (let i = 0; i < req.data.length; i++) {
-        const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
-        publics.push({publics: req.data[i], 
-          user: user.data
-        });
-      }
-      return publics
-        
+        for (let pub of req.data) {
+            if (pub.status === "true") {
+                const subCount = await this.getPublicSubCount(pub.id);
+                publics.push({public: pub, subs: subCount})
+            }
+        }
+
+        return publics;
     },
+
+      async getPublic(id) {
+        const req = await axios.get(`${URL}/getPublicById/${id}`);
+        return req.data;
+      },
+
+      async getPublicSubCount(id) {
+          const req = await axios.get(`${URL}/getPublicSubsCount/${id}`)
+          return req.data;
+      },
+
+      async searchPublic(value) {
+        let publics = [];
+          const req = await axios.post(`${URL}/searchPublic`, {
+              value: value
+          })
+
+          for (let pub of req.data) {
+              if (pub.status === "true") {
+                  const subCount = await this.getPublicSubCount(pub.id);
+                  publics.push({public: pub, subs: subCount})
+              }
+          }
+
+          return publics;
+      }
 
   },
 })

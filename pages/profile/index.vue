@@ -55,9 +55,6 @@
                 </div>  
                 
             </div>
-            <div class="next_post_btn">
-                <button @click="addLimit" class="post_next">Посты профиля</button>
-            </div>
         </div>
     </div>
 </template>
@@ -70,23 +67,12 @@ import { jwtDecode } from 'jwt-decode';
 
 const api = useApiStore();
 let data = reactive([]);
-let limit = ref(10);
 let nickname = ref('');
 let about = ref('')
 let link = ref('')
 const img = ref("");
 
-
-watch (limit, async () => {
-    data.splice(0, data.length)
-    const posts = await api.getAllPosts(limit.value);
-    data.push(...posts)
-}) 
-
-function addLimit(){
-    limit.value = limit.value + 10
-    // alert(limit.value)
-}
+const router = useRouter();
 
 onMounted ( async () => {
   if (localStorage.getItem('token') == null || sessionStorage.getItem("user") == null) {
@@ -99,6 +85,8 @@ onMounted ( async () => {
   about.value = user.about;
   link.value = user.link;
   img.value = user.avatar;
+
+  data.push(...await api.getAllUserPosts(user.id));
 })
 
 function datePost(date) {

@@ -12,19 +12,18 @@
                     </div>
                    
                     <div class="div_search">
-                        <input type="search" class="search" name="" id="" placeholder="Поиск паблика">
+                        <input v-model="searchValue" @input="search" type="search" class="search" placeholder="Поиск паблика">
                         <button class="btn_search"><img src="public/img/Search.png" alt="" class="icon"></button>
                     </div>
                     <div class="publics">
-                        <div class="public" >
-                            <div class="info" v-for="publics in data">
-                                <NuxtLink to="/publics/[id].vue">111</NuxtLink>
-                                <img class="logo" :src="publics.user.avatar" alt="не загрузилось:(">
+                        <div class="public" v-for="pub in data">
+                          <NuxtLink :to="pub.public.id"><div class="info">
+                                <img class="logo" :src="pub.public.avatar" alt="не загрузилось:(">
                                 <div class="info_public">
-                                    <h1 class="name_public">{{ publics.user.name }}</h1>
-                                    <p class="followers">0 подписчиков</p>
+                                    <h1 class="name_public">{{ pub.public.name }}</h1>
+                                    <p class="followers">{{ pub.subs }} подписчиков</p>
                                 </div>
-                            </div>
+                            </div></NuxtLink>
                         </div>
                         <hr class="hr">
                     </div>
@@ -47,6 +46,20 @@ const api = useApiStore();
 let data = reactive([]);
 let limit = ref(10);
 
+const searchValue = ref("");
+
+async function search() {
+  if (searchValue.value !== "") {
+    data.splice(0, data.length)
+    const publics = await api.searchPublic(searchValue.value);
+    data.push(...publics)
+  } else {
+    data.splice(0, data.length)
+    const publics = await api.getAllPublics(limit.value);
+    data.push(...publics)
+  }
+}
+
 watch (limit, async () => {
     data.splice(0, data.length)
     const publics = await api.getAllPublics(limit.value);
@@ -56,14 +69,16 @@ watch (limit, async () => {
 onMounted(async () => {
     const publics = await api.getAllPublics(limit.value);
     data.push(...publics.reverse())
-    
-    const userId = jwtDecode(localStorage.getItem('token')).data.id;
 })
 
 // function addLimit(){
 //     limit.value = limit.value + 10
 //     // alert(limit.value)
 // }
+
+useHead({
+  title: "Паблики"
+})
 
 </script>
 
@@ -183,7 +198,16 @@ onMounted(async () => {
     margin-left: 10px;
 }
 
-.public{
-    /* margin-top: 30px; */
+.public {
+  //margin-top: 30px;
+}
+
+.public a{
+  text-decoration: none;
+  color: black;
+}
+
+.logo {
+  width: 90px;
 }
 </style>
