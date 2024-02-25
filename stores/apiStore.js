@@ -135,23 +135,6 @@ export const useApiStore = defineStore('api', {
         
     },
 
-    async getUserPosts(){
-      
-      let posts = [];
-      const req = await axios.get(`${URL}/getUserPosts/${id}`)
-
-      for (let i = 0; i < req.data.length; i++) {
-        const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
-        posts.push({post: req.data[i],  
-          view: await this.getPostViews(req.data[i].id), 
-          user: user.data
-        });
-        console.log(posts);
-      }
-      return posts
-        
-    },
-
     async postLike(id, post){
       await axios.post(`${URL}/postLike`, {
         id: id,
@@ -251,6 +234,49 @@ export const useApiStore = defineStore('api', {
         const req = await this.getUserInfoById(id);
         sessionStorage.setItem("user", JSON.stringify(req));
 
+    },
+
+    async createPostComment(id, post, comment, date) {
+      await axios.post(`${URL}/createPostComment`, {
+        id: id,
+        post: post,
+        comment: comment,
+        date: date
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })
+    },
+
+    // паблики
+
+    async createPublic(userId, name, description, avatar, site, comment){
+      await axios.post(`${URL}/createPublic`, {
+        userId: userId,
+        name: name,
+        description: description,
+        avatar: avatar,
+        site: site,
+        comment: comment
+      }, {headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      })
+    },
+
+    async getAllPublics(limit){
+      
+      let publics = [];
+      const req = await axios.get(`${URL}/getAllPublics/${limit}`)
+
+      for (let i = 0; i < req.data.length; i++) {
+        const user = await axios.get(`${URL}/getUserInfoById/${req.data[i].userId}`);
+        publics.push({publics: req.data[i], 
+          user: user.data
+        });
+      }
+      return publics
+        
     },
 
   },

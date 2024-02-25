@@ -31,7 +31,7 @@
                             <p class="quantity_like" >{{ post.dislikes }}</p>
                         </div>
 
-                        <div class="div_commnets" >
+                        <div class="div_commnets" @click="createComment">
                             <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
                             <p class="quantity_like" >4</p>
                         </div>
@@ -84,6 +84,7 @@ import { jwtDecode } from 'jwt-decode';
 
 let limit = ref(10);
 let data = reactive([]);
+let comment = ref('');
 const api = useApiStore();
 
 watch (limit, async () => {
@@ -170,6 +171,14 @@ async function dislike(id) {
     }
 
     await api.postDislike(userId, id);
+}
+
+async function createComment(id){
+    const userId = jwtDecode(localStorage.getItem('token')).data.id;
+    const postId = await api.getPostById(id);
+    console.log(postId);
+
+    await api.createPostComment(userId, postId, comment.value, Date)
 }
 
 function datePost(date) {

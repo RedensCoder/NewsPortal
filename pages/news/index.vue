@@ -76,7 +76,7 @@ onMounted(async () => {
     }
     else {
         let id = jwtDecode(localStorage.getItem('token')).data.id;
-        console.log(id);
+        // console.log(id);
 
         let res = await api.getUserInfoById(id);
         
