@@ -84,11 +84,13 @@ app.delete("/deletePostComment/:id", authenticateToken, async (req: Request, res
 app.post("/createPublic", authenticateTokenBody, async (req: Request, res: Response) => await Public.CreatePublic(req, res, prisma));
 app.post("/addAdmin", authenticateTokenBody, async (req: Request, res: Response) => await Public.AddAdmin(req, res, prisma));
 app.post("/subscribe", authenticateTokenBody, async (req: Request, res: Response) => await Public.Subscribe(req, res, prisma));
+app.post("/searchPublic", async (req: Request, res: Response) => await Public.SearchPublic(req, res, prisma));
 app.get("/getAllPublics/:take", async (req: Request, res: Response) => await Public.GetAllPublics(req, res, prisma));
 app.get("/getUserPublics/:id", authenticateToken, async (req: Request, res: Response) => await Public.GetUserPublics(req, res, prisma));
 app.get("/getPublicById/:id", async (req: Request, res: Response) => await Public.GetPublicById(req, res, prisma));
 app.get("/getPublicAdmins/:id", authenticateToken, async (req: Request, res: Response) => await Public.GetPublicAdmins(req, res, prisma));
 app.get("/getPublicSubs/:id", async (req: Request, res: Response) => await Public.GetPublicSubscribers(req, res, prisma));
+app.get("/getPublicSubsCount/:id", async (req: Request, res: Response) => await Public.GetPublicSubsCount(req, res, prisma));
 app.put("/updatePublic", authenticateTokenBody, async (req: Request, res: Response) => await Public.UpdatePublic(req, res, prisma));
 app.delete("/deletePublic/:id", authenticateToken, async (req: Request, res: Response) => await Public.DeletePublic(req, res, prisma));
 

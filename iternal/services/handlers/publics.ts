@@ -158,6 +158,35 @@ export const GetPublicSubscribers = async (req: Request, res: Response, prisma: 
     ));
 }
 
+export const SearchPublic = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!req.body.value) {
+        res.sendStatus(204);
+        return;
+    }
+
+    const group = await prisma.publics.findMany({
+        where: {
+            name: {
+                startsWith: `%${req.body.value}%`
+            }
+        }
+    });
+
+    res.send(JSON.stringify(
+        group, (key, value) => (typeof value === 'bigint' || typeof value === 'boolean' ? value.toString() : value)
+    ));
+}
+
+export const GetPublicSubsCount = async (req: Request, res: Response, prisma: PrismaClient) => {
+    if (!Number.isInteger(Number(req.params.id))) {
+        return res.sendStatus(400);
+    }
+
+    const subs = await prisma.public_subscribers.count({ where: { publicId: Number(req.params.id) } })
+
+    res.send(subs.toString());
+}
+
 export const UpdatePublic = async (req: Request, res: Response, prisma: PrismaClient) => {
     if (!req.body.userId || !req.body.public) {
         res.sendStatus(204);
