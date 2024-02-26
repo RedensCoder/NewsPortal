@@ -17,11 +17,11 @@
                     </div>
                     <div class="publics">
                         <div class="public" >
-                            <div class="info" v-for="publics in data">
+                            <div class="info" >
                                 <NuxtLink to="/publics/[id].vue">111</NuxtLink>
-                                <img class="logo" :src="publics.user.avatar" alt="не загрузилось:(">
+                                <img class="logo" src="/public/img/example_logo.png" alt="не загрузилось:(">
                                 <div class="info_public">
-                                    <h1 class="name_public">{{ publics.user.name }}</h1>
+                                    <h1 class="name_public"></h1>
                                     <p class="followers">0 подписчиков</p>
                                 </div>
                             </div>
