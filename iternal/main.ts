@@ -3,12 +3,15 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { PrismaClient } from '@prisma/client';
 
-// @ts-ignore
-import file from "./services/file/file.cjs";
+//@ts-ignore
+import userAva from "./services/file/file.cjs";
+//@ts-ignore
+import publicAva from "./services/file/file.cjs";
 
 import * as User from "./services/handlers/users";
 import * as Post from "./services/handlers/posts";
 import * as Public from "./services/handlers/publics";
+import * as Files from "./services/handlers/files";
 import {authenticateToken, authenticateTokenBody, authenticateTokenParams} from "./services/security/jwt";
 
 const prisma = new PrismaClient();
@@ -30,25 +33,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 //ROUTES
 //UPLOAD
-app.put("/uploadUserAvatar/:id", authenticateToken, file.single("avatar"), async (req: Request, res: Response) => {
-    if (!Number.isInteger(Number(req.params.id))) {
-        return res.sendStatus(400)
-    }
-    //@ts-ignore
-    if (req.file) {
-        await prisma.user_infos.update({
-            where: { userId: Number(req.params.id)},
-            data: {
-                //@ts-ignore
-                avatar: `${req.protocol}://${req.get('host')}/${req.file.path}`
-            }
-        })
-
-        res.sendStatus(200);
-    } else {
-        res.sendStatus(422);
-    }
-});
+app.put("/uploadUserAvatar/:id", authenticateToken, userAva.single("avatar"), async (req: Request, res: Response) => Files.UploadUserAvatar(req, res, prisma));
+app.put("/uploadPublicAvatar/:id", authenticateToken, publicAva.single("avatar"), async (req: Request, res: Response) => Files.UploadPublicAvatar(req, res, prisma));
 
 //USERS
 app.post("/createUser", async (req: Request, res: Response) => await User.CreateUser(req, res, prisma));

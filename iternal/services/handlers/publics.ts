@@ -32,7 +32,9 @@ export const CreatePublic = async (req: Request, res: Response, prisma: PrismaCl
         }
     });
 
-    res.sendStatus(200);
+    res.send(JSON.stringify(
+        group, (key, value) => (typeof value === 'bigint' || typeof value === 'boolean' ? value.toString() : value)
+    ));
 }
 export const AddAdmin = async (req: Request, res: Response, prisma: PrismaClient) => {
     if (!req.body.userId || !req.body.public) {
