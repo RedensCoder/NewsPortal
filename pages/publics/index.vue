@@ -24,8 +24,9 @@
                                     <p class="followers">{{ pub.subs }} подписчиков</p>
                                 </div>
                             </div></NuxtLink>
+                            <hr class="hr">
                         </div>
-                        <hr class="hr">
+                        
                     </div>
                     <!-- <div class="next_post_btn">
                         <button @click="addLimit" class="post_next">Следующие Паблики</button>
@@ -101,6 +102,7 @@ useHead({
 }
 
 .hr{
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 .main{
@@ -199,15 +201,16 @@ useHead({
 }
 
 .public {
-  //margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .public a{
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .logo {
-  width: 90px;
+    max-width: 100px;
+    max-height: 100px;
 }
 </style>

@@ -305,8 +305,8 @@ button{
 }
 .articles{
     background-color: #FFFFFF;
-    width: 770px;
-    margin: 30px 0 0px auto;
+    width: 780px;
+    margin-top: 30px;
     align-items: center;
 }
 

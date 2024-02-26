@@ -8,10 +8,11 @@
                 <p class="time_post">5 минут назад</p>
             </div>
             <p class="news_text">Новости</p>
-            <div class="news">
+            <div class="news_content">
                 <h2 class="heading_post">Погода на неделю в Москве</h2>
                 <img class="img_post" src="http://vsegda-pomnim.com/uploads/posts/2022-04/1648935906_99-vsegda-pomnim-com-p-bittsevskii-les-foto-106.jpg" alt="">
                 <p class="text_post">Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в МосквеПогода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве Погода на неделю в Москве</p>
+                
                 <div class="buttons_post">
                     <div class="div_like" @click="quantity_like1">
                         <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like" >
@@ -33,9 +34,10 @@
                         <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="articles_popular">
+        <!-- <div class="articles_popular">
             <p class="post_watching">Популярные статьи</p>
             <hr>
             <div class="news_post">
@@ -54,7 +56,7 @@
 
             </div>
             <hr>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -112,16 +114,16 @@ button{
 }
 .articles{
     background-color: #FFFFFF;
-    width: 770px;
+    width: 780px;
     height: auto;
     overflow: auto;
-    margin: 30px 0 0 auto;
+    margin-top: 30px;
     align-items: center;
 }
 
 .author{
     display: flex;
-    margin: 10px auto;
+    margin-top: 10px;
     padding: 0px 20px;
     gap: 10px;
     text-align: center;
@@ -129,9 +131,9 @@ button{
 }
 
 .ava{
-    width: 33px;
-    height: 33px;    
-    border-radius: 50px;
+    width: 40px;
+    height: 40px;    
+    border-radius: 100%;
 }
 
 .nickname{
@@ -145,27 +147,37 @@ button{
     font-size: 14px;
     line-height: 16px;
 }
+
 .news_text{
+    margin-top: 10px;
     padding-top: 5px;
     padding-left: 20px;
     font-size: 20px;
     line-height: 16px;
     color: #818181;
 }
-.news{
-    padding: 20px;
-    padding-top: 20px;
+.news_content{
+    margin: 10px auto;
+    padding: 10px 20px;
     width: auto;
 }
 
+.heading_post{
+    line-height: 19.36px;
+    color: #000000;
+}
+
 .img_post{
-    width: 730px;
-    height: 400px;
-    padding: 20px 0px 10px;
+    max-width: 100%;
+    width: 780px;
+    margin-top: 10px;
+    max-height: 400px;
+    height: auto;
     object-fit: cover;
 }
 
 .text_post{
+    padding: 10px 0px;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
@@ -173,37 +185,6 @@ button{
 }
 
 .buttons_post{
-    display: flex;
-    padding-top: 15px;
-    gap: 10px;
-}
-
-.articles_popular{
-    background-color: #FFFFFF;
-    width: 400px;
-    height: auto;
-    overflow: auto;
-    margin: 30px;
-    padding: 25px;
-}
-
-.news_post{
-    padding: 24px 0px 5px;
-}
-
-.post_watching{
-    font-size: 20px;
-    line-height: 16px;
-    color: #818181;
-}
-
-.heading_post{
-    line-height: 19.36px;
-    color: #000000;
-    font-size: 18px;
-}
-
-.div_interaction{
     display: flex;
     gap: 10px;
 }
