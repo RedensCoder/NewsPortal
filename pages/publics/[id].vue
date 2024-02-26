@@ -3,8 +3,8 @@
         <div class="main">
             <div class="content">
                 <div class="header">
-                    <h1 class="text_header">Новости мира</h1>
-                    <p class="text_header" style="font-size: 16px;">6666 подписчиков</p>
+                    <h1 class="text_header">{{ pub.data.value.name }}</h1>
+                    <p class="text_header" style="font-size: 16px;">{{ subs.data.value }} подписчиков</p>
                 </div>
 
                 <div class="posts_public">
@@ -55,7 +55,19 @@
 <script setup>
 import ("~/assets/css/second.css");
 import '@fontsource-variable/inter';
+import {useApiStore} from "~/stores/apiStore.js";
 
+const api = useApiStore();
+const route = useRoute();
+
+const id = route.params.id;
+
+const pub = await useAsyncData(() => api.getPublic(id));
+const subs = await useAsyncData(() => api.getPublicSubCount(id));
+
+useHead({
+  title: pub.data.value.name
+})
 </script>
 
 <style scoped>

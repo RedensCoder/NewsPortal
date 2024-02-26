@@ -18,8 +18,7 @@ onMounted(async () => {
         let id = jwtDecode(localStorage.getItem('token')).data.id;
 
         let res = await api.getUserInfoById(id);
-        
-        nickname.value = res.nickname;
+        sessionStorage.setItem("user", JSON.stringify(res));
         dsa.value = false;
     }
 });
