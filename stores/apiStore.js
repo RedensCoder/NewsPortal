@@ -232,6 +232,18 @@ export const useApiStore = defineStore('api', {
           sessionStorage.setItem("user", JSON.stringify(req));
       },
 
+      async uploadPublicAvatar(id, img) {
+          const file = new FormData();
+          file.append("avatar", img)
+
+          await axios.put(`${URL}/uploadpublicAvatar/${id}`, file, {
+              headers: {
+                  "Authorization": localStorage.getItem("token"),
+                  "Content-Type": "multipart/form-data"
+              }
+          });
+      },
+
     async updateUserInfo(id, about, nickname, link) {
       await axios.put(`${URL}/updateUserInfo`, {
         id: id,
@@ -263,17 +275,19 @@ export const useApiStore = defineStore('api', {
     // паблики
 
     async createPublic(userId, name, description, avatar, site, comment){
-      await axios.post(`${URL}/createPublic`, {
+      const pub = await axios.post(`${URL}/createPublic`, {
         userId: userId,
         name: name,
         description: description,
-        avatar: avatar,
+        avatar: "null",
         site: site,
         comment: comment
       }, {headers: {
           Authorization: `${localStorage.getItem("token")}`
         }
       })
+
+        await this.uploadPublicAvatar(pub.data.id, avatar);
     },
 
     async getAllPublics(limit){

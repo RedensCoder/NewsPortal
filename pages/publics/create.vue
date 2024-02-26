@@ -9,18 +9,18 @@
 
                 <div class="name_public">
                     <h3>Название паблика</h3>
-                    <input type="text" class="input_nick">
+                    <input v-model="name" type="text" class="input_nick">
                 </div>
 
                 <div class="description">
                     <h3>Описание паблика</h3>
-                    <textarea name="" cols="103" rows="12" class="description_public"></textarea>
+                    <textarea v-model="description" cols="103" rows="12" class="description_public"></textarea>
                 </div>
 
                 <div class="div_ava">
-                    <img  class="ava" src="/img/add_picture.png" alt="">
-                    <!-- <img v-else class="ava" style="width: 40px" :src="imgAva" alt=""> -->
-                    <input accept="image/*" style="visibility: hidden; width: 0px" id="ava" type="file">
+                    <img v-if="imgAva === null" class="ava" src="/img/add_picture.png" alt="">
+                    <img v-else class="ava" style="width: 40px" :src="imgAva" alt="">
+                    <input @input="setImg" accept="image/png, image/jpeg" style="visibility: hidden; width: 0px" id="ava" type="file">
                     <label for="ava" class="btn_dowl">Загрузить</label>
                 </div>
 
@@ -31,10 +31,10 @@
 
                 <div class="comments_adm">
                     <h3>Комментарий администрации</h3>
-                    <input type="text" class="input_nick">
+                    <input v-model="comm" type="text" class="input_nick">
                 </div>
 
-                <button class="btn_" >Создать паблик</button>
+                <button @click="create" class="btn_">Создать паблик</button>
             </div>
         </div>
     </div>
@@ -50,6 +50,28 @@ let router = useRouter();
 
 const api = useApiStore();
 
+const name = ref("");
+const description = ref("");
+const img = ref(null);
+const imgAva = ref(null);
+const link = ref("");
+const comm = ref("");
+
+function setImg(e) {
+  img.value = e.target.files[0];
+  imgAva.value = URL.createObjectURL(img.value);
+}
+
+async function create() {
+  const id = jwtDecode(localStorage.getItem("token")).data.id;
+
+  await api.createPublic(id, name.value, description.value, img.value, link.value, comm.value);
+  await router.push("/");
+}
+
+useHead({
+  title: "Создание Паблика"
+})
 </script>
 
 <style scoped>

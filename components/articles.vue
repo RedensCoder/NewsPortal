@@ -56,6 +56,15 @@ hr{
         max-width: none;
     }
 }
+
+@media (max-width: 425px) {
+  .header_articles {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
 /* адаптив конец */
 
 .text_articles{

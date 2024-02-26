@@ -9,7 +9,7 @@
                 <div class="change_ava">
                     <img v-if="imgAva === ''" class="ava" src="/img/add_picture.png" alt="">
                     <img v-else class="ava" style="width: 40px" :src="imgAva" alt="">
-                    <input @change="upload" accept="image/*" style="visibility: hidden; width: 0px" id="ava" type="file">
+                    <input @change="upload" accept="image/png, image/jpeg" style="visibility: hidden; width: 0px" id="ava" type="file">
                     <label for="ava" class="btn_dowl">Загрузить</label>
                 </div>
 
@@ -79,6 +79,10 @@ async function updateUserInfo() {
 
   router.push("/profile").then(() => window.location.reload())
 }
+
+useHead({
+  title: "Настройки Профиля"
+})
 </script>
 
 <style scoped>

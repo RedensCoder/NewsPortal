@@ -162,14 +162,17 @@ function datePost(date) {
     return timeAgo
 }
 
+useHead({
+  title: "Профиль"
+})
 </script>
 
 <style scoped>
 .main{
     margin-top: 3%;
     /* max-width: 100%; */
+    display: flex;
     justify-content: center;
-    margin-left: 29%;
 }
 
 .content{
@@ -307,5 +310,29 @@ function datePost(date) {
     line-height: 19px;
     color: #ffffff;
     height: 50px;
+}
+
+@media (max-width: 425px) {
+  * {
+    display: block;
+  }
+
+  .main {
+    display: block;
+  }
+
+  .info_profile {
+    width: 100%;
+  }
+
+  .profile_posts {
+    width: 100%;
+  }
+
+  .posts {
+    margin-left: 0;
+    margin-bottom: 15px;
+    width: 100%;
+  }
 }
 </style>
