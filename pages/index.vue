@@ -32,6 +32,9 @@ useHead({
     <!-- СТРАНИЦА СО СТАТЬЯМИ -->
     <Articles />
     <div class="main">
+        <div>
+
+        </div>
         <div class="content">
             <div class="author">
                 <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
@@ -69,17 +72,19 @@ useHead({
                 </div>
                 <button class="read_button">Читать далее</button>
             </div>
-                         
-        </div>
-        
+                          
+        </div>          
     </div>
+    
 </template>
 
 <style scoped>
 .main{
-    display: flex;
+    display: grid;
     justify-content: center;
     max-width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 30px;
 }
 
 hr{
@@ -105,7 +110,6 @@ button{
     width: 780px;
     height: auto;
     overflow: auto;
-    margin-top: 30px;
     align-items: center;
 }
 

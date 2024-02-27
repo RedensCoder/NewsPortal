@@ -45,11 +45,27 @@
                             <p class="text_post" v-html="post.post.content"></p>
                         </div>
                         
-                        <!-- ДИВ С КОММЕНТАМИ И ПРОСМОТРАМИ -->
-                        <div class="">
-
+                        <div class="interaction">
+                            <div class="div_like" @click="quantity_like1">
+                                <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like" >
+                                <p class="quantity_like" >{{ 1 }}</p>
+                            </div>
+                            <div class="div_dizlike" >
+                                <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                <p class="quantity_like" >2</p>
+                            </div>
+                            <div class="div_commnets" >
+                                <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                <p class="quantity_like" >4</p>
+                            </div>
+                            <div class="div_viewing" >
+                                <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
+                                <p class="quantity_like" >5</p>
+                            </div>
+                            <div class="div_share" >
+                                <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                            </div>
                         </div>
-
                     </div>
             
                 </div>  
@@ -334,5 +350,22 @@ useHead({
     margin-bottom: 15px;
     width: 100%;
   }
+}
+
+.interaction{
+    display: flex;
+    gap: 10px;
+}
+
+.div_like, .div_dizlike, .div_share, .div_viewing, .div_commnets{
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.quantity_like{
+    padding-left: 5px;
+    font-size: 15px;
+    cursor: pointer;
 }
 </style>

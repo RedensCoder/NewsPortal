@@ -1,6 +1,9 @@
 <template>
     <Articles />
     <div class="main">
+        <div>
+
+        </div>
         <div class="articles">
             <div class="author">
                 <img src="https://yt3.googleusercontent.com/UGnZwQcSeg1K28KjtJSL6FOy5ZJeV3_B3MxURWdYxGUjV3Bk0HnB3XdArW1vvtWzBs1MfCNY=s900-c-k-c0x00ffffff-no-rj" alt="аватарка не загрузилась" class="ava">
@@ -37,26 +40,6 @@
 
             </div>
         </div>
-        <!-- <div class="articles_popular">
-            <p class="post_watching">Популярные статьи</p>
-            <hr>
-            <div class="news_post">
-                <h3 class="heading_post">Реконструкция белого дома</h3>
-
-                <div class="div_interaction">
-                    <div class="div_commnets" >
-                        <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >4</p>
-                    </div>
-                    <div class="div_viewing" >
-                        <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >5</p>
-                    </div>
-                </div>
-
-            </div>
-            <hr>
-        </div> -->
     </div>
 </template>
 
@@ -90,9 +73,11 @@ onMounted(async () => {
 
 <style scoped>
 .main{
-    display: flex;
+    display: grid;
     justify-content: center;
     max-width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 30px;
 }
 
 hr{
@@ -117,7 +102,6 @@ button{
     width: 780px;
     height: auto;
     overflow: auto;
-    margin-top: 30px;
     align-items: center;
 }
 

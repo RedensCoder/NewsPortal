@@ -1,6 +1,9 @@
 <template>
     <Articles />
         <div class="main">
+
+            <div></div>
+
             <div class="content">
                 <div class="header">
                     <h1 class="text_header">{{ pub.data.value.name }}</h1>
@@ -10,7 +13,7 @@
                 <div class="posts_public">
                     <div class="posts">
                         <div class="header_post">
-                            <p class="text_header padding">Новости мира</p>
+                            <p class="text_header padding">{{ titile }}</p>
                             <img src="/public/img/image 5.svg" alt="fff">
                         </div>
 
@@ -22,22 +25,22 @@
                             <div class="interactions">
                                 <div class="div_like" >
                                     <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
-                                    <p class="quantity_like">{{  }}</p>
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
                                 </div>
 
 
                                 <div class="div_dizlike" >
                                     <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
-                                    <p class="quantity_like" >{{ }}</p>
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
                                 </div>
                                 <div class="div_commnets" >
                                     <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
-                                    <p class="quantity_like" >4</p>
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
                                 </div>
 
                                 <div class="div_viewing" >
                                     <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
-                                    <p class="quantity_view">{{  }}</p>
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
                                 </div>
 
                                 <div class="div_share" >
@@ -47,6 +50,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
@@ -65,6 +69,16 @@ const id = route.params.id;
 const pub = await useAsyncData(() => api.getPublic(id));
 const subs = await useAsyncData(() => api.getPublicSubCount(id));
 
+function parseNumber(number) {
+    if (number < 1000) {
+        return number.toString();
+    } else if (number < 1000000) {
+        return (number / 1000).toFixed(1) + 'K';
+    } else {
+        return (number / 1000000).toFixed(1) + 'M';
+    }
+}
+
 useHead({
   title: pub.data.value.name
 })
@@ -72,13 +86,15 @@ useHead({
 
 <style scoped>
 .main{
-    display: flex;
+    display: grid;
     justify-content: center;
+    max-width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 30px;
 }
 
 .content{
     width: 780px;
-    margin-top: 50px;
     display: flex;
     flex-direction: column;
     background-color: #FFFFFF;
@@ -102,8 +118,7 @@ useHead({
 }
 
 .padding{
-    padding: 2px;
-    padding-left: 5px;
+    padding: 5px 10px;  
 }
 
 .posts_public{
@@ -118,12 +133,12 @@ useHead({
 }
 
 .text_post{
-    padding-top: 20px;
+    padding: 20px 10px 0px;
 }
 
 .interactions{
     display: flex;
-    padding-top: 10px;
+    padding: 0 10px;
     gap: 10px;  
 }
 

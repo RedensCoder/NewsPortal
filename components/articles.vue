@@ -76,7 +76,7 @@ hr{
     padding: 0px 38px;
 }
 
-.text_articles:hover,.text_articles:focus,.text_articles:active{
+.text_articles:hover, .router-link-active{
     color: #8657E9;
 }
 
