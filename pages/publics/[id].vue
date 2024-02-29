@@ -50,8 +50,250 @@
                         </div>
                     </div>
                 </div>
+                <div class="posts_public">
+                    <div class="posts">
+                        <div class="header_post">
+                            <p class="text_header padding">{{ titile }}</p>
+                            <img src="/public/img/image 5.svg" alt="fff">
+                        </div>
+
+                        <div class="eee">
+                            <p class="text_post">Долгожданный первый трейлер следующей игры Grand Theft Auto наконец-то вышел, и вы можете посмотреть его ниже!
+
+Трейлер должен был быть представлен во вторник, 5 декабря, в 9 утра по восточному времени. Однако трейлер GTA 6, к сожалению, просочился в Твиттер на несколько часов раньше, поэтому Rockstar Games решила опубликовать и официальную версию раньше.</p>
+
+                            <div class="interactions">
+                                <div class="div_like" >
+                                    <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
+                                </div>
+
+
+                                <div class="div_dizlike" >
+                                    <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+                                <div class="div_commnets" >
+                                    <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_viewing" >
+                                    <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_share" >
+                                    <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="posts_public">
+                    <div class="posts">
+                        <div class="header_post">
+                            <p class="text_header padding">{{ titile }}</p>
+                            <img src="/public/img/image 5.svg" alt="fff">
+                        </div>
+
+                        <div class="eee">
+                            <p class="text_post">Долгожданный первый трейлер следующей игры Grand Theft Auto наконец-то вышел, и вы можете посмотреть его ниже!
+
+Трейлер должен был быть представлен во вторник, 5 декабря, в 9 утра по восточному времени. Однако трейлер GTA 6, к сожалению, просочился в Твиттер на несколько часов раньше, поэтому Rockstar Games решила опубликовать и официальную версию раньше.</p>
+
+                            <div class="interactions">
+                                <div class="div_like" >
+                                    <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
+                                </div>
+
+
+                                <div class="div_dizlike" >
+                                    <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+                                <div class="div_commnets" >
+                                    <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_viewing" >
+                                    <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_share" >
+                                    <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="posts_public">
+                    <div class="posts">
+                        <div class="header_post">
+                            <p class="text_header padding">{{ titile }}</p>
+                            <img src="/public/img/image 5.svg" alt="fff">
+                        </div>
+
+                        <div class="eee">
+                            <p class="text_post">Долгожданный первый трейлер следующей игры Grand Theft Auto наконец-то вышел, и вы можете посмотреть его ниже!
+
+Трейлер должен был быть представлен во вторник, 5 декабря, в 9 утра по восточному времени. Однако трейлер GTA 6, к сожалению, просочился в Твиттер на несколько часов раньше, поэтому Rockstar Games решила опубликовать и официальную версию раньше.</p>
+
+                            <div class="interactions">
+                                <div class="div_like" >
+                                    <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
+                                </div>
+
+
+                                <div class="div_dizlike" >
+                                    <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+                                <div class="div_commnets" >
+                                    <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_viewing" >
+                                    <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_share" >
+                                    <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="posts_public">
+                    <div class="posts">
+                        <div class="header_post">
+                            <p class="text_header padding">{{ titile }}</p>
+                            <img src="/public/img/image 5.svg" alt="fff">
+                        </div>
+
+                        <div class="eee">
+                            <p class="text_post">Долгожданный первый трейлер следующей игры Grand Theft Auto наконец-то вышел, и вы можете посмотреть его ниже!
+
+Трейлер должен был быть представлен во вторник, 5 декабря, в 9 утра по восточному времени. Однако трейлер GTA 6, к сожалению, просочился в Твиттер на несколько часов раньше, поэтому Rockstar Games решила опубликовать и официальную версию раньше.</p>
+
+                            <div class="interactions">
+                                <div class="div_like" >
+                                    <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
+                                </div>
+
+
+                                <div class="div_dizlike" >
+                                    <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+                                <div class="div_commnets" >
+                                    <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_viewing" >
+                                    <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_share" >
+                                    <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="posts_public">
+                    <div class="posts">
+                        <div class="header_post">
+                            <p class="text_header padding">{{ titile }}</p>
+                            <img src="/public/img/image 5.svg" alt="fff">
+                        </div>
+
+                        <div class="eee">
+                            <p class="text_post">Долгожданный первый трейлер следующей игры Grand Theft Auto наконец-то вышел, и вы можете посмотреть его ниже!
+
+Трейлер должен был быть представлен во вторник, 5 декабря, в 9 утра по восточному времени. Однако трейлер GTA 6, к сожалению, просочился в Твиттер на несколько часов раньше, поэтому Rockstar Games решила опубликовать и официальную версию раньше.</p>
+
+                            <div class="interactions">
+                                <div class="div_like" >
+                                    <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
+                                </div>
+
+
+                                <div class="div_dizlike" >
+                                    <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+                                <div class="div_commnets" >
+                                    <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_viewing" >
+                                    <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_share" >
+                                    <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="posts_public">
+                    <div class="posts">
+                        <div class="header_post">
+                            <p class="text_header padding">{{ titile }}</p>
+                            <img src="/public/img/image 5.svg" alt="fff">
+                        </div>
+
+                        <div class="eee">
+                            <p class="text_post">Долгожданный первый трейлер следующей игры Grand Theft Auto наконец-то вышел, и вы можете посмотреть его ниже!
+
+Трейлер должен был быть представлен во вторник, 5 декабря, в 9 утра по восточному времени. Однако трейлер GTA 6, к сожалению, просочился в Твиттер на несколько часов раньше, поэтому Rockstar Games решила опубликовать и официальную версию раньше.</p>
+
+                            <div class="interactions">
+                                <div class="div_like" >
+                                    <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
+                                    <p class="quantity_like">{{ parseNumber(44444) }}</p>
+                                </div>
+
+
+                                <div class="div_dizlike" >
+                                    <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+                                <div class="div_commnets" >
+                                    <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
+                                    <p class="quantity_like" >{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_viewing" >
+                                    <img src="~/public/img/Eye.svg" alt="NO" class="img_like">
+                                    <p class="quantity_view">{{ parseNumber(44444) }}</p>
+                                </div>
+
+                                <div class="div_share" >
+                                    <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 
             </div>
+            <RedactorPublic :name="pub.data.value.name" :ava="pub.data.value.avatar" :subs="subs.data.value"/>
         </div>
 
 </template>

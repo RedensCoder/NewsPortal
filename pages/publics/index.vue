@@ -6,9 +6,10 @@
             <div class="content">
                 <div class="all_publics">
                     <div class="public1">
-                        <h3 class="text text1 t1">Все паблики</h3>
+                        <h3 class="text1 t1">Все паблики</h3>
                         <hr class="hr_public">
-                        <h3 class="text text1 t3" @click="my_public">Мои паблики</h3>
+                        <h3 class="text1 t3" @click="my_public">Мои паблики</h3>
+                        <NuxtLink class="create_public text1" to="/publics/create">Создать паблик</NuxtLink>
                     </div>
                    
                     <div class="div_search">
@@ -84,23 +85,6 @@ useHead({
 </script>
 
 <style scoped>
-.next_post_btn{
-    margin-top: 30px;
-    margin-left: 37%;
-    margin-bottom: 30px;
-}
-.post_next{
-    width: auto;
-    border-radius: 4px;
-    background-color: #8657E9;
-    border: black 1.9px solid;
-    padding: 15px 15px;
-    font-size: 16px;
-    line-height: 19px;
-    color: #ffffff;
-    height: 50px;
-}
-
 .hr{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -212,5 +196,13 @@ useHead({
 .logo {
     max-width: 100px;
     max-height: 100px;
+}
+
+.create_public{
+    align-items: end;
+    text-align: end;
+    margin-left: 150px;
+    text-decoration: none;
+    color: black;
 }
 </style>
