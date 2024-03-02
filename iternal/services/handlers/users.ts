@@ -90,6 +90,19 @@ export const GetUserInfoById = async (req: Request, res: Response, prisma: Prism
     ));
 }
 
+export const GetUserInfoByLink = async (req: Request, res: Response, prisma: PrismaClient) => {
+    const user = await prisma.user_infos.findFirst({ where: { link: req.params.link } });
+
+    if (user === null) {
+        res.sendStatus(400);
+        return;
+    }
+
+    res.send(JSON.stringify(
+        user, (key, value) => (typeof value === 'bigint' ? value.toString() : value)
+    ));
+}
+
 export const GetUserSocialsById = async (req: Request, res: Response, prisma: PrismaClient) => {
     if (!Number.isInteger(Number(req.params.id))) {
         return res.sendStatus(400)

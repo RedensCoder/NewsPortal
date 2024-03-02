@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 //@ts-ignore
 import userAva from "./services/file/file.cjs";
 //@ts-ignore
-import publicAva from "./services/file/file.cjs";
+import publicAva from "./services/file/publicImgFile.cjs";
 
 import * as User from "./services/handlers/users";
 import * as Post from "./services/handlers/posts";
@@ -42,6 +42,7 @@ app.post("/auth", async (req: Request, res: Response) => await User.Auth(req, re
 app.post("/createSocial", authenticateTokenBody, async (req: Request, res: Response) => await User.CreateSocial(req, res, prisma));
 app.get("/getUserById/:id", authenticateTokenParams, async (req: Request, res: Response) => await User.GetUserById(req, res, prisma));
 app.get("/getUserInfoById/:id", async (req: Request, res: Response) => await User.GetUserInfoById(req, res, prisma));
+app.get("/getUserInfoByLink/:link", async (req: Request, res: Response) => await User.GetUserInfoByLink(req, res, prisma));
 app.get("/getUserSocialsById/:id", async (req: Request, res: Response) => await User.GetUserSocialsById(req, res, prisma));
 app.put("/updateUserInfo", authenticateTokenBody, async (req: Request, res: Response) => await User.UpdateUserInfo(req, res, prisma));
 app.put("/updateSocial", authenticateTokenBody, async (req: Request, res: Response) => await User.UpdateSocial(req, res, prisma));
@@ -78,7 +79,7 @@ app.get("/getPublicAdmins/:id", authenticateToken, async (req: Request, res: Res
 app.get("/getPublicSubs/:id", async (req: Request, res: Response) => await Public.GetPublicSubscribers(req, res, prisma));
 app.get("/getPublicSubsCount/:id", async (req: Request, res: Response) => await Public.GetPublicSubsCount(req, res, prisma));
 app.put("/updatePublic", authenticateTokenBody, async (req: Request, res: Response) => await Public.UpdatePublic(req, res, prisma));
-app.delete("/deletePublic/:id", authenticateToken, async (req: Request, res: Response) => await Public.DeletePublic(req, res, prisma));
+app.delete("/deletePublic/:id", authenticateTokenBody, async (req: Request, res: Response) => await Public.DeletePublic(req, res, prisma));
 
 app.listen(8080, () => {
     console.log("[Server] Enabled!");

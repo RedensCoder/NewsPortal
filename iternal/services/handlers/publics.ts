@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 
 export const CreatePublic = async (req: Request, res: Response, prisma: PrismaClient) => {
-    if (!req.body.userId || !req.body.name || !req.body.description || !req.body.avatar || !req.body.site) {
+    if (!req.body.userId || !req.body.name || !req.body.description || !req.body.avatar) {
         res.sendStatus(204);
         return;
     }
@@ -229,6 +229,18 @@ export const UpdatePublic = async (req: Request, res: Response, prisma: PrismaCl
 export const DeletePublic = async (req: Request, res: Response, prisma: PrismaClient) => {
     if (!Number.isInteger(Number(req.params.id))) {
         return res.sendStatus(400)
+    }
+
+    if (!req.body.userId) {
+        res.sendStatus(204);
+        return;
+    }
+
+    const admin = await prisma.public_admins.findFirst({where: { AND: { publicId: Number(req.params.id), userId: req.body.userId }} })
+
+    if (admin === null) {
+        res.sendStatus(403);
+        return;
     }
 
     await prisma.public_subscribers.deleteMany({ where: { publicId: Number(req.params.id) } });
