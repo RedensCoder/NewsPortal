@@ -6,11 +6,11 @@
             <div class="info_profile">
             
                 <div class="info">
-                    <img class="img_profile" alt="" :src="img">
+                    <img class="img_profile" alt="" :src="user.data.value.avatar">
 
                     <div class="column">
-                        <p class="nickname">{{ nickname }}</p>
-                        <p class="status">{{ about }}</p>
+                        <p class="nickname">{{ user.data.value.nickname }}</p>
+                        <p class="status">{{ user.data.value.about }}</p>
                     </div>
                     
                 </div>
@@ -30,7 +30,7 @@
 
             <div class="profile_posts" >
    
-                <h1 class="text header">Посты пользователя:</h1>
+                <h1 class="text header">Посты {{ user.data.value.nickname }}:</h1>
 
                 <div class="posts" v-for="post in data">
                     
@@ -95,10 +95,10 @@ import { jwtDecode } from 'jwt-decode';
 
 const api = useApiStore();
 let data = reactive([]);
-let nickname = ref('');
-let about = ref('')
-let link = ref('')
-const img = ref("");
+
+const route = useRoute()
+
+const user = await useAsyncData(() => api.getUserInfoByLink(route.params.link));
 
 const router = useRouter();
 
@@ -150,18 +150,13 @@ async function dislike(id) {
 }
 
 onMounted ( async () => {
-  if (localStorage.getItem('token') == null || sessionStorage.getItem("user") == null) {
-    router.push("/");
+  const me = JSON.parse(sessionStorage.getItem("user"));
+
+  if (me.link === user.data.value.link) {
+    await router.push("/profile");
   }
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
-
-  nickname.value = user.nickname;
-  about.value = user.about;
-  link.value = user.link;
-  img.value = user.avatar;
-
-  const posts = await api.getAllUserPosts(user.userId);
+  const posts = await api.getAllUserPosts(user.data.value.userId);
 
   data.push(...posts.reverse());
 
@@ -272,7 +267,7 @@ function datePost(date) {
 }
 
 useHead({
-  title: "Профиль"
+  title: user.data.value.nickname
 })
 </script>
 

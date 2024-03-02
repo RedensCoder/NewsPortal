@@ -293,7 +293,7 @@
                 
                 
             </div>
-            <RedactorPublic :name="pub.data.value.name" :ava="pub.data.value.avatar" :subs="subs.data.value"/>
+            <RedactorPublic :name="pub.data.value.name" :ava="pub.data.value.avatar" :description="pub.data.value.description" :subs="subs.data.value"/>
         </div>
 
 </template>

@@ -45,7 +45,8 @@ async function createPost() {
     tags.value.split(",").forEach(element => {
         tag.push(element.trim());
     });
-    await api.createPost(title.value, content.value, tag, jwtDecode(localStorage.getItem("token")).data.id)
+    //CREATE СТАТЬЯ ПЛИЗ ТУТ НАДО
+    //await api.createPost(title.value.trim(), content.value.trim(), tag, jwtDecode(localStorage.getItem("token")).data.id)
     title.value = "";
     content.value = "";
     tags.value = "";

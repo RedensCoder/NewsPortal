@@ -2,7 +2,7 @@
 <script setup>
 import '@fontsource-variable/inter';
 
-const props = defineProps(["name", "ava", "subs"])
+const props = defineProps(["name", "ava", "description", "subs"])
 
 function parseNumber(number) {
     if (number < 1000) {
@@ -33,7 +33,7 @@ function parseNumber(number) {
 
             <div class="description"> 
                 <h2>Описание:</h2>
-                <p class="text_description">Публикация новостей со всего мира</p>
+                <p class="text_description">{{ props.description }}</p>
             </div>
             <hr>
             <NuxtLink to="/publics/index.vue" class="text_">Отписаться</NuxtLink>

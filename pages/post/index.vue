@@ -4,41 +4,41 @@
     <div class="main">
         <div class="flex_column">
             <div class="articles" v-for="post in data">
-                <div class="author">
+                <NuxtLink :to="post.user.link" ><div class="author">
                     <img :src="post.user.avatar" alt="аватарка не загрузилась" class="ava">
                     <p class="nickname">{{ post.user.nickname }}</p>
                     <p class="time_post" >{{ datePost(post.post.Date) }}</p>
-                </div>
+                </div></NuxtLink>
                 <div class="news">
                     <p class="text_post" v-html="post.post.content"></p>
 
                     <div class="buttons_post">
                         <div class="div_like" @click="like(post.post.id)" v-if="!post.likeState">
                             <img src="~/public/img/Facebook Like.svg" alt="NO" class="img_like">
-                            <p class="quantity_like">{{ post.likes }}</p>
+                            <p class="quantity_like">{{ parseNumber(post.likes) }}</p>
                         </div>
                         <div class="div_like" @click="like(post.post.id)" v-else>
                             <img src="~/public/img/Facebook Like fiol.svg" alt="NO" class="img_like">
-                            <p class="quantity_like">{{ post.likes }}</p>
+                            <p class="quantity_like">{{ parseNumber(post.likes) }}</p>
                         </div>
 
                         <div class="div_dizlike" @click="dislike(post.post.id)" v-if="!post.disLikeState">
                             <img src="~/public/img/Facebook DizLike.svg" alt="NO" class="img_like" >
-                            <p class="quantity_like" >{{ post.dislikes }}</p>
+                            <p class="quantity_like" >{{ parseNumber(post.dislikes) }}</p>
                         </div>
                         <div class="div_dizlike" @click="dislike(post.post.id)" v-else>
                             <img src="~/public/img/Facebook DisLike red.svg" alt="NO" class="img_like" >
-                            <p class="quantity_like" >{{ post.dislikes }}</p>
+                            <p class="quantity_like" >{{ parseNumber(post.dislikes) }}</p>
                         </div>
 
                         <div class="div_commnets" @click="createComment">
                             <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
-                            <p class="quantity_like" >4</p>
+                            <p class="quantity_like" >{{ parseNumber(4) }}</p>
                         </div>
 
                         <div class="div_viewing" >
                             <img src="~/public/img/Eye.svg" alt="NO" class="img_view">
-                            <p class="quantity_view">{{ post.view }}</p>
+                            <p class="quantity_view">{{ parseNumber(post.view) }}</p>
                         </div>
 
                         <div class="div_share" >
@@ -88,10 +88,31 @@ let comment = ref('');
 const api = useApiStore();
 
 watch (limit, async () => {
-    data.splice(0, data.length)
-    const posts = await api.getAllPosts(limit.value);
-    data.push(...posts)
-}) 
+  data.splice(0, data.length)
+  const posts = await api.getAllPosts(limit.value);
+  data.push(...posts.reverse())
+
+  const userId = jwtDecode(localStorage.getItem('token')).data.id;
+  for (const p of data) {
+    let like = await api.getUserPostLike(userId, p.post.id)
+
+    if (like === null) {
+      p.likeState = false
+    }
+    else {
+      p.likeState = true
+    }
+
+    let disLike = await api.getUserPostDislike(userId, p.post.id)
+
+    if (disLike === null) {
+      p.disLikeState = false
+    }
+    else {
+      p.disLikeState = true
+    }
+  }
+});
 
 function addLimit(){
     limit.value = limit.value + 10
@@ -103,27 +124,25 @@ onMounted(async () => {
     data.push(...posts.reverse())
 
     const userId = jwtDecode(localStorage.getItem('token')).data.id;
-    data.forEach(async p => {
+    for (const p of data) {
         let like = await api.getUserPostLike(userId, p.post.id)
-            
+
         if (like === null) {
             p.likeState = false
         }
         else {
             p.likeState = true
         }
-    })
 
-    data.forEach(async p => {
-        let disLike = await api.getUserPostDislike(userId, p.post.id)
-            
-        if (disLike === null) {
-            p.disLikeState = false
-        }
-        else {
-            p.disLikeState = true
-        }
-    })
+      let disLike = await api.getUserPostDislike(userId, p.post.id)
+
+      if (disLike === null) {
+        p.disLikeState = false
+      }
+      else {
+        p.disLikeState = true
+      }
+    }
 })
 
 async function like(id) {
@@ -179,6 +198,16 @@ async function createComment(id){
     console.log(postId);
 
     await api.createPostComment(userId, postId, comment.value, Date)
+}
+
+function parseNumber(number) {
+  if (number < 1000) {
+    return number.toString();
+  } else if (number < 1000000) {
+    return (number / 1000).toFixed(1) + 'K';
+  } else {
+    return (number / 1000000).toFixed(1) + 'M';
+  }
 }
 
 function datePost(date) {
@@ -254,6 +283,9 @@ function datePost(date) {
     return timeAgo
 }
 
+useHead({
+  title: "Новостной Портал"
+})
 </script>
 
 <style scoped>

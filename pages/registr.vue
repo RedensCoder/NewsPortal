@@ -49,7 +49,7 @@ let eMail = ref('');
 let router = useRouter();
 
 async function registr(){
-    if (login.value !== "" && password.value !== "" && passwordSubmit.value !== "" && eMail.value !== ""){
+    if (login.value.trim() !== "" && password.value.trim() !== "" && passwordSubmit.value.trim() !== "" && eMail.value.trim() !== ""){
         if (password.value ===  passwordSubmit.value){
             const token = await api.createUser(login.value , password.value , eMail.value);
             if (token !== undefined){
