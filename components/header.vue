@@ -209,6 +209,8 @@ button {
     border-radius: 4px;
     background-color: #8657E9;
     border: none;
+    margin-left: 10px;
+    min-width: 200px;
     padding: 15px;
     font-size: 16px;
     line-height: 19px;
@@ -233,8 +235,8 @@ button {
     width: auto;
     height: auto;
     background-color: #ffffff;
-    right: 45px;
-    top: 80px;
+    right: 140px;
+    top: 110px;
     border-radius: 4px;
     -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
