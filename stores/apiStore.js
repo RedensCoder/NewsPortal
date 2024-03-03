@@ -71,6 +71,20 @@ export const useApiStore = defineStore('api', {
           }
       }
     },
+      async getUserInfoByLink(link){
+          try {
+              const token = await axios.get(`${URL}/getUserInfoByLink/${link}`, {
+              })
+              if (token.status === 200){
+                  return token.data;
+              }
+          }
+          catch(err){
+              if(err.response.status === 401){
+                  return undefined;
+              }
+          }
+      },
     // ИЗМЕНИТЬ ПОТОМ НА СТАТЬЮ И НОВОСТИ
     // async createArticles(title, content, tags, userId){
 
@@ -203,11 +217,10 @@ export const useApiStore = defineStore('api', {
 
     async addView(id){
 
-      await axios.put(`${URL}/addView`, {
-        id: id
-      }, {headers: {
-          Authorization: `${localStorage.getItem("token")}`
-        }
+      await axios.put(`${URL}/addView/${id}`, {}, {
+          headers: {
+              Authorization: `${localStorage.getItem("token")}`
+          }
       })   
       
     },
@@ -275,17 +288,20 @@ export const useApiStore = defineStore('api', {
     // паблики
 
     async createPublic(userId, name, description, avatar, site, comment){
-      const pub = await axios.post(`${URL}/createPublic`, {
-        userId: userId,
-        name: name,
-        description: description,
-        avatar: "null",
-        site: site,
-        comment: comment
-      }, {headers: {
-          Authorization: `${localStorage.getItem("token")}`
-        }
-      })
+        console.log(`id: ${userId}, name: ${name}, desc: ${description}, site: ${site}, comm: ${comment}`)
+
+        const pub = await axios.post(`${URL}/createPublic`, {
+            userId: userId,
+            name: name,
+            description: description,
+            avatar: "null",
+            site: site,
+            comment: comment
+        }, {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`
+          }
+        })
 
         await this.uploadPublicAvatar(pub.data.id, avatar);
     },

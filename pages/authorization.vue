@@ -35,7 +35,7 @@ async function auth(){
 
     if (login.value !== "" && password.value !== ""){
 
-        const token = await api.auth(login.value, password.value);
+        const token = await api.auth(login.value.trim(), password.value.trim());
 
         if (token !== undefined){
             // localStorage.getItem(token);

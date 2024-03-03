@@ -65,7 +65,12 @@ function setImg(e) {
 async function create() {
   const id = jwtDecode(localStorage.getItem("token")).data.id;
 
-  await api.createPublic(id, name.value, description.value, img.value, link.value, comm.value);
+  if (name.value.trim() === "" || description.value.trim() === "" || img.value === null) {
+    alert("Вы ввели не все данные!");
+    return
+  }
+
+  await api.createPublic(id, name.value.trim(), description.value.trim(), img.value, link.value.trim(), comm.value.trim());
   await router.push("/");
 }
 
