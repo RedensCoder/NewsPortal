@@ -20,6 +20,10 @@ model Users {
   PostLike     Post_likes[]
   PostDislikes Post_dislikes[]
   PostComments Post_comments[]
+  UserArticles    User_articles[]
+  ArticleLike     Article_likes[]
+  ArticleDislikes Article_dislikes[]
+  ArticleComments Article_comments[]
   PublicAdmins         Public_admins[]
   PublicSubscribers    Public_subscribers[]
 }
@@ -58,7 +62,7 @@ model User_posts {
 model Post_views {
     id       BigInt         @id @default(autoincrement())
     postId   BigInt         @unique
-    post     User_posts    @relation(fields: [postId], references: [id])
+    post     User_posts     @relation(fields: [postId], references: [id])
     views    Int
 }
 
@@ -86,6 +90,54 @@ model Post_comments {
     post     User_posts    @relation(fields: [postId], references: [id])
     comment  String
     Date     DateTime      @default(now())
+}
+
+model User_articles {
+    id        BigInt   @id @default(autoincrement())
+    userId    BigInt
+    user      Users    @relation(fields: [userId], references: [id])
+    title     String
+    content   String
+    tags      String[]
+    Date      DateTime @default(now())
+
+    ArticleViews    Article_views?
+    ArticleLike     Article_likes[]
+    ArticleDislikes Article_dislikes[]
+    ArticleComments Article_comments[]
+}
+
+model Article_views {
+    id          BigInt              @id @default(autoincrement())
+    articleId   BigInt              @unique
+    article     User_articles       @relation(fields: [articleId], references: [id])
+    views       Int
+}
+
+model Article_likes {
+    id          BigInt          @id @default(autoincrement())
+    userId      BigInt
+    user        Users           @relation(fields: [userId], references: [id])
+    articleId   BigInt
+    article     User_articles   @relation(fields: [articleId], references: [id])
+}
+
+model Article_dislikes {
+    id          BigInt          @id @default(autoincrement())
+    userId      BigInt
+    user        Users           @relation(fields: [userId], references: [id])
+    articleId   BigInt
+    article     User_articles    @relation(fields: [articleId], references: [id])
+}
+
+model Article_comments {
+    id          BigInt              @id @default(autoincrement())
+    userId      BigInt
+    user        Users               @relation(fields: [userId], references: [id])
+    articleId   BigInt
+    article     User_articles       @relation(fields: [articleId], references: [id])
+    comment     String
+    Date        DateTime            @default(now())
 }
 
 model Publics {
