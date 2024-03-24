@@ -25,7 +25,7 @@ hr{
 }
 
 .header_articles{
-    height: 70px;
+    min-height: 70px;
     display: flex;
     background-color: #FFFFFF;
     justify-content: center;
@@ -58,11 +58,22 @@ hr{
 }
 
 @media (max-width: 425px) {
-  .header_articles {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+    .header_articles {
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        height: 100%;
+    }
+    hr{
+        visibility: hidden;
+        height: 12px;
+    }
+    .text_articles{
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        height: auto;
+    }
 }
 
 /* адаптив конец */

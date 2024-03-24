@@ -48,31 +48,9 @@
                     </div>
                 </div>
             </div>
-                <div class="next_post_btn">
-                    <button @click="addLimit" class="post_next">Следующие Посты</button>
-                </div>
+            <button @click="addLimit" class="post_next">Следующие Посты</button>
         </div>
         
-        <!-- <div class="articles_popular">
-            <p class="post_watching">Популярные статьи</p>
-            <hr>
-            <div class="news_post">
-                <h3 class="heading_post">Реконструкция белого дома</h3>
-
-                <div class="div_interaction">
-                    <div class="div_commnets" >
-                        <img src="~/public/img/Chat Message.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >4</p>
-                    </div>
-                    <div class="div_viewing" >
-                        <img src="~/public/img/Eye.svg" alt="NO" class="img_like" >
-                        <p class="quantity_like" >5</p>
-                    </div>
-                </div>
-
-            </div>
-            <hr>
-        </div> -->
     </div>
 </template>
 
@@ -289,19 +267,15 @@ useHead({
 </script>
 
 <style scoped>
-.next_post_btn{
-    margin-top: 30px;
-    margin-left: 37%;
-    margin-bottom: 30px;
-}
+
 .post_next{
     width: auto;
+    height: auto;
     border-radius: 4px;
     background-color: #8657E9;
-    border: black 1.9px solid;
-    padding: 15px 15px;
+    border: black 1px solid;
+    padding: 15px;
     font-size: 16px;
-    line-height: 19px;
     color: #ffffff;
     height: 50px;
 }
@@ -335,6 +309,7 @@ button{
     display: flex;
     flex-direction: column;
 }
+
 .articles{
     background-color: #FFFFFF;
     width: 780px;

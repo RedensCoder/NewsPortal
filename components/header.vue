@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <button @click="scrollToTop" class="scroll_btn"></button>
+        <!-- <button @click="scrollToTop" class="scroll_btn"></button> -->
     </div>
 </template>
 
@@ -130,15 +130,15 @@ button {
 .header{
     background-color: #202124;
     position: sticky;
-    
 }
 
 .header_content{
     display: flex;
-    height: 150px;
+    min-height: 150px;
     justify-content: space-between;
     width: 100%;
     max-width: 100%;
+
 }
 
 /* адаптив начало */
@@ -147,15 +147,56 @@ button {
     .header_content{
         max-width: 1400px;
     }
+    .scroll_btn{
+        position: fixed;
+        left: 120px;
+    }
+}
+@media (max-width: 1024px){
+    .header_content{
+        max-width: 1024px;
+    }
+    .scroll_btn{
+        left: 30px;
+    }
 }
 @media (max-width: 992px){
     .header_content{
         max-width: 992px;
     }
+    .scroll_btn{
+
+    }
 }
 @media (max-width: 767px){
     .header_content{
         max-width: none;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        /* align-items: center; */
+        height: auto;
+    }
+    .buttons{
+        display: flex;
+        
+    }
+    .scroll_btn{
+        position: fixed;
+        /* left: 650px; */
+    }
+}
+@media (max-width: 425px) {
+    * {
+        display: block;
+    }
+  .header_content{
+        max-width: none;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        /* align-items: center; */
+        height: auto;
     }
 }
 /* адаптив конец */
@@ -264,7 +305,6 @@ button {
     border: 1px solid;
 }
 
-
 .public_profile{
   display: flex;
   flex-direction: column;
@@ -306,7 +346,7 @@ button {
 .scroll_btn{
   position: fixed;
   background-color: #673ab7;
-  left: 20px;
+  margin-left: 20px;
   bottom: 20px;
   border-radius: 20px;
   cursor: pointer;
@@ -324,10 +364,4 @@ button {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 17V4M3 10l7-7 7 7'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-@media (max-width: 425px) {
-  * {
-    display: block;
-  }
-
-}
 </style>

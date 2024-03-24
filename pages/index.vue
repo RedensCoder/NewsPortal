@@ -103,6 +103,8 @@ h3{
 button{
     width: 100px;
     height: 40px;
+    cursor: pointer;
+    color: #8657E9;
 }
 
 .content{
@@ -197,5 +199,14 @@ button{
     padding-left: 5px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.read_button{
+    margin-top: 10px;
+    border: 1px solid #8657E9;
+    border-radius: 4px;
+    min-width: 120px;
+    min-height: 34px;
+    font-size: 14px;
 }
 </style>

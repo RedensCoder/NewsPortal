@@ -37,9 +37,10 @@
                         <img src="~/public/img/Share.svg" alt="NO" class="img_like" >
                     </div>
                 </div>
-
+                <button class="read_button">Читать далее</button>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -96,7 +97,9 @@ h3{
 button{
     width: 100px;
     height: 40px;
+    color: #8657E9;
 }
+
 .articles{
     background-color: #FFFFFF;
     width: 780px;
@@ -189,5 +192,45 @@ button{
     padding-left: 5px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.read_button{
+    margin-top: 10px;
+    border: 1px solid #8657E9;
+    border-radius: 4px;
+    min-width: 120px;
+    min-height: 34px;
+    font-size: 14px;
+}
+
+@media (max-width: 1400px){
+    .main{
+        max-width: 1400px;
+    }
+    .articles{
+        margin: 0px 10px;
+    }
+}
+@media (max-width: 768px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+    }
+    .articles{
+        width: 97%;
+    }
+}
+@media (max-width: 425px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+    }
+    .articles{
+        width: 97%;
+    }
 }
 </style>
