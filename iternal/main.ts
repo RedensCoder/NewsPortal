@@ -10,6 +10,7 @@ import publicAva from "./services/file/publicImgFile.cjs";
 
 import * as User from "./services/handlers/users";
 import * as Post from "./services/handlers/posts";
+import * as Article from "./services/handlers/articles";
 import * as Public from "./services/handlers/publics";
 import * as Files from "./services/handlers/files";
 import {authenticateToken, authenticateTokenBody, authenticateTokenParams} from "./services/security/jwt";
@@ -66,6 +67,25 @@ app.put("/updatePost", authenticateTokenBody, async (req: Request, res: Response
 app.put("/addView/:id", authenticateToken, async (req: Request, res: Response) => await Post.AddView(req, res, prisma));
 app.delete("/deletePost/:id", authenticateToken, async (req: Request, res: Response) => await Post.DeletePost(req, res, prisma));
 app.delete("/deletePostComment/:id", authenticateToken, async (req: Request, res: Response) => await Post.DeleteComment(req, res, prisma));
+
+//ARTICLES
+app.post("/createArticle", authenticateTokenBody, async (req: Request, res: Response) => await Article.Create(req, res, prisma));
+app.post("/ArticleLike", authenticateTokenBody, async (req: Request, res: Response) => await Article.Like(req, res, prisma));
+app.post("/ArticleDislike", authenticateTokenBody, async (req: Request, res: Response) => await Article.Dislike(req, res, prisma));
+app.post("/getUserArticleLike", authenticateTokenBody, async (req: Request, res: Response) => await Article.GetUserLike(req, res, prisma));
+app.post("/getUserArticleDislike", authenticateTokenBody, async (req: Request, res: Response) => await Article.GetUserDislike(req, res, prisma));
+app.post("/createArticleComment", authenticateTokenBody, async (req: Request, res: Response) => await Article.CreateComment(req, res, prisma));
+app.get("/getAllArticles/:take", async (req: Request, res: Response) => await Article.GetAll(req, res, prisma));
+app.get("/getUserArticles/:id", async (req: Request, res: Response) => await Article.GetUserArt(req, res, prisma));
+app.get("/getArticleById/:id", async (req: Request, res: Response) => await Article.GetById(req, res, prisma));
+app.get("/getArticleLikes/:id", async (req: Request, res: Response) => await Article.GetLikeById(req, res, prisma));
+app.get("/getArticleDislikes/:id", async (req: Request, res: Response) => await Article.GetDislikeById(req, res, prisma));
+app.get("/getArticleViews/:id", async (req: Request, res: Response) => await Article.GetViews(req, res, prisma));
+app.get("/getArticleComments/:id", async (req: Request, res: Response) => await Article.GetPostComments(req, res, prisma));
+app.put("/updateArticle", authenticateTokenBody, async (req: Request, res: Response) => await Article.Update(req, res, prisma));
+app.put("/addViewArticle/:id", authenticateToken, async (req: Request, res: Response) => await Article.AddView(req, res, prisma));
+app.delete("/deleteArticle/:id", authenticateToken, async (req: Request, res: Response) => await Article.Delete(req, res, prisma));
+app.delete("/deleteArticleComment/:id", authenticateToken, async (req: Request, res: Response) => await Article.DeleteComment(req, res, prisma));
 
 //PUBLICS
 app.post("/createPublic", authenticateTokenBody, async (req: Request, res: Response) => await Public.CreatePublic(req, res, prisma));
