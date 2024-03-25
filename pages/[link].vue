@@ -348,16 +348,18 @@ useHead({
 }
 
 .posts{
-    margin: 0px 20px 30px;
-    background-color: #EEEEEE;
-    height: 100%;
-    width: 740px;
-    align-items: center;
-    border-radius: 5px;
+  margin: 0px 20px 30px;
+  height: 100%;
+  width: 740px;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .post_info{
-    padding: 20px;
+  padding: 20px;
+  background-color: #EEEEEE;
+  border: 1px solid #8657E9;
+  border-radius: 5px;
 }
 
 .post_header{

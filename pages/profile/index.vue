@@ -11,6 +11,9 @@
                     <div class="column">
                         <p class="nickname">{{ nickname }}</p>
                         <p class="status">{{ about }}</p>
+                        <!-- <div class="editor_buttons"> -->
+                          <button class="editor_profile_buttons" @click="routerSettings">Редактировать профиль</button>
+                        <!-- </div> -->
                     </div>
                     
                 </div>
@@ -29,8 +32,19 @@
             </div>
 
             <div class="profile_posts" >
-   
-                <h1 class="text header">Посты пользователя:</h1>
+              
+              <div class="post_create">
+                <h1 class="text_create_post">Создать пост:</h1>
+
+                <div class="post_create_textarea">
+                  <textarea name="" id="" placeholder="Что у вас нового?"></textarea>
+                  <hr>
+                  <button class="btn">Опубликовать</button>
+                </div>
+          
+              </div>
+
+                <h1 class="text_view_post">Посты пользователя:</h1>
 
                 <div class="posts" v-for="post in data">
                     
@@ -101,6 +115,10 @@ let link = ref('')
 const img = ref("");
 
 const router = useRouter();
+
+function routerSettings() {
+  router.push("/profile/settings");
+}
 
 async function like(id) {
   const userId = jwtDecode(localStorage.getItem('token')).data.id;
@@ -278,98 +296,155 @@ useHead({
 
 <style scoped>
 .main{
-    margin-top: 3%;
-    /* max-width: 100%; */
-    display: flex;
-    justify-content: center;
+  margin-top: 3%;
+  /* max-width: 100%; */
+  display: flex;
+  justify-content: center;
+}
+
+textarea{
+  padding: 5px;
+  font-size: 14px;
+  line-height: 16.94px;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  resize: none;
+}
+
+hr{
+  margin: 20px auto;
+}
+
+.btn{
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: #8657E9;
+  font-size: 14px;
+  border: 1px solid;
+  box-sizing: border-box;
+}
+
+.post_create_textarea{
+  border-radius: 5px;
+  margin: 0px 20px;
+  background-color: #EEEEEE;
+  border: 1px solid #8657E9;
+  padding: 20px 10px;
 }
 
 .content{
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .info_profile{
-    width: 780px;
-    background-color: #8657E9;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 780px;
+  background-color: #8657E9;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .nickname{
-    font-size: 20px;
+  font-size: 20px;
 }
 .status{
-    margin-top: 10px;
-    font-size: 16px;
+  /* margin-top: 10px; */
+  font-size: 16px;
 }
+
+.editor_profile_buttons{
+  min-width: 191px;
+  min-height: 34px;
+  border-radius: 4px;
+  color: #8657E9;
+  font-size: 14px;
+}
+
 .img_profile{
-    width: 110px;
-    height: 110px;
-    border-radius: 100%;
-    border: 1px solid #FFFFFF;
+  width: 110px;
+  height: 110px;
+  border-radius: 100%;
+  border: 1px solid #FFFFFF;
 }
 
 .info{
-    display: flex;
-    margin-left: 30px;
-    color: #FFFFFF;
+  display: flex;
+  margin-left: 30px;
+  color: #FFFFFF;
 }
+
 .column{
-    margin-top: 25px;
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .icon_site{
-    margin-right: 0.5%;
+  margin-right: 0.5%;
 }
 .site{
-    color: #FFFFFF;
-    margin-right: 50px;
+  color: #FFFFFF;
+  margin-right: 50px;
 }
 
 .soc_seti{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 /* посты профиля */
 .profile_posts{
-    background: #FFFFFF;
-    display: flex;
-    height: auto;
-    width: 780px;
-    flex-direction: column;
+  background: #FFFFFF;
+  display: flex;
+  height: auto;
+  width: 780px;
+  flex-direction: column;
 }
 
-.header{
-    margin-left: 2.5%;
-    margin-top: 5%;
-    margin-bottom: 2.5%;
-    font-size: 20px;
-    color:  #000000;
+.post_create{
+  margin-bottom: 25px;
+  
+}
+
+.text_create_post{
+  margin: 20px 20px;
+  margin-bottom: 2.5%;
+  font-size: 20px;
+  color:  #000000;
+}
+
+
+.text_view_post{
+  margin: 0px 20px;
+  margin-bottom: 3.5%;
+  font-size: 20px;
+  color:  #000000;
 }
 
 .posts{
-    margin: 0px 20px 30px;
-    background-color: #EEEEEE;
-    height: 100%;
-    width: 740px;
-    align-items: center;
-    border-radius: 5px;
+  margin: 0px 20px 30px;
+  height: 100%;
+  width: 740px;
+  align-items: center;
 }
 
 .post_info{
-    padding: 20px;
+  padding: 20px;
+  background-color: #EEEEEE;
+  border: 1px solid #8657E9;
+  border-radius: 5px;
 }
 
 .post_header{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .img_profile_post{

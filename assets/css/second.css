@@ -1,11 +1,11 @@
 *{
     padding: 0;
     margin: 0;
+    font-family: 'Inter Variable', sans-serif; 
 }
 
 body{
     background-color: #dfdfdf;
-    font-family: 'Inter Variable', sans-serif; 
 }
 
 button {

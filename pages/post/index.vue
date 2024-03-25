@@ -50,7 +50,7 @@
             </div>
             <button @click="addLimit" class="post_next">Следующие Посты</button>
         </div>
-        
+
     </div>
 </template>
 
@@ -269,8 +269,8 @@ useHead({
 <style scoped>
 
 .post_next{
-    width: auto;
-    height: auto;
+    width: 190px;
+    box-sizing: border-box;
     border-radius: 4px;
     background-color: #8657E9;
     border: black 1px solid;
@@ -278,12 +278,12 @@ useHead({
     font-size: 16px;
     color: #ffffff;
     height: 50px;
+    margin: 20px auto;
 }
 
 .main{
     display: flex;
     justify-content: center;
-    /* margin-left: 28%; */
     max-width: 100%;
 }
 
