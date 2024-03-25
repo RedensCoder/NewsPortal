@@ -231,7 +231,7 @@ export const GetViews = async (req: Request, res: Response, prisma: PrismaClient
     const views = await prisma.post_views.findFirst({ where: { postId: Number(req.params.id) } })
 
     // @ts-ignore
-    res.send(views.views.toString());
+    res.send(views?.views.toString());
 }
 
 // COMMENTS
